@@ -1,6 +1,7 @@
 "use client";
 
 import * as React from "react";
+import Link from "next/link";
 
 /**
  * Navbar — Yathra '26 (pairs with hero.tsx).
@@ -107,7 +108,7 @@ const GridIcon = () => (
 
 function Logo() {
   return (
-    <a
+    <Link
       href="/"
       aria-label="Yathra ’26 — home"
       className="group flex flex-col items-center leading-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffd23f]"
@@ -138,7 +139,7 @@ function Logo() {
       >
         A Million Dollar Journey
       </span>
-    </a>
+    </Link>
   );
 }
 
