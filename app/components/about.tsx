@@ -539,7 +539,7 @@ const About = () => {
             className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight"
             style={{ fontFamily: "'Outfit', 'Figtree', sans-serif" }}
           >
-            About <span style={{ color: PINK }}>Yathra ’27</span>
+            About <span style={{ color: PINK }}>Yathra </span>
           </h2>
           <p className="mt-3 text-base sm:text-lg text-zinc-400 leading-relaxed">
             The flagship inter-college idea pitching and innovation program empowering the next generation of social entrepreneurs.
@@ -573,7 +573,7 @@ const About = () => {
                 <span>The Flagship Innovation Program</span>
               </div>
               <p className="text-base sm:text-lg font-medium leading-relaxed text-zinc-100">
-                <span className="text-white font-bold">Yathra ’27</span> is the premier inter-college idea pitching and startup acceleration initiative organized by{' '}
+                <span className="text-white font-bold">Yathra </span> is the premier inter-college idea pitching and startup acceleration initiative organized by{' '}
                 <span className="text-[#ffd23f] font-semibold">Hult Prize at University College of Engineering, Kariavattom (UCEK)</span>.
               </p>
               <p className="mt-4 text-sm sm:text-base leading-relaxed text-zinc-300">
@@ -599,7 +599,7 @@ const About = () => {
                 From Campus Project to Viable Enterprise
               </h3>
               <p className="text-sm leading-relaxed text-zinc-300">
-                Yathra ’27 provides a structured launchpad for students to transform raw ideas into market-ready ventures through specialized mentorship, ecosystem collaboration, and competitive evaluation, empowering student changemakers to drive tangible, long-term impact.
+                Yathra provides a structured launchpad for students to transform raw ideas into market-ready ventures through specialized mentorship, ecosystem collaboration, and competitive evaluation, empowering student changemakers to drive tangible, long-term impact.
               </p>
             </div>
             <div className="mt-6 pt-4 border-t border-white/10 text-xs text-zinc-400">
