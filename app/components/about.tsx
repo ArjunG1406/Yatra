@@ -42,6 +42,7 @@ const IMPACT_METRICS = [
   { value: '$1M', label: 'Global Prize Opportunity', sub: 'Hult Prize Global Acceleration' },
   { value: 'Top 40', label: 'Shortlisted Teams', sub: 'From nationwide submissions' },
   { value: 'Top 16', label: 'Finalist Startups', sub: 'Advance to live pitching' },
+  // { value: 'Technopark', label: 'Grand Finale Venue', sub: 'Travancore Hall, Trivandrum' },
 ]
 
 const EDITION_DATA = {
@@ -538,7 +539,7 @@ const About = () => {
             className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight"
             style={{ fontFamily: "'Outfit', 'Figtree', sans-serif" }}
           >
-            About <span style={{ color: PINK }}>Yathra</span>
+            About <span style={{ color: PINK }}>Yathra ’27</span>
           </h2>
           <p className="mt-3 text-base sm:text-lg text-zinc-400 leading-relaxed">
             The flagship inter-college idea pitching and innovation program empowering the next generation of social entrepreneurs.
@@ -572,7 +573,7 @@ const About = () => {
                 <span>The Flagship Innovation Program</span>
               </div>
               <p className="text-base sm:text-lg font-medium leading-relaxed text-zinc-100">
-                <span className="text-white font-bold">Yathra </span> is the premier inter-college idea pitching and startup acceleration initiative organized by{' '}
+                <span className="text-white font-bold">Yathra ’27</span> is the premier inter-college idea pitching and startup acceleration initiative organized by{' '}
                 <span className="text-[#ffd23f] font-semibold">Hult Prize at University College of Engineering, Kariavattom (UCEK)</span>.
               </p>
               <p className="mt-4 text-sm sm:text-base leading-relaxed text-zinc-300">
@@ -598,7 +599,7 @@ const About = () => {
                 From Campus Project to Viable Enterprise
               </h3>
               <p className="text-sm leading-relaxed text-zinc-300">
-                Yathra  provides a structured launchpad for students to transform raw ideas into market-ready ventures through specialized mentorship, ecosystem collaboration, and competitive evaluation, empowering student changemakers to drive tangible, long-term impact.
+                Yathra ’27 provides a structured launchpad for students to transform raw ideas into market-ready ventures through specialized mentorship, ecosystem collaboration, and competitive evaluation, empowering student changemakers to drive tangible, long-term impact.
               </p>
             </div>
             <div className="mt-6 pt-4 border-t border-white/10 text-xs text-zinc-400">
@@ -629,10 +630,10 @@ const About = () => {
           </div>
 
           {/* Toggle Button */}
-          <div className="inline-flex items-center rounded-2xl border border-white/15 bg-white/[0.04] p-1.5 backdrop-blur shrink-0 shadow-sm">
+          <div className="w-full sm:w-auto grid grid-cols-2 sm:inline-flex items-center rounded-2xl border border-white/15 bg-white/[0.04] p-1.5 backdrop-blur shadow-sm">
             <button
               onClick={() => setSelectedEdition('26')}
-              className={`px-5 py-2 rounded-xl text-xs font-bold transition-all ${
+              className={`w-full sm:w-auto px-5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center ${
                 selectedEdition === '26'
                   ? 'bg-[#ff2d87] text-white shadow-md shadow-[#ff2d87]/30'
                   : 'text-zinc-400 hover:text-white hover:bg-white/[0.04]'
@@ -642,7 +643,7 @@ const About = () => {
             </button>
             <button
               onClick={() => setSelectedEdition('25')}
-              className={`px-5 py-2 rounded-xl text-xs font-bold transition-all ${
+              className={`w-full sm:w-auto px-5 py-2.5 rounded-xl text-xs font-bold transition-all flex items-center justify-center ${
                 selectedEdition === '25'
                   ? 'bg-[#ff2d87] text-white shadow-md shadow-[#ff2d87]/30'
                   : 'text-zinc-400 hover:text-white hover:bg-white/[0.04]'
@@ -654,9 +655,9 @@ const About = () => {
         </div>
 
         {/* Venue Information Banner (Same Venue for Both Editions) */}
-        <div className="mb-10 rounded-2xl border border-white/10 bg-white/[0.025] p-4 sm:p-5 flex flex-wrap items-center justify-between gap-4 backdrop-blur">
+        <div className="mb-10 rounded-2xl border border-white/10 bg-white/[0.025] p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-4 backdrop-blur">
           <div className="flex items-center gap-3 text-xs sm:text-sm text-zinc-200">
-            <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-[#ffd23f]/30 bg-[#ffd23f]/10 text-[#ffd23f]">
+            <div className="flex h-9 w-9 items-center justify-center rounded-xl border border-[#ffd23f]/30 bg-[#ffd23f]/10 text-[#ffd23f] shrink-0">
               <MapPin className="h-4 w-4" />
             </div>
             <div>
@@ -664,7 +665,7 @@ const About = () => {
               <strong className="text-white font-bold">{currentEdition.venue}</strong>
             </div>
           </div>
-          <span className="text-[11px] text-zinc-400 font-medium rounded-lg border border-white/10 bg-white/[0.03] px-3 py-1">
+          <span className="self-start sm:self-auto text-[11px] text-zinc-400 font-medium rounded-lg border border-white/10 bg-white/[0.03] px-3 py-1">
             Official Competition Host Venue
           </span>
         </div>
