@@ -1,9 +1,3 @@
-import React from 'react'
-
-const credits = () => {
-  return (
-    <div>credits</div>
-  )
+export default function Credits() {
+  return null;
 }
-
-export default credits

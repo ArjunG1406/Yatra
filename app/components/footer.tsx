@@ -15,13 +15,13 @@ const FooterLink = ({ href, children, external }: FooterLinkProps) => {
       href={href}
       target={external ? '_blank' : undefined}
       rel={external ? 'noopener noreferrer' : undefined}
-      className="group inline-flex items-center gap-1.5 text-zinc-300 hover:text-white transition-colors duration-200 text-sm sm:text-base font-medium tracking-wide w-fit"
+      className="group inline-flex items-center gap-1 text-zinc-600 hover:text-zinc-950 transition-colors text-sm font-medium w-fit"
     >
-      <span className="group-hover:text-primary transition-colors duration-200">
+      <span className="group-hover:text-[#ff2d87] transition-colors">
         {children}
       </span>
       <ArrowUpRight
-        className="h-4 w-4 shrink-0 -translate-x-1 opacity-0 transition-all duration-200 group-hover:translate-x-0 group-hover:opacity-100 text-primary"
+        className="h-3.5 w-3.5 opacity-0 -translate-x-1 transition-all group-hover:opacity-100 group-hover:translate-x-0 text-[#ff2d87]"
         aria-hidden="true"
       />
     </Link>
@@ -30,117 +30,103 @@ const FooterLink = ({ href, children, external }: FooterLinkProps) => {
 
 const PINK = '#ff2d87'
 
-const Footer = () => {
+export default function Footer() {
   return (
-    <footer className="w-full bg-[#050204] border-t border-white/10 text-white relative z-10">
-      <div className="max-w-7xl mx-auto px-6 sm:px-10 md:px-16 lg:px-20 pt-14 pb-8">
-        {/* Brand & Wordmark */}
-        <div className="mb-10">
+    <footer className="w-full bg-zinc-50 border-t border-zinc-200 text-zinc-900">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-16 pb-12">
+        {/* Brand & Wordmark Header */}
+        <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 pb-12 border-b border-zinc-200">
           <Link
             href="/"
-            aria-label="Yathra ’26 — home"
-            className="group inline-flex flex-col items-center leading-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-[#ffd23f]"
+            aria-label="Yathra ’27 — home"
+            className="group inline-flex items-baseline leading-none"
           >
-            <span className="inline-flex items-start">
-              <span
-                className="text-[30px] text-white sm:text-[38px] lg:text-[40px]"
-                style={{
-                  fontFamily: "'Outfit', 'Figtree', sans-serif",
-                  fontWeight: 800,
-                  letterSpacing: "-0.05em",
-                  lineHeight: 0.85,
-                }}
-              >
-                yathra
-              </span>
-              <span
-                className="ml-[3px] flex flex-col text-[9px] font-extrabold leading-[0.88] sm:text-[11px]"
-                style={{ color: PINK, fontFamily: "'Outfit', sans-serif" }}
-              >
-                <span>2</span>
-                <span>7</span>
-              </span>
+            <span
+              className="text-[36px] sm:text-[44px] text-zinc-950 font-black tracking-[-0.06em] uppercase"
+              style={{ fontFamily: "'Outfit', sans-serif" }}
+            >
+              Yathra
             </span>
             <span
-              className="mt-2 whitespace-nowrap text-[6px] font-medium uppercase tracking-[0.34em]"
-              style={{ color: PINK }}
+              className="ml-1 text-lg sm:text-xl font-black"
+              style={{ color: PINK, fontFamily: "'Outfit', sans-serif" }}
             >
-              A Million Dollar Journey
+              ’27
             </span>
           </Link>
+
+          <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-zinc-400">
+            A Million Dollar Journey · Hult Prize UCEK
+          </span>
         </div>
 
-        {/* Links Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 lg:gap-12 pb-12">
+        {/* Links Columns Grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-10 py-12 border-b border-zinc-200">
           {/* Column 1: Hult Links */}
           <div>
-            <h3 className="text-primary text-xs font-semibold tracking-widest uppercase mb-5">
-              Hult Prize
-            </h3>
-            <div className="flex flex-col gap-3.5">
+            <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-[#ff2d87] block mb-4">
+              01 // Global Acceleration
+            </span>
+            <div className="flex flex-col gap-2.5">
               <FooterLink href="https://www.hultprize.org/" external>
-                HULT PRIZE
+                Global Hult Prize Foundation
               </FooterLink>
-              <FooterLink href="/#why">
-                WHY HULT
+              <FooterLink href="#why">
+                Value Proposition & Mentorship
               </FooterLink>
-              <FooterLink href="/#stages">
-                YATHRA ’26
+              <FooterLink href="#editions">
+                Past Chapters (’26 & ’25)
               </FooterLink>
               <FooterLink href="https://www.hultprize.org/hult-prize-winners/" external>
-                WINNERS & FINALISTS
+                Global Winners & Finalists
               </FooterLink>
             </div>
           </div>
 
-          {/* Column 2: Event & Community Links */}
+          {/* Column 2: Program Navigation */}
           <div>
-            <h3 className="text-primary text-xs font-semibold tracking-widest uppercase mb-5">
-              Quick Links
-            </h3>
-            <div className="flex flex-col gap-3.5">
-              <FooterLink href="/#execom">
-                EXECOM
+            <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-[#ff2d87] block mb-4">
+              02 // Summit Directory
+            </span>
+            <div className="flex flex-col gap-2.5">
+              <FooterLink href="#about">
+                About the Initiative
               </FooterLink>
-              <FooterLink href="/#events">
-                EVENTS
+              <FooterLink href="#theme">
+                17 UN SDGs Innovation Scope
               </FooterLink>
-              <FooterLink href="https://uck.ac.in/" external>
-                UCEK
+              <FooterLink href="#how-it-works">
+                4-Stage Competition Timeline
               </FooterLink>
-              <FooterLink href="https://www.hultprize.org/code-of-conduct/" external>
-                CODE OF CONDUCT
+              <FooterLink href="#partners">
+                Partners & Sponsorship
               </FooterLink>
             </div>
           </div>
 
-          {/* Column 3: Institution & Social Contacts */}
-          <div id="contact" className="flex flex-col justify-between">
+          {/* Column 3: Location & Connect */}
+          <div className="flex flex-col justify-between">
             <div>
-              <h3 className="text-primary text-xs font-semibold tracking-widest uppercase mb-5">
-                Location & Connect
-              </h3>
-              <Link
-                target="_blank"
-                rel="noopener noreferrer"
-                href="https://uck.ac.in/"
-                className="group block"
-              >
-                <p className="text-sm font-semibold text-zinc-200 group-hover:text-white transition-colors duration-200">
-                  UNIVERSITY COLLEGE OF ENGINEERING
-                </p>
-                <p className="text-xs text-zinc-400 mt-1">
-                  University of Kerala, Kariavattom Campus
-                </p>
-              </Link>
+              <span className="font-mono text-[11px] font-bold uppercase tracking-widest text-[#ff2d87] block mb-4">
+                03 // Venue & Host
+              </span>
+              <p className="text-sm font-bold text-zinc-900">
+                University College of Engineering Kariavattom (UCEK)
+              </p>
+              <p className="text-xs text-zinc-500 mt-1">
+                University of Kerala Campus, Thiruvananthapuram
+              </p>
+              <p className="text-xs text-zinc-500 mt-2 font-mono">
+                <strong>GRAND FINALE:</strong> Travancore Hall, Technopark
+              </p>
             </div>
 
             {/* Social Icons */}
             <div className="mt-6">
-              <span className="text-xs text-zinc-500 uppercase tracking-wider block mb-3">
-                Follow Us
+              <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-zinc-400 block mb-2.5">
+                Official Channels
               </span>
-              <div className="flex flex-row gap-3 flex-wrap items-center">
+              <div className="flex flex-row gap-2.5 flex-wrap items-center">
                 {socialLinks.map((item) => (
                   <Link
                     key={item.link}
@@ -148,9 +134,9 @@ const Footer = () => {
                     target={item.link.startsWith('http') ? '_blank' : undefined}
                     rel={item.link.startsWith('http') ? 'noopener noreferrer' : undefined}
                     aria-label={item.name}
-                    className="flex h-10 w-10 items-center justify-center rounded-lg border border-white/10 bg-white/[0.04] text-zinc-300 transition-all duration-200 hover:border-primary hover:bg-primary/10 hover:text-primary focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary"
+                    className="flex h-9 w-9 items-center justify-center rounded-lg border border-zinc-200 bg-white text-zinc-600 transition-colors hover:border-[#ff2d87] hover:text-[#ff2d87]"
                   >
-                    <item.icon size={19} className="transition-transform duration-200 group-hover:scale-110" />
+                    <item.icon size={17} />
                   </Link>
                 ))}
               </div>
@@ -158,14 +144,14 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* Bottom Credits & Copyright */}
-        <div className="pt-8 border-t border-white/10 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-zinc-500">
-          <p>© 2026 Yathra · Hult Prize UCEK. All rights reserved.</p>
-          
+        {/* Bottom Metadata & Legal */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-3 text-xs text-zinc-500 font-mono">
+          <p>© 2027 YATHRA · HULT PRIZE UCEK. ALL RIGHTS RESERVED.</p>
+          <p>
+            UNIVERSITY COLLEGE OF ENGINEERING KARIAVATTOM
+          </p>
         </div>
       </div>
     </footer>
   )
 }
-
-export default Footer

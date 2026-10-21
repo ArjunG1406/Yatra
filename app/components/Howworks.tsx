@@ -2,31 +2,9 @@
 
 import React, { useEffect, useLayoutEffect, useRef } from "react";
 
-/**
- * How it works — Yathra '26 (Hult Prize UCEK Qualifiers)
- *
- * Structure mirrors the START Summit "How it works" block:
- *   heading → one-line subtitle → 4 numbered steps (big number, "Step N", title, description)
- *
- * Layout: one vertical timeline on every screen size. Steps stack top to bottom,
- * connected by a rail down the left edge.
- *
- * Palette: black, white, pink, yellow.
- *
- * Scroll animation: every colour and line is driven by a scroll-linked value (0 → 1),
- * so it fills in while you scroll down and un-fills when you scroll back up.
- *   - heading + subtitle brighten from dim grey to white
- *   - each step number's outline goes grey → pink (Step 4 also fills solid pink)
- *   - each node goes grey → yellow and grows, "Step N" goes grey → yellow
- *   - the pink rail draws itself downward from one step to the next
- *   - titles and descriptions fade up from dim to full white
- * Reduced-motion users get the finished state with no animation.
- *
- * Self-contained: needs only React. No Tailwind or extra packages.
- */
-
 type Step = {
   number: number;
+  phase: string;
   title: string;
   description: string;
 };
@@ -34,36 +12,33 @@ type Step = {
 const STEPS: Step[] = [
   {
     number: 1,
-    title: "Preliminary Round",
-    description:
-      "Submit a one-page concept note on your idea. The top 40 teams are shortlisted for creativity, feasibility and alignment with the SDGs.",
+    phase: "PHASE 01",
+    title: "Concept Note Submission",
+    description: "Submit an executive summary defining your SDG problem, target market, and proposed solution. Top 40 teams advance.",
   },
   {
     number: 2,
-    title: "Semifinals",
-    description:
-      "Pitch online to a panel of experienced judges with a detailed presentation and live Q&A. The top 16 teams advance.",
+    phase: "PHASE 02",
+    title: "Virtual Semifinals",
+    description: "Online pitch presentation and live Q&A before an expert evaluation jury. Top 16 startups qualify for the finals.",
   },
   {
     number: 3,
+    phase: "PHASE 03",
     title: "Founders Bootcamp",
-    description:
-      "Build your Business Model Canvas and MVP, and sharpen your pitch with mentors before the finale.",
+    description: "Intensive venture acceleration covering Business Model Canvas, unit economics, customer validation, and pitch coaching.",
   },
   {
     number: 4,
-    title: "Grand Finale",
-    description:
-      "Pitch live at Travancore Hall, Technopark to judges, investors and industry experts. Winning teams receive prizes and exclusive opportunities.",
+    phase: "PHASE 04",
+    title: "Grand Finale at Technopark",
+    description: "Live physical pitching at Travancore Hall, Technopark Trivandrum to executive judges, angel investors, and ecosystem leaders.",
   },
 ];
-
-/* ---------- scroll maths ---------- */
 
 const clamp = (v: number, lo = 0, hi = 1) => Math.min(hi, Math.max(lo, v));
 const smooth = (t: number) => t * t * (3 - 2 * t);
 
-// SSR-safe layout effect (avoids a flash of the finished state before JS runs)
 const useIsoLayoutEffect = typeof window !== "undefined" ? useLayoutEffect : useEffect;
 
 export default function HowWorks() {
@@ -95,7 +70,6 @@ export default function HowWorks() {
     const update = () => {
       frame = 0;
       const vh = window.innerHeight;
-      // an element is "0" when its top is at 90% of the viewport, "1" when it reaches 55%
       const startY = vh * 0.9;
       const endY = vh * 0.55;
       const span = startY - endY;
@@ -108,7 +82,6 @@ export default function HowWorks() {
       const ps = steps.map(progressOf);
       steps.forEach((el, i) => {
         el.style.setProperty("--p", ps[i].toFixed(4));
-        // the rail leaving this step fills as the next step arrives
         el.style.setProperty("--lp", (ps[i + 1] ?? 0).toFixed(4));
       });
     };
@@ -144,10 +117,13 @@ export default function HowWorks() {
 
       <div className="yw-inner">
         <div ref={headRef} className="yw-head">
+          <span className="yw-kicker">Program Roadmap</span>
           <h2 id="yw-heading" className="yw-title">
-            How it works
+            Stages of Yathra ’27
           </h2>
-          <p className="yw-sub">Four stages, from a one-page concept note to the Grand Finale.</p>
+          <p className="yw-sub">
+            Four milestone stages from submission to the Grand Finale at Technopark.
+          </p>
         </div>
 
         <ol className="yw-steps">
@@ -164,10 +140,10 @@ export default function HowWorks() {
               </div>
               <div className="yw-body">
                 <span className="yw-num" aria-hidden="true">
-                  {step.number}
+                  0{step.number}
                 </span>
                 <div className="yw-text">
-                  <span className="yw-label">Step {step.number}</span>
+                  <span className="yw-label">{step.phase}</span>
                   <h3 className="yw-step-title">{step.title}</h3>
                   <p className="yw-desc">{step.description}</p>
                 </div>
@@ -182,72 +158,77 @@ export default function HowWorks() {
 
 export { HowWorks };
 
-/* ---------- styles ---------- */
-/*
- * --hp (heading) and --p / --lp (step, rail) are set from JS and run 0 → 1.
- * They default to 1 so the section is fully visible if JS is unavailable.
- */
 const CSS = `
 .yw {
-  --yw-black: #000000;
-  --yw-white: #ffffff;
-  --yw-pink: #ff2d8a;
-  --yw-yellow: #ffd60a;
-  --yw-dim: #2b2b2b;
-  background: var(--yw-black);
-  color: var(--yw-white);
-  padding: clamp(64px, 10vw, 128px) clamp(20px, 5vw, 64px);
-  font-family: "Outfit", "Urbanist", "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --yw-bg: #ffffff;
+  --yw-text: #09090b;
+  --yw-subtext: #52525b;
+  --yw-pink: #ff2d87;
+  --yw-dim: #e4e4e7;
+  background: var(--yw-bg);
+  color: var(--yw-text);
+  padding: 64px 20px;
+  border-bottom: 1px solid #e4e4e7;
 }
-.yw-inner { max-width: 960px; margin: 0 auto; }
+.yw-inner { max-width: 860px; margin: 0 auto; }
 
 /* heading */
 .yw-head { --hp: 1; }
+.yw-kicker {
+  display: block;
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--yw-pink);
+  margin-bottom: 0.25rem;
+}
 .yw-title {
   margin: 0;
-  font-size: clamp(2.25rem, 5vw, 4rem);
-  font-weight: 700;
-  line-height: 1.05;
-  letter-spacing: -0.02em;
-  color: color-mix(in srgb, var(--yw-white) calc(var(--hp) * 100%), var(--yw-dim));
-  transform: translateY(calc((1 - var(--hp)) * 24px));
+  font-family: 'Outfit', sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  text-transform: uppercase;
+  color: var(--yw-text);
 }
 .yw-sub {
-  margin: 16px 0 0;
-  max-width: 46ch;
-  font-size: clamp(1rem, 1.6vw, 1.2rem);
+  margin: 8px 0 0;
+  max-width: 50ch;
+  font-size: 0.95rem;
   line-height: 1.5;
-  color: rgb(255 255 255 / calc(0.12 + var(--hp) * 0.6));
-  transform: translateY(calc((1 - var(--hp)) * 16px));
+  color: var(--yw-subtext);
 }
 
 /* vertical timeline */
 .yw-steps {
   list-style: none;
-  margin: clamp(48px, 7vw, 80px) 0 0;
+  margin: 48px 0 0;
   padding: 0;
 }
 .yw-step {
   --p: 1;
   --lp: 1;
-  --yw-pad: clamp(48px, 7vw, 80px);
+  --yw-pad: 48px;
   position: relative;
   display: grid;
   grid-template-columns: 14px minmax(0, 1fr);
-  column-gap: clamp(20px, 4vw, 48px);
+  column-gap: 28px;
   padding-bottom: var(--yw-pad);
 }
 .yw-step:last-child { padding-bottom: 0; }
 
-/* rail: grey base line, pink fill that draws downward, node that turns yellow */
+/* rail */
 .yw-track { position: relative; }
 .yw-track::before,
 .yw-fill {
   content: "";
   position: absolute;
   left: 6px;
-  top: 11px;
-  bottom: calc(var(--yw-pad) * -1 - 11px);
+  top: 10px;
+  bottom: calc(var(--yw-pad) * -1 - 10px);
   width: 2px;
 }
 .yw-track::before { background: var(--yw-dim); }
@@ -265,75 +246,64 @@ const CSS = `
   width: 14px;
   height: 14px;
   border-radius: 50%;
-  background: color-mix(in srgb, var(--yw-yellow) calc(var(--p) * 100%), var(--yw-dim));
-  transform: scale(calc(0.6 + var(--p) * 0.4));
+  border: 2.5px solid #ffffff;
+  background: color-mix(in srgb, var(--yw-pink) calc(var(--p) * 100%), var(--yw-dim));
+  box-shadow: 0 1px 3px rgba(0,0,0,0.12);
+  transform: scale(calc(0.7 + var(--p) * 0.3));
 }
 .yw-step:last-child .yw-track::before,
 .yw-step:last-child .yw-fill { display: none; }
 
-/* step content: big number on the left, text on the right */
+/* step content */
 .yw-body {
   display: grid;
-  grid-template-columns: clamp(88px, 16vw, 200px) minmax(0, 1fr);
-  column-gap: clamp(16px, 4vw, 48px);
+  grid-template-columns: 80px minmax(0, 1fr);
+  column-gap: 24px;
   align-items: start;
 }
 
-
-
-/* number: grey outline -> pink outline; last step also fills solid pink.
-   The glyphs are built from overlapping shapes, and a plain text stroke draws those
-   inner edges (the glitch). Painting the stroke first and then an opaque black fill
-   over it hides the inner edges and leaves only the outer outline.
-   4px stroke = 2px visible outline, same weight as before. */
 .yw-num {
   display: block;
-  font-size: clamp(4rem, 10vw, 7.5rem);
-  font-weight: 800;
+  font-family: 'Outfit', sans-serif;
+  font-size: 2.5rem;
+  font-weight: 900;
   line-height: 0.9;
-  letter-spacing: -0.04em;
-  color: var(--yw-black);
-  paint-order: stroke fill;
-  -webkit-text-stroke: 4px color-mix(in srgb, var(--yw-pink) calc(var(--p) * 100%), var(--yw-dim));
-  text-rendering: geometricPrecision;
-  transform: translateY(calc((1 - var(--p)) * 32px));
-}
-.yw-step:last-child .yw-num {
-  color: color-mix(in srgb, var(--yw-pink) calc(var(--p) * 100%), var(--yw-black));
-  -webkit-text-stroke: 0;
+  letter-spacing: -0.05em;
+  color: color-mix(in srgb, var(--yw-pink) calc(var(--p) * 100%), #d4d4d8);
 }
 
 .yw-label {
   display: block;
-  font-size: 0.95rem;
-  font-weight: 600;
-  line-height: 1.5;
-  color: color-mix(in srgb, var(--yw-yellow) calc(var(--p) * 100%), var(--yw-dim));
+  font-family: 'Space Grotesk', monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--yw-pink);
 }
 .yw-step-title {
-  margin: 8px 0 0;
-  font-size: clamp(1.4rem, 2.6vw, 2rem);
-  font-weight: 700;
-  line-height: 1.15;
-  color: color-mix(in srgb, var(--yw-white) calc(var(--p) * 100%), var(--yw-dim));
-  transform: translateY(calc((1 - var(--p)) * 20px));
+  margin: 2px 0 0;
+  font-family: 'Outfit', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+  color: var(--yw-text);
 }
 .yw-desc {
-  margin: 12px 0 0;
+  margin: 6px 0 0;
   max-width: 52ch;
-  font-size: 1.05rem;
-  line-height: 1.6;
-  color: rgb(255 255 255 / calc(0.1 + var(--p) * 0.62));
-  transform: translateY(calc((1 - var(--p)) * 16px));
+  font-size: 0.9rem;
+  line-height: 1.5;
+  color: var(--yw-subtext);
 }
 
-/* small screens: number sits above the text */
+/* small screens */
 @media (max-width: 639px) {
-  .yw-body { grid-template-columns: 1fr; row-gap: 12px; }
-  .yw-num { font-size: 3.5rem; }
+  .yw-body { grid-template-columns: 1fr; row-gap: 6px; }
+  .yw-num { font-size: 2rem; }
 }
 
-/* reduced motion: finished state, no movement */
 @media (prefers-reduced-motion: reduce) {
   .yw-title, .yw-sub, .yw-num, .yw-step-title, .yw-desc, .yw-track::after { transform: none; }
   .yw-fill { transform: none; }

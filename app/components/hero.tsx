@@ -1,298 +1,446 @@
-import * as React from "react";
+"use client";
 
-/**
- * Hero — Yathra '26 · Hult Prize UCEK Qualifiers (navbar not included).
- *
- * Same structure as the RAISE hero: three-part headline, subtitle with bold
- * spans, two CTAs, two partner cards. The announcement pill is removed.
- *
- * Requirements: React 18+, Tailwind CSS 3.2+.
- * Palette: white (primary) on black, hot pink #ff2d87, yellow #ffd23f.
- *
- * Breakpoints:
- *   < 640px   headline stacks (wordmark above "is UNLIMITED"), CTAs and cards
- *             go full-width and stack
- *   ≥ 640px   headline on one row, CTAs side by side
- *   ≥ 1024px  full desktop spacing and sizes
- *
- * Props let you swap in real assets: `backdropSrc` (e.g. the pink 3D India
- * map from the brochure, transparent PNG/WebP) and `hultLogoSrc` (official
- * Hult Prize logo) — the SVG stand-ins below are approximations.
- */
+import React, { useEffect, useRef, useState, useCallback } from "react";
+import Image from "next/image";
 
 const PINK = "#ff2d87";
-const YELLOW = "#ffd23f";
 
-type HeroProps = {
-  backdropSrc?: string;
-  hultLogoSrc?: string;
-  registerHref?: string;
-  contactHref?: string;
-  onRegister?: () => void;
-};
-
-const FONT_IMPORT = `
-@import url('https://fonts.googleapis.com/css2?family=Figtree:wght@400;500;600;800&family=Outfit:wght@800&family=Instrument+Serif:ital@1&display=swap');
-`;
-
-/* Stand-in for the glowing India map: a "journey" route with a pin */
-function JourneyBackdrop() {
-  return (
-    <svg viewBox="0 0 700 460" className="h-full w-full" fill="none" aria-hidden>
-      <defs>
-        <radialGradient id="yg" cx="50%" cy="50%" r="50%">
-          <stop offset="0" stopColor={PINK} stopOpacity="0.55" />
-          <stop offset="0.6" stopColor={PINK} stopOpacity="0.15" />
-          <stop offset="1" stopColor={PINK} stopOpacity="0" />
-        </radialGradient>
-        <linearGradient id="yr" x1="0" y1="1" x2="1" y2="0">
-          <stop offset="0" stopColor="#ffffff" stopOpacity="0.1" />
-          <stop offset="0.6" stopColor={PINK} stopOpacity="0.9" />
-          <stop offset="1" stopColor="#ffffff" stopOpacity="0.9" />
-        </linearGradient>
-        <filter id="yb" x="-20%" y="-20%" width="140%" height="140%">
-          <feGaussianBlur stdDeviation="2.5" />
-        </filter>
-      </defs>
-      <ellipse cx="350" cy="230" rx="330" ry="210" fill="url(#yg)" />
-      <g filter="url(#yb)">
-        <circle cx="350" cy="230" r="170" stroke={PINK} strokeOpacity="0.28" strokeWidth="1.5" />
-        <circle cx="350" cy="230" r="230" stroke="#fff" strokeOpacity="0.1" strokeWidth="1" />
-        <path
-          d="M70 380 C 190 120, 400 380, 600 90"
-          stroke="url(#yr)"
-          strokeWidth="5"
-          strokeLinecap="round"
-          strokeDasharray="2 14"
-        />
-      </g>
-      <circle cx="70" cy="380" r="7" fill="#fff" />
-      {/* pin */}
-      <path
-        d="M600 62c-15 0-27 12-27 27 0 20 27 46 27 46s27-26 27-46c0-15-12-27-27-27z"
-        fill={YELLOW}
-      />
-      <circle cx="600" cy="89" r="9" fill="#0a0507" />
-    </svg>
-  );
+interface CardItem {
+  id: number;
+  title: string;
+  tag: string;
+  image: string;
 }
 
-/* Approximation of the Hult Prize "H" mark */
-function HultMark({ className = "" }: { className?: string }) {
-  return (
-    <svg viewBox="0 0 44 40" className={className} fill="currentColor" aria-hidden>
-      <path d="M0 4a4 4 0 0 1 4-4h8v40H4a4 4 0 0 1-4-4V4zM32 0h8a4 4 0 0 1 4 4v32a4 4 0 0 1-4 4h-8V0zM12 15h20v10H12z" />
-    </svg>
-  );
+const CARDS: CardItem[] = [
+  {
+    id: 1,
+    title: "Champion Venture",
+    tag: "Yathra ’26 Winner",
+    image: "/yathra/yatra26winners/winner.jpg",
+  },
+  {
+    id: 2,
+    title: "1st Runner-Up",
+    tag: "Yathra ’26 Finalist",
+    image: "/yathra/yatra26winners/runnerup.JPG",
+  },
+  {
+    id: 3,
+    title: "Live Stage Pitch",
+    tag: "Travancore Hall",
+    image: "/yathra/yatra26part/event1.jpg",
+  },
+  {
+    id: 4,
+    title: "Executive Jury",
+    tag: "Q&A Deliberation",
+    image: "/yathra/yatra26part/event2.jpg",
+  },
+  {
+    id: 5,
+    title: "Founder Network",
+    tag: "Mentorship Sprint",
+    image: "/yathra/yatra26part/event3.jpg",
+  },
+  {
+    id: 6,
+    title: "Inaugural Champion",
+    tag: "Yathra ’25 Winner",
+    image: "/yathra/yatra25winners/winner.JPG",
+  },
+  {
+    id: 7,
+    title: "1st Runner-Up ’25",
+    tag: "Social Venture",
+    image: "/yathra/yatra25winners/runnerup1.jpg",
+  },
+  {
+    id: 8,
+    title: "2nd Runner-Up ’25",
+    tag: "SDG Innovation",
+    image: "/yathra/yatra25winners/runnerup2.jpg",
+  },
+  {
+    id: 9,
+    title: "Pitch Showcase",
+    tag: "Technopark Stage",
+    image: "/yathra/yatra25part/event1.jpg",
+  },
+  {
+    id: 10,
+    title: "Valedictory Ceremony",
+    tag: "Awards Ceremony",
+    image: "/yathra/yatra25part/event4.jpg",
+  },
+];
+
+interface ComputedCard {
+  card: CardItem;
+  xL: number;
+  yMin: number;
+  w: number;
+  height: number;
+  clipPath: string;
+  zIndex: number;
+  opacity: number;
 }
 
-const ctaBase =
-  "group inline-flex h-[52px] w-full items-center justify-center gap-3 rounded-lg px-6 text-base font-semibold tracking-[-0.02em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffd23f] sm:h-[58px] sm:w-auto sm:px-[26px] sm:text-[18px] lg:h-[62px] lg:text-[19px]";
+export default function Hero() {
+  const carouselTrackRef = useRef<HTMLDivElement>(null);
+  const [dimensions, setDimensions] = useState({ width: 1200, height: 360 });
+  const [computedCards, setComputedCards] = useState<ComputedCard[]>([]);
+  const [isDragging, setIsDragging] = useState(false);
 
-const cardBase =
-  "flex h-[72px] w-full max-w-[420px] items-center justify-center rounded-2xl border border-white/10 bg-white/[0.035] px-6 shadow-[inset_0_1px_0_rgba(255,255,255,0.06),0_8px_30px_rgba(0,0,0,0.5)] backdrop-blur sm:h-[80px] sm:w-auto sm:max-w-none sm:px-7 lg:h-[90px] lg:px-[30px]";
+  // Animation & Drag physics state
+  const offsetRef = useRef(0);
+  const velocityRef = useRef(45); // auto drift in px/s
+  const isPointerDownRef = useRef(false);
+  const lastPointerXRef = useRef(0);
+  const lastPointerTimeRef = useRef(0);
 
-export default function Hero({
-  backdropSrc,
-  hultLogoSrc,
-  registerHref = "#register",
-  contactHref = "mailto:hultprizeucek@gmail.com",
-  onRegister,
-}: HeroProps) {
+  // Responsive container measurement
+  const updateDimensions = useCallback(() => {
+    if (!carouselTrackRef.current) return;
+    const w = carouselTrackRef.current.clientWidth || window.innerWidth;
+    const isMobile = w < 640;
+    const isTablet = w < 1024;
+    const h = isMobile ? 240 : isTablet ? 320 : 370;
+    setDimensions({ width: w, height: h });
+  }, []);
+
+  useEffect(() => {
+    updateDimensions();
+    window.addEventListener("resize", updateDimensions);
+    const observer = new ResizeObserver(updateDimensions);
+    if (carouselTrackRef.current) observer.observe(carouselTrackRef.current);
+    return () => {
+      window.removeEventListener("resize", updateDimensions);
+      observer.disconnect();
+    };
+  }, [updateDimensions]);
+
+  // Cylinder geometry calculations responsive to actual container width & height
+  const computeGeometry = useCallback(
+    (currentOffset: number, width: number, height: number): ComputedCard[] => {
+      const totalCards = CARDS.length;
+      const isMobile = width < 640;
+      const isTablet = width < 1024;
+
+      // Card sizing adapted to viewport width
+      const w0 = isMobile ? 120 : isTablet ? 150 : 170;
+      const h0 = isMobile ? 180 : isTablet ? 230 : 270;
+      const pitch = w0 + (isMobile ? 16 : 26);
+      const totalTrack = totalCards * pitch;
+      const halfTrack = totalTrack / 2;
+
+      const center = width / 2;
+      const normDivisor = width * (isMobile ? 0.48 : 0.52);
+
+      const cardsOutput: ComputedCard[] = [];
+
+      for (let i = 0; i < totalCards; i++) {
+        let rawPos = (i * pitch + currentOffset) % totalTrack;
+        if (rawPos < 0) rawPos += totalTrack;
+
+        let t = rawPos - center;
+        if (t > halfTrack) t -= totalTrack;
+        if (t < -halfTrack) t += totalTrack;
+
+        // Pushed position along the cylinder curve
+        const tNorm = t / normDivisor;
+        const pushedX = center + t * (1 + 0.08 * tNorm * tNorm);
+
+        // Skip cards outside viewport
+        if (pushedX < -w0 * 1.2 || pushedX > width + w0 * 1.2) continue;
+
+        const d = Math.abs(pushedX - center) / normDivisor;
+        const cardW = w0 + (isMobile ? 24 : 45) * d * d;
+
+        const xL = pushedX - cardW / 2;
+        const xR = pushedX + cardW / 2;
+
+        const qL = Math.abs(xL - center) / normDivisor;
+        const qR = Math.abs(xR - center) / normDivisor;
+
+        // Heights with outer edges taller than inner edges
+        const hL = h0 + (isMobile ? 40 : 85) * Math.pow(Math.min(qL, 1.4), 2.4);
+        const hR = h0 + (isMobile ? 40 : 85) * Math.pow(Math.min(qR, 1.4), 2.4);
+
+        // Vertical center of the carousel stage
+        const yC = height / 2 - (isMobile ? 6 : 10) * d * d;
+
+        const yTL = yC - hL / 2;
+        const yBL = yC + hL / 2;
+        const yTR = yC - hR / 2;
+        const yBR = yC + hR / 2;
+
+        const yMin = Math.min(yTL, yTR);
+        const yMax = Math.max(yBL, yBR);
+        const cardH = Math.max(1, yMax - yMin);
+
+        // Quad polygon points
+        const pTL_y = ((yTL - yMin) / cardH) * 100;
+        const pTR_y = ((yTR - yMin) / cardH) * 100;
+        const pBR_y = ((yBR - yMin) / cardH) * 100;
+        const pBL_y = ((yBL - yMin) / cardH) * 100;
+
+        const clipPath = `polygon(0% ${pTL_y.toFixed(2)}%, 100% ${pTR_y.toFixed(2)}%, 100% ${pBR_y.toFixed(2)}%, 0% ${pBL_y.toFixed(2)}%)`;
+
+        // Safe low z-index (1 to 10) so carousel is ALWAYS below fixed navbar (z-50)
+        const zIndex = Math.round(1 + (1 - Math.min(d, 1)) * 10);
+        const opacity = d > 1.05 ? Math.max(0, 1 - (d - 1.05) * 4) : 1;
+
+        cardsOutput.push({
+          card: CARDS[i],
+          xL,
+          yMin,
+          w: cardW,
+          height: cardH,
+          clipPath,
+          zIndex,
+          opacity,
+        });
+      }
+
+      return cardsOutput;
+    },
+    []
+  );
+
+  // Animation loop with continuous drift and momentum decay
+  useEffect(() => {
+    let animationFrameId: number;
+    let lastTimestamp = performance.now();
+
+    const loop = (now: number) => {
+      const dt = Math.min((now - lastTimestamp) / 1000, 0.1);
+      lastTimestamp = now;
+
+      if (!isPointerDownRef.current) {
+        const targetSpeed = dimensions.width < 640 ? 35 : 45;
+        if (Math.abs(velocityRef.current) > targetSpeed) {
+          velocityRef.current *= Math.pow(0.08, dt);
+          if (Math.abs(velocityRef.current) < targetSpeed) {
+            velocityRef.current = targetSpeed;
+          }
+        } else {
+          velocityRef.current = targetSpeed;
+        }
+
+        offsetRef.current -= velocityRef.current * dt;
+      }
+
+      setComputedCards(computeGeometry(offsetRef.current, dimensions.width, dimensions.height));
+      animationFrameId = requestAnimationFrame(loop);
+    };
+
+    animationFrameId = requestAnimationFrame(loop);
+    return () => cancelAnimationFrame(animationFrameId);
+  }, [computeGeometry, dimensions]);
+
+  // Pointer drag interactions (touch + mouse)
+  const handlePointerDown = (e: React.PointerEvent) => {
+    isPointerDownRef.current = true;
+    setIsDragging(true);
+    lastPointerXRef.current = e.clientX;
+    lastPointerTimeRef.current = performance.now();
+    velocityRef.current = 0;
+    (e.target as HTMLElement).setPointerCapture?.(e.pointerId);
+  };
+
+  const handlePointerMove = (e: React.PointerEvent) => {
+    if (!isPointerDownRef.current) return;
+    const now = performance.now();
+    const dt = Math.max((now - lastPointerTimeRef.current) / 1000, 0.001);
+    const deltaX = e.clientX - lastPointerXRef.current;
+
+    offsetRef.current += deltaX;
+    velocityRef.current = -deltaX / dt;
+
+    lastPointerXRef.current = e.clientX;
+    lastPointerTimeRef.current = now;
+  };
+
+  const handlePointerUp = () => {
+    isPointerDownRef.current = false;
+    setIsDragging(false);
+  };
+
   return (
-    <section
-      className="relative isolate flex min-h-[100svh] w-full flex-col items-center overflow-hidden bg-[#050204] px-5 pb-16 pt-28 text-white sm:px-8 sm:pb-20 sm:pt-36 lg:pb-24 lg:pt-44"
-      style={{ fontFamily: "'Figtree', system-ui, sans-serif" }}
-    >
-      <style>{FONT_IMPORT}</style>
-
-      {/* ───────── Background: pink stage lights ───────── */}
-      <div aria-hidden className="pointer-events-none absolute inset-0 -z-10">
-        <div
-          className="absolute inset-0"
-          style={{
-            background:
-              "radial-gradient(90% 38% at 50% -6%, rgba(255,45,135,0.38) 0%, rgba(120,20,70,0.22) 45%, rgba(5,2,4,0) 100%)",
-          }}
-        />
-        <div
-          className="absolute inset-x-0 top-0 h-[32%] opacity-70 sm:h-[40%]"
-          style={{
-            background:
-              "radial-gradient(10% 70% at 70% 0%, rgba(255,45,135,0.4), transparent 70%), radial-gradient(10% 70% at 82% 0%, rgba(255,210,63,0.18), transparent 70%), radial-gradient(10% 70% at 30% 0%, rgba(255,45,135,0.3), transparent 70%), radial-gradient(10% 70% at 18% 0%, rgba(255,255,255,0.1), transparent 70%)",
-            filter: "blur(18px)",
-          }}
-        />
-        <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-white/40 to-transparent" />
-        {/* warm glow rising from the bottom, as on the brochure */}
-        <div
-          className="absolute inset-x-0 bottom-0 h-[35%]"
-          style={{
-            background:
-              "linear-gradient(to top, rgba(255,45,135,0.18), transparent)",
-          }}
-        />
-        <div
-          className="absolute left-1/2 top-[34%] h-[46%] w-[90%] -translate-x-1/2 -translate-y-1/2 sm:w-[46%]"
-          style={{
-            background:
-              "radial-gradient(closest-side, rgba(255,45,135,0.28), transparent)",
-            filter: "blur(30px)",
-          }}
-        />
-      </div>
-
-      {/* ───────── Headline + subtitle ───────── */}
-      <div className="relative w-full max-w-[1110px] min-[1900px]:max-w-[1250px]">
-        {/* Backdrop behind the headline */}
-        <div
-          aria-hidden
-          className="pointer-events-none absolute left-1/2 top-[34%] aspect-[700/460] w-[125%] -translate-x-1/2 -translate-y-1/2 opacity-80 [mask-image:radial-gradient(closest-side,#000_70%,transparent)] sm:top-[38%] sm:w-[62%] sm:opacity-90 lg:w-[56%]"
-        >
-          {backdropSrc ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={backdropSrc} alt="" className="h-full w-full object-contain" />
-          ) : (
-            <JourneyBackdrop />
-          )}
+    <section className="relative z-0 w-full overflow-hidden bg-white text-zinc-950 pt-24 sm:pt-28 lg:pt-32 pb-8 sm:pb-12 border-b border-zinc-200">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        {/* ─── 1. TOP BADGE ─── */}
+        <div className="flex justify-center mb-4 sm:mb-6">
+          <div
+            className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border shadow-xs"
+            style={{
+              backgroundColor: "#ffe4f0",
+              borderColor: "#ffb3d6",
+              color: PINK,
+            }}
+          >
+            <span className="h-1.5 w-1.5 rounded-full bg-[#ff2d87] animate-pulse" />
+            <span className="text-xs sm:text-[13px] font-bold tracking-tight">
+              Trusted by 10,000+ collegiate innovators
+            </span>
+          </div>
         </div>
 
-        <h1 className="relative z-10 m-0 w-full [container-type:inline-size]">
-          <span className="sr-only">Yathra is unlimited</span>
-          <span
-            aria-hidden
-            className="flex w-full flex-col items-center gap-[3cqw] sm:flex-row sm:justify-center sm:gap-0"
+        {/* ─── 2. HEADLINE & RELATIVE NOTE ─── */}
+        <div className="relative max-w-4xl mx-auto text-center px-2">
+          {/* Handwritten note: "Be seen / with Yathra" (Desktop only, positioned in safe right margin) */}
+          <div
+            aria-hidden="true"
+            className="hidden xl:block absolute -right-20 top-2 pointer-events-none select-none text-left"
           >
-            {/* Wordmark: "yathra" + stacked pink 26 */}
-            <span className="inline-flex shrink-0 items-start">
-              <span
-                className="text-white [font-size:26cqw] [letter-spacing:-0.05em] [line-height:0.85] sm:[font-size:12cqw]"
-                style={{ fontFamily: "'Outfit', 'Figtree', sans-serif", fontWeight: 800 }}
-              >
-                yathra
-              </span>
-              {/* <span
-                className="ml-[0.8cqw] flex flex-col font-extrabold [font-size:6.5cqw] [line-height:0.88] sm:ml-[0.5cqw] sm:[font-size:3.1cqw]"
-                style={{ color: PINK, fontFamily: "'Outfit', sans-serif" }}
-              >
-                <span>2</span>
-                <span>7</span>
-              </span> */}
-            </span>
+            <div
+              className="text-[24px] font-bold leading-tight rotate-[12deg]"
+              style={{ color: PINK, fontFamily: "'Caveat', cursive" }}
+            >
+              Be seen
+              <br />
+              with Yathra
+            </div>
+            <svg
+              className="w-[90px] h-[75px] -mt-1 ml-3 overflow-visible"
+              viewBox="0 0 90 75"
+              fill="none"
+              stroke={PINK}
+              strokeWidth="2.2"
+              strokeLinecap="round"
+            >
+              <path d="M 20 8 C 55 15, 65 42, 42 65 C 38 68, 32 68, 32 68" />
+              <path d="M 40 56 L 31 68 L 44 72" />
+            </svg>
+          </div>
 
-            {/* "is UNLIMITED" */}
-            <span className="flex items-center whitespace-nowrap sm:contents">
-              <span
-                className="inline-block bg-gradient-to-b from-[#f4f4f4] to-[#8a8a8a] bg-clip-text pr-[1.2cqw] italic text-transparent opacity-90 [font-size:16cqw] [letter-spacing:-0.02em] [line-height:1] sm:ml-[1.6cqw] sm:mr-[1.4cqw] sm:pr-[0.6cqw] sm:[font-size:9.5cqw]"
-                style={{ fontFamily: "'Instrument Serif', Georgia, serif" }}
-              >
-                is
-              </span>
-              <span className="inline-block font-extrabold text-white [font-size:12cqw] [letter-spacing:-0.04em] [line-height:1] sm:[font-size:7.4cqw]">
-                IMMNIENT
-              </span>
-            </span>
-          </span>
-        </h1>
-
-        <p className="relative z-10 mx-auto mt-6 max-w-[34ch] text-balance text-center text-[clamp(17px,4.7vw,24px)] font-normal leading-[1.12] tracking-[-0.025em] sm:mt-10 sm:max-w-[900px] sm:text-[clamp(22px,2.9vw,30px)] lg:mt-12 lg:max-w-[1000px] lg:text-[clamp(26px,1.75vw+4px,33px)]">
-          A million dollar journey for India’s next wave of changemakers.
-          <br className="hidden sm:block" />{" "}
-          Hult Prize{" "}
-          <strong className="font-semibold" style={{ color: PINK }}>
-            UCEK Qualifiers
-          </strong>{" "}
-          {/* at{" "}
-          <strong className="font-semibold">
-            University College of Engineering
-          </strong>
-          , Kariavattom. */}
-        </p>
-      </div>
-
-      {/* ───────── CTAs ───────── */}
-      <div className="relative z-10 mt-10 flex w-full max-w-[420px] flex-col items-center gap-3 sm:mt-12 sm:max-w-none sm:flex-row sm:justify-center lg:mt-[70px]">
-        <a
-          href={registerHref}
-          onClick={onRegister}
-          className={`${ctaBase} bg-white text-black shadow-[0_6px_24px_rgba(0,0,0,0.4)] hover:bg-white/90`}
-        >
-          Register Now
-          <svg
-            viewBox="0 0 24 24"
-            className="h-5 w-5 transition-transform group-hover:translate-x-0.5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden
+          <h1
+            className="text-3xl sm:text-5xl md:text-6xl lg:text-[76px] font-extrabold tracking-[-0.04em] text-zinc-950 uppercase leading-[1.02] sm:leading-[0.98]"
+            style={{ fontFamily: "'Inter Tight', 'Outfit', sans-serif" }}
           >
-            <path d="M5 12h14M13 6l6 6-6 6" />
-          </svg>
-        </a>
-
-        <a
-          href={contactHref}
-          className={`${ctaBase} border border-[#ff2d87]/40 bg-[#ff2d87]/15 text-white shadow-[0_6px_24px_rgba(0,0,0,0.4),inset_0_1px_0_rgba(255,255,255,0.1)] backdrop-blur hover:bg-[#ff2d87]/25`}
-        >
-          Contact Us
-          <svg
-            viewBox="0 0 24 24"
-            className="h-5 w-5 transition-transform group-hover:-translate-y-0.5 group-hover:translate-x-0.5"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            aria-hidden
-          >
-            <path d="M6 18L18 6M8 6h10v10" />
-          </svg>
-        </a>
-      </div>
-
-      {/* ───────── Partner cards ───────── */}
-      <div className="relative z-10 mt-10 flex w-full flex-col items-center gap-4 sm:mt-12 sm:w-auto sm:flex-row sm:flex-wrap sm:justify-center sm:gap-5 lg:mt-[60px]">
-        {/* Hult Prize × UCEK lockup */}
-        <div className={`${cardBase} gap-3 sm:gap-4`}>
-          {hultLogoSrc ? (
-            // eslint-disable-next-line @next/next/no-img-element
-            <img src={hultLogoSrc} alt="Hult Prize" className="h-8 w-auto sm:h-9 lg:h-[46px]" />
-          ) : (
-            <>
-              <HultMark className="h-8 w-auto text-white sm:h-9 lg:h-[46px]" />
-              <a href="https://hultprize.uck.ac.in/" target="_blank" rel="noopener noreferrer">
-              <span className="text-[17px] font-extrabold leading-[0.95] tracking-[-0.03em] sm:text-[19px] lg:text-[24px]">
-                Hult
-                <br />
-                Prize
-              </span>
-              </a>
-            </>
-          )}
-          <span aria-hidden className="h-9 w-px bg-white/70 sm:h-10 lg:h-[52px]" />
-          <span className="text-[12px] font-normal leading-[1.15] tracking-[-0.01em] text-white/90 sm:text-[14px] lg:text-[17px]">
-            University College
+            A Million Dollar Journey
             <br />
-            of Engineering
-            <br />
-            Kariavattom
-          </span>
+            <span
+              className="text-transparent bg-clip-text"
+              style={{
+                backgroundImage: `linear-gradient(90deg, #09090b 10%, ${PINK} 100%)`,
+              }}
+            >
+              For India’s Changemakers
+            </span>
+          </h1>
+
+          <p className="mt-3 sm:mt-5 text-xs sm:text-base md:text-lg text-zinc-600 font-normal leading-relaxed max-w-2xl mx-auto">
+            Empowering the next generation of student social entrepreneurs across India to
+            build, validate, and pitch scalable ventures tackling the United Nations SDGs.
+          </p>
         </div>
 
-        {/* Partners */}
-        <div className={`${cardBase} flex-col gap-1`}>
-          <span
-            className="text-[11px] font-semibold uppercase tracking-[0.22em] lg:text-[12px]"
-            style={{ color: PINK }}
+        {/* ─── 3. RESPONSIVE CURVED CAROUSEL STAGE (BELOW NAVBAR AT ALL TIMES) ─── */}
+        <div
+          ref={carouselTrackRef}
+          onPointerDown={handlePointerDown}
+          onPointerMove={handlePointerMove}
+          onPointerUp={handlePointerUp}
+          onPointerCancel={handlePointerUp}
+          className={`relative z-10 w-full mt-4 sm:mt-6 overflow-hidden select-none ${
+            isDragging ? "cursor-grabbing" : "cursor-grab"
+          }`}
+          style={{
+            height: `${dimensions.height}px`,
+            touchAction: "none",
+          }}
+        >
+          {computedCards.map((item) => (
+            <div
+              key={item.card.id}
+              className="absolute overflow-hidden rounded-xl border border-zinc-200/90 shadow-md bg-zinc-950"
+              style={{
+                left: `${item.xL}px`,
+                top: `${item.yMin}px`,
+                width: `${item.w}px`,
+                height: `${item.height}px`,
+                clipPath: item.clipPath,
+                zIndex: item.zIndex,
+                opacity: item.opacity,
+              }}
+            >
+              <Image
+                src={item.card.image}
+                alt={item.card.title}
+                fill
+                draggable={false}
+                className="object-cover pointer-events-none"
+                sizes="(max-width: 640px) 160px, 300px"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent pointer-events-none" />
+
+              <span className="absolute top-2 left-2 px-1.5 py-0.5 rounded text-[8.5px] sm:text-[9.5px] font-mono font-bold uppercase tracking-wider text-white bg-black/60 backdrop-blur-xs">
+                {item.card.tag}
+              </span>
+
+              <div className="absolute bottom-2 left-2 flex items-center gap-1.5 z-10">
+                <div className="h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center text-white border border-white/40 shadow-xs">
+                  <svg viewBox="0 0 24 24" className="h-2.5 w-2.5 fill-current ml-0.5">
+                    <path d="M8 5v14l11-7z" />
+                  </svg>
+                </div>
+                <span className="text-[10px] sm:text-[11px] font-bold text-white tracking-tight drop-shadow-xs truncate max-w-[100px] sm:max-w-[130px]">
+                  {item.card.title}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* ─── 4. BOTTOM ACTION BUTTON & ZERO COST NOTE (BELOW THE BUTTON, POINTING UP AT THE BUTTON) ─── */}
+        <div className="mt-6 sm:mt-8 flex flex-col items-center justify-center relative">
+          {/* Button with dashed outline ring */}
+          <div className="relative flex items-center justify-center">
+            <div
+              className="absolute w-[184px] h-[58px] sm:w-[196px] sm:h-[66px] rounded-full border border-dashed pointer-events-none"
+              style={{ borderColor: `${PINK}80` }}
+            />
+            <a
+              href="https://hultprize.uck.ac.in/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="relative z-10 px-7 py-3 sm:px-8 sm:py-3.5 rounded-full flex items-center justify-center gap-2 text-white font-bold text-sm sm:text-base shadow-lg hover:brightness-105 active:scale-98 transition-all"
+              style={{
+                backgroundColor: PINK,
+                boxShadow: `0 6px 20px ${PINK}40`,
+              }}
+            >
+              <span>Register Now</span>
+              <span className="text-white/80 font-normal">→</span>
+            </a>
+          </div>
+
+          {/* Zero cost note positioned BELOW the button, with an arrow pointing UPWARDS toward the button */}
+          <div
+            aria-hidden="true"
+            className="mt-3.5 flex items-center gap-1.5 select-none pointer-events-none text-[#ff2d87]"
+            style={{ fontFamily: "'Caveat', cursive" }}
           >
-            In partnership with
-          </span>
-          <span className="text-center text-[15px] font-semibold tracking-[-0.02em] sm:text-[17px] lg:text-[21px]">
-            µlearn <span style={{ color: YELLOW }}>·</span> Unstop{" "}
-            <span style={{ color: YELLOW }}>·</span> Kerala Startup Mission
-          </span>
+            <svg
+              className="w-5 h-6 sm:w-6 sm:h-7 overflow-visible -rotate-6"
+              viewBox="0 0 24 28"
+              fill="none"
+              stroke={PINK}
+              strokeWidth="2.3"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              {/* Arrow curving upward toward the button */}
+              <path d="M 12 24 C 10 16, 14 10, 12 5" />
+              {/* Arrowhead pointing up */}
+              <path d="M 6 11 L 12 4 L 18 11" />
+            </svg>
+            <span className="text-lg sm:text-2xl font-bold -rotate-2">
+              Zero cost entry
+            </span>
+          </div>
         </div>
       </div>
     </section>
