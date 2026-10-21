@@ -6,8 +6,12 @@ import Link from "next/link";
 /**
  * Navbar — Yathra '26 (pairs with hero.tsx).
  *
- * Layout mirrors the original RAISE navbar:
- *   [ Program ▾  Participate ▾ ]   [ yathra wordmark ]   [ Register ]  [ Explore ▦ ▾ ]
+ * Desktop layout:
+ *   [ (empty) ]   [ yathra wordmark ]   [ Register* ]  [ Explore ▦ ▾ ]
+ *   * Register only appears once the hero's own Register button has scrolled out of
+ *     view, so there are never two Register buttons on screen at the top of the page.
+ *     Mark the hero button with  data-hero-register  (otherwise the first other link
+ *     to #register on the page is used, or ~75% of a screen of scroll as a fallback).
  *
  * Requirements: React 18+, Tailwind CSS 3.2+.
  * Palette: white (primary) on black, hot pink #ff2d87, yellow #ffd23f.
@@ -207,9 +211,6 @@ function Dropdown({ group, open, onToggle, onHover, align = "left", icon, classN
 
 /* ───────── Navbar ───────── */
 
-const dropdownBtn =
-  "inline-flex h-[52px] items-center gap-2.5 rounded-lg border border-white/10 bg-white/[0.06] px-5 text-[17px] font-medium tracking-[-0.02em] text-white shadow-[inset_0_1px_0_rgba(255,255,255,0.06)] backdrop-blur transition-colors hover:bg-white/[0.12] aria-expanded:bg-white/[0.12] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffd23f] xl:h-[58px] xl:px-6";
-
 const registerBtn =
   "inline-flex h-[52px] items-center gap-2.5 rounded-lg bg-white px-5 text-[17px] font-semibold tracking-[-0.02em] text-black shadow-[0_6px_24px_rgba(0,0,0,0.4)] transition-colors hover:bg-white/90 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#ffd23f] xl:h-[58px] xl:px-6";
 
@@ -220,7 +221,9 @@ export default function Navbar() {
   const [openMenu, setOpenMenu] = React.useState<string | null>(null);
   const [mobileOpen, setMobileOpen] = React.useState(false);
   const [scrolled, setScrolled] = React.useState(false);
+  const [showRegister, setShowRegister] = React.useState(false);
   const barRef = React.useRef<HTMLElement>(null);
+  const heroRegisterRef = React.useRef<Element | null>(null);
 
   /* scrolled style */
   React.useEffect(() => {
@@ -228,6 +231,40 @@ export default function Navbar() {
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
+  }, []);
+
+  /* show the navbar Register button only after the hero's Register button is scrolled past */
+  React.useEffect(() => {
+    const findHeroRegister = () => {
+      const marked = document.querySelector("[data-hero-register]");
+      if (marked) return marked;
+      return (
+        Array.from(document.querySelectorAll(`a[href="${REGISTER_HREF}"]`)).find(
+          (a) => !barRef.current?.contains(a)
+        ) ?? null
+      );
+    };
+
+    const update = () => {
+      if (!heroRegisterRef.current || !heroRegisterRef.current.isConnected) {
+        heroRegisterRef.current = findHeroRegister();
+      }
+      const el = heroRegisterRef.current;
+      const barH = barRef.current?.offsetHeight ?? 0;
+      // past = the hero button has gone up under / above the navbar
+      const past = el
+        ? el.getBoundingClientRect().bottom < barH
+        : window.scrollY > window.innerHeight * 0.75;
+      setShowRegister(past);
+    };
+
+    update();
+    window.addEventListener("scroll", update, { passive: true });
+    window.addEventListener("resize", update);
+    return () => {
+      window.removeEventListener("scroll", update);
+      window.removeEventListener("resize", update);
+    };
   }, []);
 
   /* outside click + Escape */
@@ -301,11 +338,8 @@ export default function Navbar() {
         aria-label="Main"
         className="mx-auto grid h-[76px] w-full max-w-[1760px] grid-cols-[1fr_auto_1fr] items-center gap-4 px-5 sm:h-[88px] sm:px-8 lg:h-[104px] xl:px-[72px]"
       >
-        {/* Left — dropdowns (desktop) / logo (mobile) */}
-        <div className="hidden items-center gap-2 lg:flex xl:gap-2.5">
-          <Dropdown {...dd(PROGRAM)} className={dropdownBtn} />
-          <Dropdown {...dd(PARTICIPATE)} className={dropdownBtn} />
-        </div>
+        {/* Left — empty on desktop (keeps the logo centred) / logo (mobile) */}
+        <div className="hidden lg:block" aria-hidden />
         <div className="col-start-1 row-start-1 justify-self-start lg:hidden">
           <Logo />
         </div>
@@ -317,7 +351,16 @@ export default function Navbar() {
 
         {/* Right — CTAs (desktop) / hamburger (mobile) */}
         <div className="hidden items-center justify-end gap-2 lg:flex xl:gap-2.5">
-          <a href={REGISTER_HREF} className={registerBtn}>
+          <a
+            href={REGISTER_HREF}
+            aria-hidden={!showRegister}
+            tabIndex={showRegister ? 0 : -1}
+            className={`${registerBtn} !transition-[opacity,transform,filter,visibility,background-color] ease-[cubic-bezier(0.22,1,0.36,1)] will-change-[opacity,transform] motion-reduce:transform-none motion-reduce:blur-none motion-reduce:duration-150 ${
+              showRegister
+                ? "visible translate-y-0 scale-100 opacity-100 blur-0 duration-[600ms]"
+                : "pointer-events-none invisible -translate-y-2 scale-[0.96] opacity-0 blur-[6px] duration-300"
+            }`}
+          >
             Register
             <TicketIcon />
           </a>
