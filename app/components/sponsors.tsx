@@ -2,182 +2,135 @@
 
 import React from 'react'
 import Image from 'next/image'
-import { PlusCircle, ExternalLink, Building } from 'lucide-react'
+import { PlusCircle } from 'lucide-react'
 
-const PINK = '#ff2d87'
-const YELLOW = '#ffd23f'
-
-interface PartnerDetail {
-  id: string
-  name: string
-  role: string
-  category: string
-  logo?: string
-  logoWidth?: number
-  logoHeight?: number
-  website?: string
-  isVacant?: boolean
-  tagline: string
-}
-
-const PARTNERS: PartnerDetail[] = [
-  {
-    id: 'unstop',
-    name: 'Unstop',
-    role: 'Opportunity & Platform Partner',
-    category: 'Official Platform Partner',
-    logo: '/partners/unstop.png',
-    logoWidth: 220,
-    logoHeight: 70,
-    website: 'https://unstop.com',
-    isVacant: false,
-    tagline: 'Connecting collegiate innovators with global hackathons, competitions, and opportunities.',
-  },
-  {
-    id: 'mulearn',
-    name: 'µLearn',
-    role: 'A GTech Initiative',
-    category: 'Ecosystem & Skilling Partner',
-    logo: '/partners/mulearn.webp',
-    logoWidth: 200,
-    logoHeight: 70,
-    website: 'https://mulearn.org',
-    isVacant: false,
-    tagline: 'Peer learning and industry-readiness ecosystem powered by leading GTech companies.',
-  },
-  
-  {
-    id: 'vacant-sponsor',
-    name: 'Title / Innovation Sponsor',
-    role: 'Your Brand Placement',
-    category: 'Sponsorship Opportunity · Open',
-    isVacant: true,
-    tagline: 'Associate your brand with 10,000+ collegiate innovators and nationwide UN SDG social ventures.',
-  },
-]
-
-const Sponsors = () => {
+export default function Sponsors() {
   return (
     <section
       id="partners"
-      className="relative w-full bg-[#050204] py-20 px-6 sm:px-10 lg:px-16 overflow-hidden border-y border-white/10"
-      style={{ fontFamily: "'Figtree', system-ui, sans-serif" }}
+      className="w-full bg-white text-zinc-950 py-16 px-5 sm:px-8 border-b border-zinc-200"
     >
-      {/* Ambient background glow */}
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute left-1/2 top-1/3 -translate-x-1/2 -translate-y-1/2 h-96 w-[700px] rounded-full blur-[130px] opacity-15"
-        style={{
-          background: `radial-gradient(ellipse at center, ${PINK} 0%, ${YELLOW} 60%, transparent 100%)`,
-        }}
-      />
-
-      <div className="max-w-7xl mx-auto relative z-10">
-        {/* Section Header */}
-        <div className="text-center max-w-3xl mx-auto mb-14">
+      <div className="max-w-4xl mx-auto">
+        {/* Minimal Section Header */}
+        <div className="text-center max-w-xl mx-auto mb-12">
+          <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#ff2d87] block mb-1">
+            Partners & Ecosystem
+          </span>
           <h2
-            className="text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white"
-            style={{ fontFamily: "'Outfit', 'Figtree', sans-serif" }}
+            className="text-2xl sm:text-3xl font-black tracking-tight text-zinc-950 uppercase"
+            style={{ fontFamily: "'Outfit', sans-serif" }}
           >
-            Partners & <span style={{ color: PINK }}>Sponsors</span>
+            Official Summit Partners
           </h2>
-          <p className="mt-3 text-sm sm:text-base text-zinc-400">
-            Backed by leading innovation networks — with prime sponsorship slots available for visionary organizations.
+          <p className="mt-1.5 text-xs sm:text-sm text-zinc-500">
+            Backed by national innovation networks and student incubation ecosystems.
           </p>
         </div>
 
-        {/* Reasonably Big Cards Grid */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-          {PARTNERS.map((item) => {
-            const isVacant = item.isVacant
+        {/* ─── TIERED PARTNER CARDS (MINIMAL) ─── */}
+        <div className="flex flex-col items-center gap-8">
+          {/* Tier 1: Platform Partner */}
+          <div className="w-full max-w-sm flex flex-col items-center">
+            <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-1.5 text-center">
+              Official Platform Partner
+            </span>
+            <div className="w-full h-24 rounded-xl border border-zinc-200 bg-white shadow-sm flex items-center justify-center p-4 hover:border-zinc-300 transition-all">
+              <Image
+                src="/partners/unstop.png"
+                alt="Unstop"
+                width={170}
+                height={50}
+                className="max-h-10 w-auto object-contain"
+              />
+            </div>
+          </div>
 
-            return (
-              <div
-                key={item.id}
-                className={`group relative rounded-3xl p-7 sm:p-8 backdrop-blur transition-all duration-300 flex flex-col justify-between min-h-[290px] sm:min-h-[310px] ${
-                  isVacant
-                    ? 'border-2 border-dashed border-[#ff2d87]/40 bg-gradient-to-b from-[#ff2d87]/10 via-white/[0.02] to-transparent hover:border-[#ffd23f] hover:bg-[#ff2d87]/15 shadow-[0_8px_32px_rgba(255,45,135,0.12)]'
-                    : 'border border-white/10 bg-white/[0.035] hover:border-white/25 hover:bg-white/[0.06] shadow-[0_8px_30px_rgba(0,0,0,0.5)]'
-                }`}
-              >
-                {/* Brand Logo Display Area */}
-                <div className="mb-6 flex flex-col items-center justify-center">
-                  {isVacant ? (
-                    <div className="w-full h-24 rounded-2xl border border-dashed border-white/20 bg-black/40 flex flex-col items-center justify-center p-3 text-center transition-colors group-hover:border-[#ffd23f]/60">
-                      <PlusCircle className="h-6 w-6 text-[#ffd23f] mb-1 animate-pulse" />
-                      <span className="text-xs font-bold text-white tracking-wide">
-                        [ Your Brand Logo Here ]
-                      </span>
-                      <span className="text-[10px] text-zinc-400 mt-0.5">
-                        Vacant Sponsor Placement
-                      </span>
-                    </div>
-                  ) : item.logo ? (
-                    <div className="w-full h-24 rounded-2xl border border-white/5 bg-black/30 flex items-center justify-center p-4">
-                      <Image
-                        src={item.logo}
-                        alt={item.name}
-                        width={item.logoWidth || 180}
-                        height={item.logoHeight || 60}
-                        className="max-h-14 max-w-[180px] object-contain filter brightness-95 contrast-105 group-hover:brightness-110 group-hover:scale-105 transition-all duration-300"
-                      />
-                    </div>
-                  ) : (
-                    <div className="w-full h-24 rounded-2xl border border-white/10 bg-black/40 flex items-center justify-center">
-                      <Building className="h-8 w-8 text-zinc-400" />
-                    </div>
-                  )}
-                </div>
+          {/* Tier 2: Ecosystem & Skilling Partner */}
+          <div className="w-full max-w-sm flex flex-col items-center">
+            <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-1.5 text-center">
+              Ecosystem & Skilling Partner
+            </span>
+            <div className="w-full h-24 rounded-xl border border-zinc-200 bg-white shadow-sm flex items-center justify-center p-4 hover:border-zinc-300 transition-all">
+              <Image
+                src="/partners/mulearn.webp"
+                alt="µLearn GTech"
+                width={160}
+                height={50}
+                className="max-h-10 w-auto object-contain"
+              />
+            </div>
+          </div>
 
-                {/* Title & Role & Tagline */}
-                <div>
-                  <h3
-                    className={`text-xl font-bold tracking-tight mb-1 transition-colors ${
-                      isVacant ? 'text-[#ffd23f] group-hover:text-white' : 'text-white'
-                    }`}
-                    style={{ fontFamily: "'Outfit', sans-serif" }}
-                  >
-                    {item.name}
-                  </h3>
-                  <p className="text-xs font-semibold uppercase tracking-wider text-zinc-400 mb-2">
-                    {item.role}
-                  </p>
-                  <p className="text-xs text-zinc-300/85 line-clamp-3 leading-relaxed">
-                    {item.tagline}
-                  </p>
-                </div>
-
-                {/* Card Footer */}
-                <div className="mt-5 pt-3.5 border-t border-white/10 flex items-center justify-between text-[11px]">
-                  <span className="text-zinc-400 font-medium">
-                    {item.category}
-                  </span>
-                  {item.website ? (
-                    <a
-                      href={item.website}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="inline-flex items-center gap-1 font-semibold text-[#ffd23f] hover:text-[#ff2d87] transition-colors"
-                    >
-                      <span>Visit</span>
-                      <ExternalLink className="h-3 w-3" />
-                    </a>
-                  ) : isVacant ? (
-                    <a
-                      href="#contact"
-                      className="inline-flex items-center gap-1 font-semibold text-[#ff2d87] hover:text-[#ffd23f] transition-colors"
-                    >
-                      <span>Inquire Slot →</span>
-                    </a>
-                  ) : null}
-                </div>
+          {/* Tier 3: Innovation & Campus Incubation Partners */}
+          <div className="w-full max-w-xl grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="flex flex-col items-center">
+              <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-1.5 text-center">
+                Innovation Partner
+              </span>
+              <div className="w-full h-24 rounded-xl border border-zinc-200 bg-white shadow-sm flex items-center justify-center p-4 hover:border-zinc-300 transition-all">
+                <Image
+                  src="/partners/udhayam.png"
+                  alt="Udhyam"
+                  width={140}
+                  height={45}
+                  className="max-h-9 w-auto object-contain"
+                />
               </div>
-            )
-          })}
+            </div>
+
+            <div className="flex flex-col items-center">
+              <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-1.5 text-center">
+                Campus Incubation Partner
+              </span>
+              <div className="w-full h-24 rounded-xl border border-zinc-200 bg-white shadow-sm flex items-center justify-center p-4 hover:border-zinc-300 transition-all">
+                <Image
+                  src="/partners/iedc.png"
+                  alt="IEDC UCEK"
+                  width={140}
+                  height={45}
+                  className="max-h-9 w-auto object-contain"
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* Tier 4: Network Partner & Open Sponsorship */}
+          <div className="w-full max-w-xl grid grid-cols-1 sm:grid-cols-2 gap-4">
+            <div className="flex flex-col items-center">
+              <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-1.5 text-center">
+                Alumni & Network Partner
+              </span>
+              <div className="w-full h-24 rounded-xl border border-zinc-200 bg-white shadow-sm flex items-center justify-center p-4 hover:border-zinc-300 transition-all">
+                <Image
+                  src="/partners/legacy.png"
+                  alt="Legacy IEDC"
+                  width={140}
+                  height={45}
+                  className="max-h-9 w-auto object-contain"
+                />
+              </div>
+            </div>
+
+            <div className="flex flex-col items-center">
+              <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-1.5 text-center">
+                Title / Corporate Sponsor
+              </span>
+              <a
+                href="mailto:hultprizeucek@gmail.com"
+                className="w-full h-24 rounded-xl border border-dashed border-zinc-200 hover:border-pink-300 bg-zinc-50/50 hover:bg-pink-50/30 flex flex-col items-center justify-center p-3 transition-all group"
+              >
+                <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-900 group-hover:text-[#ff2d87] transition-colors">
+                  <PlusCircle className="h-3.5 w-3.5 text-[#ff2d87]" />
+                  <span>Sponsorship Open</span>
+                </div>
+                <span className="text-[10px] text-zinc-500 mt-0.5">
+                  Partner with Yathra ’27 →
+                </span>
+              </a>
+            </div>
+          </div>
         </div>
       </div>
     </section>
   )
 }
-
-export default Sponsors
