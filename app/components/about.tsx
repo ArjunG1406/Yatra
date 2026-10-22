@@ -161,80 +161,189 @@ export default function About() {
         </div>
       </section>
 
-      {/* ─────────────────── 2. PAST EDITIONS (MINIMAL UNIFIED GALLERY) ─────────────────── */}
-      <section id="editions" className="px-5 sm:px-8 py-16 max-w-6xl mx-auto border-b border-zinc-200">
-        {/* Header with Switcher */}
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-8">
-          <div>
-            <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#ff2d87] block mb-1">
+      {/* ─────────────────── 2. PAST EDITIONS (EDITORIAL STAGGERED BENTO COLLAGE) ─────────────────── */}
+      <section id="editions" className="px-5 sm:px-8 py-16 sm:py-20 max-w-6xl mx-auto border-b border-zinc-200">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-center">
+          {/* Left Column: Narrative, Switcher & Venue Info */}
+          <div className="lg:col-span-5 flex flex-col justify-center">
+            <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#ff2d87] block mb-2">
               Hall of Fame
             </span>
             <h3
-              className="text-2xl sm:text-3xl font-black tracking-tight text-zinc-950 uppercase"
+              className="text-2xl sm:text-4xl font-black tracking-tight text-zinc-950 uppercase leading-tight"
               style={{ fontFamily: "'Outfit', sans-serif" }}
             >
-              Past Editions: <span style={{ color: PINK }}>{currentEdition.name}</span>
+              Past Chapters: <span style={{ color: PINK }}>{currentEdition.name}</span>
             </h3>
-          </div>
 
-          {/* Toggle */}
-          <div className="inline-flex p-1 rounded-xl border border-zinc-200 bg-zinc-100 self-start sm:self-auto">
-            <button
-              onClick={() => setSelectedEdition('26')}
-              className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                selectedEdition === '26'
-                  ? 'bg-zinc-950 text-white shadow-sm'
-                  : 'text-zinc-600 hover:text-zinc-950'
-              }`}
-            >
-              Yathra ’26
-            </button>
-            <button
-              onClick={() => setSelectedEdition('25')}
-              className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                selectedEdition === '25'
-                  ? 'bg-zinc-950 text-white shadow-sm'
-                  : 'text-zinc-600 hover:text-zinc-950'
-              }`}
-            >
-              Yathra ’25
-            </button>
-          </div>
-        </div>
+            <p className="mt-3 text-sm sm:text-base text-zinc-600 leading-relaxed">
+              {currentEdition.summary}
+            </p>
 
-        {/* Minimal Venue Line */}
-        <div className="mb-6 flex items-center gap-2 text-xs text-zinc-600 font-medium">
-          <MapPin className="h-4 w-4 text-[#ff2d87] shrink-0" />
-          <span>Grand Finale Venue ({currentEdition.name}):</span>
-          <strong className="text-zinc-900">{currentEdition.venue}</strong>
-        </div>
-
-        {/* Unified 4-Photo Showcase Grid */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-          {currentEdition.photos.map((item, idx) => (
-            <div
-              key={idx}
-              className="rounded-xl border border-zinc-200 overflow-hidden bg-white shadow-sm flex flex-col justify-between"
-            >
-              <div className="relative aspect-[4/3] w-full bg-zinc-100">
-                <Image
-                  src={item.image}
-                  alt={item.title}
-                  fill
-                  className="object-cover"
-                  sizes="(max-width: 768px) 50vw, 25vw"
-                />
-                <span className="absolute top-2 left-2 px-2 py-0.5 text-[9px] font-mono font-bold uppercase tracking-wider rounded bg-zinc-950/90 text-white backdrop-blur">
-                  {item.tag}
-                </span>
-              </div>
-              <div className="p-3">
-                <h4 className="text-xs font-bold text-zinc-900 leading-snug truncate">
-                  {item.title}
-                </h4>
+            {/* Edition Switcher */}
+            <div className="mt-6 flex flex-col sm:flex-row sm:items-center gap-3">
+              <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-zinc-400">
+                Switch Chapter:
+              </span>
+              <div className="inline-flex p-1 rounded-xl border border-zinc-200 bg-zinc-100 self-start">
+                <button
+                  onClick={() => setSelectedEdition('26')}
+                  className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                    selectedEdition === '26'
+                      ? 'bg-zinc-950 text-white shadow-sm'
+                      : 'text-zinc-600 hover:text-zinc-950'
+                  }`}
+                >
+                  Yathra ’26
+                </button>
+                <button
+                  onClick={() => setSelectedEdition('25')}
+                  className={`px-4 py-1.5 rounded-lg text-xs font-bold transition-all ${
+                    selectedEdition === '25'
+                      ? 'bg-zinc-950 text-white shadow-sm'
+                      : 'text-zinc-600 hover:text-zinc-950'
+                  }`}
+                >
+                  Yathra ’25
+                </button>
               </div>
             </div>
-          ))}
+
+            {/* Venue Tag */}
+            <div className="mt-6 p-4 rounded-2xl border border-zinc-200 bg-zinc-50/80 flex items-start gap-3">
+              <div className="p-2 rounded-xl bg-white shadow-2xs border border-zinc-200 text-[#ff2d87] shrink-0">
+                <MapPin className="h-4 w-4" />
+              </div>
+              <div>
+                <span className="font-mono text-[10px] font-bold text-zinc-400 uppercase tracking-wider block">
+                  Grand Finale Venue ({currentEdition.name})
+                </span>
+                <span className="text-xs sm:text-sm font-bold text-zinc-900 mt-0.5 block">
+                  {currentEdition.venue}
+                </span>
+              </div>
+            </div>
+
+            {/* Key Milestone Badges */}
+            <div className="mt-6 flex flex-wrap gap-2">
+              <span className="px-3 py-1 rounded-full text-[11px] font-bold tracking-tight bg-zinc-100 text-zinc-700 border border-zinc-200">
+                100+ Startup Pitches
+              </span>
+              <span className="px-3 py-1 rounded-full text-[11px] font-bold tracking-tight bg-pink-50 text-[#ff2d87] border border-pink-200">
+                $1M Direct Seed Nomination
+              </span>
+              <span className="px-3 py-1 rounded-full text-[11px] font-bold tracking-tight bg-zinc-100 text-zinc-700 border border-zinc-200">
+                Executive Angel Jury
+              </span>
+            </div>
+          </div>
+
+          {/* Right Column: 2-Column Collage with Unified 4:3 Rounded Shape */}
+          <div className="lg:col-span-7 grid grid-cols-2 gap-3 sm:gap-5">
+            {/* Collage Column 1 (Left): Photo 0 & Photo 2 */}
+            <div className="flex flex-col gap-3 sm:gap-5">
+              {/* Card 0: Winner */}
+              {currentEdition.photos[0] && (
+                <div className="group relative aspect-[4/3] w-full rounded-2xl sm:rounded-3xl overflow-hidden border border-zinc-200/90 bg-zinc-100 shadow-[0_12px_32px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.14)] hover:-translate-y-1 transition-all duration-300">
+                  <Image
+                    src={currentEdition.photos[0].image}
+                    alt={currentEdition.photos[0].title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 35vw, 25vw"
+                  />
+                  {/* Floating Pill Tag */}
+                  <span className="absolute top-3 left-3 z-10 px-2.5 py-1 text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider rounded-full bg-zinc-950/85 text-white backdrop-blur-md shadow-xs">
+                    {currentEdition.photos[0].tag}
+                  </span>
+                  {/* Subtle Title Overlay */}
+                  <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 bg-gradient-to-t from-zinc-950/85 via-zinc-950/40 to-transparent z-10 flex flex-col justify-end">
+                    <h4
+                      className="text-xs sm:text-sm font-bold text-white leading-snug line-clamp-2"
+                      style={{ fontFamily: "'Outfit', sans-serif" }}
+                    >
+                      {currentEdition.photos[0].title}
+                    </h4>
+                  </div>
+                </div>
+              )}
+
+              {/* Card 2: Stage Pitch */}
+              {currentEdition.photos[2] && (
+                <div className="group relative aspect-[4/3] w-full rounded-2xl sm:rounded-3xl overflow-hidden border border-zinc-200/90 bg-zinc-100 shadow-[0_12px_32px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.14)] hover:-translate-y-1 transition-all duration-300">
+                  <Image
+                    src={currentEdition.photos[2].image}
+                    alt={currentEdition.photos[2].title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 35vw, 25vw"
+                  />
+                  <span className="absolute top-3 left-3 z-10 px-2.5 py-1 text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider rounded-full bg-zinc-950/85 text-white backdrop-blur-md shadow-xs">
+                    {currentEdition.photos[2].tag}
+                  </span>
+                  <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 bg-gradient-to-t from-zinc-950/85 via-zinc-950/40 to-transparent z-10 flex flex-col justify-end">
+                    <h4
+                      className="text-xs sm:text-sm font-bold text-white leading-snug line-clamp-2"
+                      style={{ fontFamily: "'Outfit', sans-serif" }}
+                    >
+                      {currentEdition.photos[2].title}
+                    </h4>
+                  </div>
+                </div>
+              )}
+            </div>
+
+            {/* Collage Column 2 (Right): Photo 1 & Photo 3 (with subtle staggered offset) */}
+            <div className="flex flex-col gap-3 sm:gap-5 pt-4 sm:pt-6">
+              {/* Card 1: Runner Up */}
+              {currentEdition.photos[1] && (
+                <div className="group relative aspect-[4/3] w-full rounded-2xl sm:rounded-3xl overflow-hidden border border-zinc-200/90 bg-zinc-100 shadow-[0_12px_32px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.14)] hover:-translate-y-1 transition-all duration-300">
+                  <Image
+                    src={currentEdition.photos[1].image}
+                    alt={currentEdition.photos[1].title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 35vw, 25vw"
+                  />
+                  <span className="absolute top-3 left-3 z-10 px-2.5 py-1 text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider rounded-full bg-zinc-950/85 text-white backdrop-blur-md shadow-xs">
+                    {currentEdition.photos[1].tag}
+                  </span>
+                  <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 bg-gradient-to-t from-zinc-950/85 via-zinc-950/40 to-transparent z-10 flex flex-col justify-end">
+                    <h4
+                      className="text-xs sm:text-sm font-bold text-white leading-snug line-clamp-2"
+                      style={{ fontFamily: "'Outfit', sans-serif" }}
+                    >
+                      {currentEdition.photos[1].title}
+                    </h4>
+                  </div>
+                </div>
+              )}
+
+              {/* Card 3: Jury / Ceremony */}
+              {currentEdition.photos[3] && (
+                <div className="group relative aspect-[4/3] w-full rounded-2xl sm:rounded-3xl overflow-hidden border border-zinc-200/90 bg-zinc-100 shadow-[0_12px_32px_rgba(0,0,0,0.06)] hover:shadow-[0_20px_40px_rgba(0,0,0,0.14)] hover:-translate-y-1 transition-all duration-300">
+                  <Image
+                    src={currentEdition.photos[3].image}
+                    alt={currentEdition.photos[3].title}
+                    fill
+                    className="object-cover group-hover:scale-105 transition-transform duration-500 ease-out"
+                    sizes="(max-width: 640px) 50vw, (max-width: 1024px) 35vw, 25vw"
+                  />
+                  <span className="absolute top-3 left-3 z-10 px-2.5 py-1 text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider rounded-full bg-zinc-950/85 text-white backdrop-blur-md shadow-xs">
+                    {currentEdition.photos[3].tag}
+                  </span>
+                  <div className="absolute inset-x-0 bottom-0 p-3 sm:p-4 bg-gradient-to-t from-zinc-950/85 via-zinc-950/40 to-transparent z-10 flex flex-col justify-end">
+                    <h4
+                      className="text-xs sm:text-sm font-bold text-white leading-snug line-clamp-2"
+                      style={{ fontFamily: "'Outfit', sans-serif" }}
+                    >
+                      {currentEdition.photos[3].title}
+                    </h4>
+                  </div>
+                </div>
+              )}
+            </div>
+          </div>
         </div>
       </section>
 

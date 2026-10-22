@@ -268,12 +268,37 @@ export default function Hero() {
   };
 
   return (
-    <section className="relative z-0 w-full overflow-hidden bg-white text-zinc-950 pt-24 sm:pt-28 lg:pt-32 pb-8 sm:pb-12 border-b border-zinc-200">
+    <section className="relative z-0 w-full overflow-hidden bg-white text-zinc-950 pt-20 sm:pt-24 lg:pt-28 pb-8 sm:pb-12 border-b border-zinc-200">
+      {/* ─── TOP LEFT BRAND LOGO ─── */}
+      <div className="absolute top-4 sm:top-7 left-4 sm:left-8 lg:left-12 z-20">
+        <a
+          href="/"
+          className="group inline-flex items-baseline focus:outline-none"
+          aria-label="Yathra ’27 Home"
+        >
+          <span
+            className="text-2xl sm:text-[28px] font-black tracking-[-0.06em] text-zinc-950 uppercase"
+            style={{ fontFamily: "'Outfit', sans-serif" }}
+          >
+            Yathra
+          </span>
+          <span
+            className="ml-0.5 text-xs sm:text-sm font-black"
+            style={{ color: PINK, fontFamily: "'Outfit', sans-serif" }}
+          >
+            ’27
+          </span>
+          <span className="hidden sm:inline-block ml-2.5 pl-2.5 border-l border-zinc-200 text-[10px] font-bold tracking-[0.2em] uppercase text-zinc-400">
+            Hult Prize UCEK
+          </span>
+        </a>
+      </div>
+
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         {/* ─── 1. TOP BADGE ─── */}
-        <div className="flex justify-center mb-4 sm:mb-6">
+        <div className="flex justify-center mb-5 sm:mb-6 mt-4 sm:mt-1">
           <div
-            className="inline-flex items-center gap-2 px-3.5 py-1 rounded-full border shadow-xs"
+            className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full border shadow-xs"
             style={{
               backgroundColor: "#ffe4f0",
               borderColor: "#ffb3d6",
@@ -380,21 +405,12 @@ export default function Hero() {
                 {item.card.tag}
               </span>
 
-              <div className="absolute bottom-2 left-2 flex items-center gap-1.5 z-10">
-                <div className="h-5 w-5 sm:h-6 sm:w-6 rounded-full bg-white/30 backdrop-blur-md flex items-center justify-center text-white border border-white/40 shadow-xs">
-                  <svg viewBox="0 0 24 24" className="h-2.5 w-2.5 fill-current ml-0.5">
-                    <path d="M8 5v14l11-7z" />
-                  </svg>
-                </div>
-                <span className="text-[10px] sm:text-[11px] font-bold text-white tracking-tight drop-shadow-xs truncate max-w-[100px] sm:max-w-[130px]">
-                  {item.card.title}
-                </span>
-              </div>
+              
             </div>
           ))}
         </div>
 
-        {/* ─── 4. BOTTOM ACTION BUTTON & ZERO COST NOTE (BELOW THE BUTTON, POINTING UP AT THE BUTTON) ─── */}
+        {/* ─── 4. BOTTOM ACTION BUTTON & EXPLORE NOTE ─── */}
         <div className="mt-6 sm:mt-8 flex flex-col items-center justify-center relative">
           {/* Button with dashed outline ring */}
           <div className="relative flex items-center justify-center">
@@ -403,21 +419,19 @@ export default function Hero() {
               style={{ borderColor: `${PINK}80` }}
             />
             <a
-              href="https://hultprize.uck.ac.in/"
-              target="_blank"
-              rel="noopener noreferrer"
+              href="#about"
               className="relative z-10 px-7 py-3 sm:px-8 sm:py-3.5 rounded-full flex items-center justify-center gap-2 text-white font-bold text-sm sm:text-base shadow-lg hover:brightness-105 active:scale-98 transition-all"
               style={{
                 backgroundColor: PINK,
                 boxShadow: `0 6px 20px ${PINK}40`,
               }}
             >
-              <span>Register Now</span>
+              <span>Explore Yathra</span>
               <span className="text-white/80 font-normal">→</span>
             </a>
           </div>
 
-          {/* Zero cost note positioned BELOW the button, with an arrow pointing UPWARDS toward the button */}
+          {/* Note positioned BELOW the button, with an arrow pointing UPWARDS toward the button */}
           <div
             aria-hidden="true"
             className="mt-3.5 flex items-center gap-1.5 select-none pointer-events-none text-[#ff2d87]"
@@ -438,7 +452,7 @@ export default function Hero() {
               <path d="M 6 11 L 12 4 L 18 11" />
             </svg>
             <span className="text-lg sm:text-2xl font-bold -rotate-2">
-              Zero cost entry
+              Discover the journey
             </span>
           </div>
         </div>

@@ -33,7 +33,7 @@ const PINK = '#ff2d87'
 export default function Footer() {
   return (
     <footer className="w-full bg-zinc-50 border-t border-zinc-200 text-zinc-900">
-      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-16 pb-12">
+      <div className="max-w-7xl mx-auto px-5 sm:px-8 lg:px-12 pt-16 pb-24 sm:pb-28">
         {/* Brand & Wordmark Header */}
         <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-4 pb-12 border-b border-zinc-200">
           <Link
