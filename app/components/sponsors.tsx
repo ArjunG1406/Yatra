@@ -117,13 +117,13 @@ export default function Sponsors() {
               </span>
               <a
                 href="mailto:hultprizeucek@gmail.com"
-                className="w-full h-24 rounded-xl border border-dashed border-pink-300 bg-pink-50/20 flex flex-col items-center justify-center p-3 hover:border-pink-400 transition-all group"
+                className="w-full h-24 rounded-xl border border-dashed border-zinc-200 hover:border-pink-300 bg-zinc-50/50 hover:bg-pink-50/30 flex flex-col items-center justify-center p-3 transition-all group"
               >
                 <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-900 group-hover:text-[#ff2d87] transition-colors">
                   <PlusCircle className="h-3.5 w-3.5 text-[#ff2d87]" />
                   <span>Sponsorship Open</span>
                 </div>
-                <span className="text-[10px] text-zinc-400 mt-0.5">
+                <span className="text-[10px] text-zinc-500 mt-0.5">
                   Partner with Yathra ’27 →
                 </span>
               </a>

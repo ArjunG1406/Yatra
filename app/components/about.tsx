@@ -151,9 +151,11 @@ export default function About() {
         <div className="mt-10 pt-8 border-t border-zinc-200 grid grid-cols-2 md:grid-cols-4 gap-6">
           {VALUE_POINTS.map((v) => (
             <div key={v.num}>
-              <span className="font-mono text-xs font-bold text-[#ff2d87] block mb-1">
-                {v.num}
-              </span>
+              <div className="flex items-center gap-2 mb-1">
+                <span className="font-mono text-xs font-bold text-[#ff2d87]">
+                  {v.num}
+                </span>
+              </div>
               <h3 className="text-sm font-bold text-zinc-900 mb-0.5">{v.title}</h3>
               <p className="text-xs text-zinc-500 leading-relaxed">{v.desc}</p>
             </div>
@@ -230,7 +232,7 @@ export default function About() {
                 100+ Startup Pitches
               </span>
               <span className="px-3 py-1 rounded-full text-[11px] font-bold tracking-tight bg-pink-50 text-[#ff2d87] border border-pink-200">
-                $1M Direct Seed Nomination
+                $1M Direct Seed Track
               </span>
               <span className="px-3 py-1 rounded-full text-[11px] font-bold tracking-tight bg-zinc-100 text-zinc-700 border border-zinc-200">
                 Executive Angel Jury
