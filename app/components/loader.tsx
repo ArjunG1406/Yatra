@@ -19,10 +19,9 @@ export default function Loader() {
     }
 
     // Sequence timing:
-    // 0.0s - 1.65s: handwriting stroke draws "Yathra"
-    // 1.15s: hand-drawn underline doodle draws in
-    // 1.25s: "'27" badge pops in
-    // 1.40s: "Hult Prize UCEK" fades in
+    // 0.0s - 0.75s: standard wordmark reveals
+    // 0.55s: "'27" badge pops in on the right
+    // 0.85s: "Hult Prize UCEK • Technopark" fades in
     // 2.05s: start smooth exit transition
     // 2.65s: completely remove from DOM
     const exitTimer = setTimeout(() => {
@@ -50,42 +49,26 @@ export default function Loader() {
   return (
     <>
       <style>{`
-        @keyframes drawCaveatStroke {
+        @keyframes titleEntrance {
           0% {
-            stroke-dashoffset: 1300;
-            fill: transparent;
-          }
-          65% {
-            stroke-dashoffset: 0;
-            fill: transparent;
-          }
-          85%, 100% {
-            stroke-dashoffset: 0;
-            fill: #ff2d87;
-          }
-        }
-
-        @keyframes drawDoodleLine {
-          0% {
-            stroke-dashoffset: 320;
             opacity: 0;
-          }
-          20% {
-            opacity: 1;
+            transform: translateY(16px) scale(0.96);
+            filter: blur(6px);
           }
           100% {
-            stroke-dashoffset: 0;
             opacity: 1;
+            transform: translateY(0) scale(1);
+            filter: blur(0);
           }
         }
 
         @keyframes popBadge {
           0% {
             opacity: 0;
-            transform: scale(0.3) rotate(-14deg);
+            transform: scale(0.3) rotate(-10deg);
           }
           65% {
-            transform: scale(1.15) rotate(4deg);
+            transform: scale(1.15) rotate(2deg);
           }
           100% {
             opacity: 1;
@@ -96,7 +79,7 @@ export default function Loader() {
         @keyframes fadeInSubline {
           0% {
             opacity: 0;
-            transform: translateY(6px);
+            transform: translateY(8px);
           }
           100% {
             opacity: 1;
@@ -115,35 +98,19 @@ export default function Loader() {
           }
         }
 
-        .caveat-draw-text {
-          font-family: 'Caveat', cursive;
-          stroke: #ff2d87;
-          stroke-width: 3.6;
-          stroke-linecap: round;
-          stroke-linejoin: round;
-          stroke-dasharray: 1300;
-          stroke-dashoffset: 1300;
-          animation: drawCaveatStroke 1.7s cubic-bezier(0.42, 0, 0.22, 1) forwards;
-        }
-
-        .caveat-underline-doodle {
-          stroke: #ff2d87;
-          stroke-width: 3;
-          stroke-linecap: round;
-          stroke-dasharray: 320;
-          stroke-dashoffset: 320;
-          animation: drawDoodleLine 0.75s ease-out 1.1s forwards;
+        .yathra-title-reveal {
+          animation: titleEntrance 0.75s cubic-bezier(0.22, 1, 0.36, 1) forwards;
         }
 
         .yathra-year-badge {
           opacity: 0;
           transform-origin: center;
-          animation: popBadge 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1.25s forwards;
+          animation: popBadge 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 0.55s forwards;
         }
 
         .yathra-subline {
           opacity: 0;
-          animation: fadeInSubline 0.55s ease-out 1.4s forwards;
+          animation: fadeInSubline 0.6s ease-out 0.85s forwards;
         }
 
         .yathra-bg-glow {
@@ -163,7 +130,7 @@ export default function Loader() {
       >
         {/* Soft Radial Ambient Pink Glow Behind Writing */}
         <div
-          className="absolute w-[380px] h-[380px] rounded-full pointer-events-none yathra-bg-glow"
+          className="absolute w-[360px] h-[360px] rounded-full pointer-events-none yathra-bg-glow"
           style={{
             background:
               "radial-gradient(circle, rgba(255, 45, 135, 0.14) 0%, rgba(255, 45, 135, 0) 70%)",
@@ -171,102 +138,33 @@ export default function Loader() {
           }}
         />
 
-        {/* Central Writing Canvas */}
+        {/* Central Brand Lockup */}
         <div className="relative z-10 flex flex-col items-center px-4 max-w-md w-full">
-          <svg
-            viewBox="0 0 460 170"
-            className="w-[300px] sm:w-[410px] overflow-visible"
-            fill="none"
-          >
-            <defs>
-              {/* Soft Luminous Drop Shadow */}
-              <filter id="caveatGlow" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur stdDeviation="2" result="blur" />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-            </defs>
+          {/* Wordmark: Standard Font 'Outfit' with '27 on the RIGHT side */}
+          <div className="relative inline-flex items-start">
+            <h1
+              className="yathra-title-reveal text-5xl sm:text-7xl font-black tracking-[-0.04em] text-zinc-950 uppercase select-none leading-none"
+              style={{ fontFamily: "'Outfit', sans-serif" }}
+            >
+              Yathra
+            </h1>
 
-            {/* Rotated handwriting group with natural spontaneous upward tilt */}
-            <g transform="rotate(-7 230 85)">
-              {/* 1. Ghost Under-layer for Instant Legibility */}
-              <text
-                x="210"
-                y="98"
-                textAnchor="middle"
-                className="select-none font-bold"
-                style={{
-                  fontFamily: "'Caveat', cursive",
-                  fontSize: "112px",
-                  fontWeight: 700,
-                  fill: "rgba(255, 45, 135, 0.05)",
-                }}
-              >
-                Yathra
-              </text>
-
-              {/* 2. Main Animated Handwriting Stroke */}
-              <text
-                x="210"
-                y="98"
-                textAnchor="middle"
-                className="caveat-draw-text select-none font-bold"
-                style={{
-                  fontFamily: "'Caveat', cursive",
-                  fontSize: "112px",
-                  fontWeight: 700,
-                  filter: "drop-shadow(0 2px 8px rgba(255, 45, 135, 0.35))",
-                }}
-              >
-                Yathra
-              </text>
-
-              {/* 3. Hand-drawn Underline Doodle */}
-              <path
-                d="M 85 118 C 160 134, 255 132, 345 112"
-                className="caveat-underline-doodle"
-                style={{
-                  filter: "drop-shadow(0 1px 4px rgba(255, 45, 135, 0.3))",
-                }}
-              />
-
-              {/* 4. Pop-in Year Tag: ’27 */}
-              <g className="yathra-year-badge" transform="translate(345, 30)">
-                <rect
-                  x="-4"
-                  y="-18"
-                  width="44"
-                  height="28"
-                  rx="8"
-                  fill="#ffe4f0"
-                  stroke="#ffb3d6"
-                  strokeWidth="1"
-                />
-                <text
-                  x="18"
-                  y="2"
-                  textAnchor="middle"
-                  style={{
-                    fontFamily: "'Outfit', sans-serif",
-                    fontSize: "18px",
-                    fontWeight: 900,
-                    fill: PINK,
-                  }}
-                >
-                  ’27
-                </text>
-              </g>
-            </g>
-          </svg>
+            {/* ’27 Badge on the RIGHT side */}
+            <span
+              className="yathra-year-badge ml-2 sm:ml-3 px-2 sm:px-2.5 py-0.5 sm:py-1 rounded-xl text-sm sm:text-base font-black bg-[#ffe4f0] text-[#ff2d87] border border-[#ffb3d6] shadow-2xs self-start leading-none"
+              style={{ fontFamily: "'Outfit', sans-serif" }}
+            >
+              ’27
+            </span>
+          </div>
 
           {/* Subtitle & Status */}
-          <div className="yathra-subline mt-2 flex flex-col items-center gap-2.5">
+          <div className="yathra-subline mt-4 flex flex-col items-center gap-2.5">
             <div className="flex items-center gap-2 text-zinc-500 font-mono text-[11px] font-bold tracking-[0.22em] uppercase">
               <span className="h-1.5 w-1.5 rounded-full bg-[#ff2d87] animate-pulse" />
               <span>Hult Prize UCEK</span>
-              
+              <span className="text-zinc-300">•</span>
+              <span className="text-zinc-400 font-medium">Technopark</span>
             </div>
 
             {/* Sleek Minimal Progress Fill Rail */}
