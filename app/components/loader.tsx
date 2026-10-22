@@ -221,8 +221,7 @@ export default function Loader() {
             <div className="flex items-center gap-2 text-zinc-500 font-mono text-[11px] font-bold tracking-[0.22em] uppercase">
               <span className="h-1.5 w-1.5 rounded-full bg-[#ff2d87] animate-pulse" />
               <span>Hult Prize UCEK</span>
-              <span className="text-zinc-300">•</span>
-              <span className="text-zinc-400 font-medium">Technopark</span>
+              
             </div>
 
             {/* Sleek Minimal Progress Fill Rail */}
