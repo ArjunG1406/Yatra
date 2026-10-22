@@ -20,7 +20,7 @@ export default function Loader() {
 
     // Sequence timing:
     // 0.0s - 1.55s: pink writing stroke animation draws "Yathra" and fills in
-    // 1.05s: "'27" badge slingshots and pops in close to the letter 'a'
+    // 1.05s: "'27" badge smoothly pops in strictly on the right side
     // 1.30s: "Hult Prize UCEK • Technopark" subline fades in
     // 2.15s: start smooth exit transition
     // 2.75s: completely remove from DOM
@@ -64,25 +64,19 @@ export default function Loader() {
           }
         }
 
-        /* Dynamic Slingshot Pop & Elastic Bounce for '27 */
-        @keyframes slingPopBadge {
+        /* Subtle, non-flashy smooth pop & settle for '27 */
+        @keyframes smoothPopBadge {
           0% {
             opacity: 0;
-            transform: scale(0.1) translate(50px, 30px) rotate(26deg);
+            transform: scale(0.65) translateY(4px);
           }
-          48% {
+          70% {
             opacity: 1;
-            transform: scale(1.32) translate(-7px, -4px) rotate(-9deg);
-          }
-          72% {
-            transform: scale(0.92) translate(3px, 2px) rotate(3deg);
-          }
-          88% {
-            transform: scale(1.05) translate(-1px, -1px) rotate(-1deg);
+            transform: scale(1.06) translateY(-1px);
           }
           100% {
             opacity: 1;
-            transform: scale(1) translate(0, 0) rotate(0deg);
+            transform: scale(1) translateY(0);
           }
         }
 
@@ -120,10 +114,9 @@ export default function Loader() {
           animation: drawOutfitPinkStroke 1.65s cubic-bezier(0.42, 0, 0.22, 1) forwards;
         }
 
-        .yathra-sling-badge {
+        .yathra-badge-reveal {
           opacity: 0;
-          transform-origin: center;
-          animation: slingPopBadge 0.75s cubic-bezier(0.175, 0.885, 0.32, 1.275) 1.05s forwards;
+          animation: smoothPopBadge 0.45s cubic-bezier(0.16, 1, 0.3, 1) 1.05s forwards;
         }
 
         .yathra-subline {
@@ -158,17 +151,18 @@ export default function Loader() {
 
         {/* Central Brand Lockup */}
         <div className="relative z-10 flex flex-col items-center px-4 max-w-lg w-full">
-          {/* Main Wordmark Canvas: Yathra + '27 snug right beside the final letter */}
-          <div className="relative flex items-center justify-center">
+          {/* Main Wordmark Row: 'Yathra' on Left + '27 Badge Strictly on the RIGHT */}
+          <div className="relative inline-flex items-start justify-center">
+            {/* SVG Canvas for 'Yathra' with tight width so there is NO blank gap */}
             <svg
-              viewBox="0 0 306 85"
-              className="w-[280px] sm:w-[350px] h-[78px] sm:h-[96px] overflow-visible"
+              viewBox="0 0 250 82"
+              className="w-[230px] sm:w-[250px] h-[72px] sm:h-[82px] overflow-visible"
               fill="none"
             >
               {/* Subtle Ghost Under-layer for Instant Legibility */}
               <text
-                x="4"
-                y="66"
+                x="0"
+                y="64"
                 className="select-none"
                 style={{
                   fontFamily: "'Outfit', sans-serif",
@@ -183,8 +177,8 @@ export default function Loader() {
 
               {/* Main Animated Pink Stroke Writing with Clean Letter Spacing */}
               <text
-                x="4"
-                y="66"
+                x="0"
+                y="64"
                 className="outfit-pink-draw-text select-none"
                 style={{
                   fontSize: "70px",
@@ -194,37 +188,32 @@ export default function Loader() {
               >
                 Yathra
               </text>
-
-              {/* ’27 Badge: Snug and close to the top-right shoulder of 'a' with Slingshot Pop Animation */}
-              <g className="yathra-sling-badge" transform="translate(254, 25)">
-                <rect
-                  x="-3"
-                  y="-16"
-                  width="44"
-                  height="26"
-                  rx="8"
-                  fill="#ffe4f0"
-                  stroke="#ffb3d6"
-                  strokeWidth="1.3"
-                  style={{
-                    filter: "drop-shadow(0 2px 6px rgba(255, 45, 135, 0.22))",
-                  }}
-                />
-                <text
-                  x="19"
-                  y="2.5"
-                  textAnchor="middle"
-                  style={{
-                    fontFamily: "'Outfit', sans-serif",
-                    fontSize: "16px",
-                    fontWeight: 900,
-                    fill: PINK,
-                  }}
-                >
-                  ’27
-                </text>
-              </g>
             </svg>
+
+            {/* ’27 Badge: Strictly on the RIGHT side, snug against the final letter 'a' */}
+            <div
+              className="yathra-badge-reveal ml-1.5 sm:ml-2 mt-0.5 sm:mt-1 shrink-0"
+              style={{
+                padding: "3px 9px",
+                borderRadius: "9px",
+                backgroundColor: "#ffe4f0",
+                border: "1.5px solid #ffb3d6",
+                boxShadow: "0 2px 8px rgba(255, 45, 135, 0.16)",
+              }}
+            >
+              <span
+                style={{
+                  fontFamily: "'Outfit', sans-serif",
+                  fontSize: "15px",
+                  fontWeight: 900,
+                  color: PINK,
+                  lineHeight: 1,
+                  display: "block",
+                }}
+              >
+                ’27
+              </span>
+            </div>
           </div>
 
           {/* Subtitle & Status */}
