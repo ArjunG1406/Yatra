@@ -233,20 +233,7 @@ export default function Navbar() {
           />
         </svg>
 
-        {/* ─── 3. SOFT PINK AMBIENT GLOW AURA BEHIND THE MEDALLION ─── */}
-        <div
-          className="absolute left-1/2 -translate-x-1/2 pointer-events-none z-15"
-          style={{
-            top: "38px",
-            transform: "translate(-50%, -50%)",
-            width: "96px",
-            height: "96px",
-            borderRadius: "50%",
-            background:
-              "radial-gradient(circle, rgba(255, 45, 135, 0.40) 0%, rgba(255, 45, 135, 0.16) 45%, transparent 75%)",
-            filter: "blur(12px)",
-          }}
-        />
+       
 
         {/* ─── 4. CENTER ELEVATED WHITE MEDALLION WITH LETTER 'Y' ─── */}
         <div
