@@ -2,10 +2,12 @@
 
 import React, { useState, useRef } from 'react'
 import Image from 'next/image'
+import Link from 'next/link'
 import {
   MapPin,
   ChevronLeft,
   ChevronRight,
+  ArrowRight,
   Coins,
   Wheat,
   HeartPulse,
@@ -236,6 +238,22 @@ export default function About() {
               </span>
               <span className="px-3 py-1 rounded-full text-[11px] font-bold tracking-tight bg-zinc-100 text-zinc-700 border border-zinc-200">
                 Executive Angel Jury
+              </span>
+            </div>
+
+            {/* Explore Edition Button */}
+            <div className="mt-7">
+              <Link
+                href={selectedEdition === '26' ? '/yatra26' : '/yatra25'}
+                className="inline-flex items-center gap-2.5 px-6 py-3.5 rounded-full bg-zinc-950 text-white font-bold text-xs uppercase tracking-wider hover:bg-[#ff2d87] transition-all shadow-sm hover:shadow-md group"
+                style={{ fontFamily: "'Outfit', sans-serif" }}
+              >
+                <span>Explore {currentEdition.name}</span>
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </div>
+            <div className="hidden">
+              <span>
               </span>
             </div>
           </div>
