@@ -4,10 +4,8 @@ import Image from 'next/image'
 import type { Metadata } from 'next'
 import {
   ArrowLeft,
-  ArrowUpRight,
   Mail,
   CheckCircle2,
-  Sparkles,
   ExternalLink,
 } from 'lucide-react'
 
@@ -135,7 +133,7 @@ const YATRA_25_SPONSORS = [
 
 export default function PartnersPage() {
   return (
-    <div className="min-h-screen bg-white text-zinc-950 font-sans">
+    <div className="min-h-screen bg-white text-zinc-950 font-sans flex flex-col justify-between">
       {/* ─────────────────── TOP MINIMAL NAVIGATION ─────────────────── */}
       <header className="sticky top-0 z-50 w-full border-b border-zinc-200/80 bg-white/95 backdrop-blur-sm">
         <div className="max-w-5xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
@@ -175,7 +173,7 @@ export default function PartnersPage() {
       </header>
 
       {/* ─────────────────── 1. PARTNER & SPONSOR BENEFITS (FIRST SECTION) ─────────────────── */}
-      <main className="max-w-5xl mx-auto px-5 sm:px-8 py-12 sm:py-16">
+      <main className="max-w-5xl mx-auto px-5 sm:px-8 py-12 sm:py-16 w-full">
         {/* Section Header */}
         <div className="max-w-3xl mb-12 sm:mb-16">
           <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#ff2d87] block mb-2">
@@ -235,47 +233,49 @@ export default function PartnersPage() {
             </div>
           ))}
         </div>
+      </main>
 
-        {/* ─────────────────── 2. PREVIOUS SPONSORS LOGO SECTION ─────────────────── */}
-        <section className="mt-20 pt-16 border-t border-zinc-200">
-          <div className="max-w-3xl mb-12">
-            <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#ff2d87] block mb-2">
+      {/* ─────────────────── 2. PREVIOUS SPONSORS LOGO SECTION (PINK BACKGROUND & BIGGER LOGOS) ─────────────────── */}
+      <section className="w-full bg-[#ff2d87] text-white py-20 sm:py-28 my-10 border-y border-pink-600/30 shadow-lg">
+        <div className="max-w-5xl mx-auto px-5 sm:px-8">
+          <div className="max-w-3xl mb-14 sm:mb-16">
+            <span className="font-mono text-xs font-bold uppercase tracking-wider text-pink-100 block mb-2">
               Proven Track Record
             </span>
             <h2
-              className="text-2xl sm:text-4xl font-black tracking-tight text-zinc-950 uppercase"
+              className="text-3xl sm:text-5xl font-black tracking-tight text-white uppercase"
               style={{ fontFamily: "'Outfit', sans-serif" }}
             >
               Previous Event Partners & Sponsors
             </h2>
-            <p className="mt-3 text-sm text-zinc-600 leading-relaxed">
+            <p className="mt-3 text-sm sm:text-base text-pink-100/90 leading-relaxed max-w-2xl">
               Leading government bodies, corporations, technology platforms, and startup incubators that have supported Yathra across our previous editions.
             </p>
           </div>
 
           {/* ─── YATHRA '26 PARTNERS ─── */}
-          <div className="mb-16">
-            <div className="flex items-center gap-3 mb-8">
-              <span className="font-mono text-xs font-bold uppercase tracking-wider text-zinc-900">
+          <div className="mb-20">
+            <div className="flex items-center gap-4 mb-10">
+              <span className="font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-white">
                 Yathra ’26 Partners & Sponsors
               </span>
-              <div className="h-px bg-zinc-200 flex-1" />
+              <div className="h-px bg-white/30 flex-1" />
             </div>
 
-            {/* Clean Logo Grid - No Flashy Boxes */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-y-10 gap-x-8 items-center justify-items-center">
+            {/* Prominent, Highly-Visible Logo Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8 items-center justify-items-center">
               {YATRA_26_SPONSORS.map((sponsor, i) => (
                 <div
                   key={i}
-                  className="w-full h-16 flex items-center justify-center p-2 group"
+                  className="w-full h-28 sm:h-36 rounded-2xl bg-white/15 hover:bg-white/25 backdrop-blur-xs border border-white/25 hover:border-white/50 flex items-center justify-center p-4 sm:p-5 transition-all duration-300 group shadow-xs hover:shadow-md"
                   title={sponsor.name}
                 >
                   <Image
                     src={sponsor.src}
                     alt={sponsor.name}
-                    width={150}
-                    height={55}
-                    className="max-h-12 max-w-[130px] w-auto h-auto object-contain transition-transform duration-200 group-hover:scale-105"
+                    width={260}
+                    height={100}
+                    className="max-h-20 sm:max-h-24 max-w-[200px] sm:max-w-[230px] w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-108 drop-shadow-[0_2px_8px_rgba(0,0,0,0.18)]"
                   />
                 </div>
               ))}
@@ -283,80 +283,80 @@ export default function PartnersPage() {
           </div>
 
           {/* ─── YATHRA '25 PARTNERS ─── */}
-          <div className="mb-16">
-            <div className="flex items-center gap-3 mb-8">
-              <span className="font-mono text-xs font-bold uppercase tracking-wider text-zinc-900">
+          <div>
+            <div className="flex items-center gap-4 mb-10">
+              <span className="font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-white">
                 Yathra ’25 Partners & Sponsors
               </span>
-              <div className="h-px bg-zinc-200 flex-1" />
+              <div className="h-px bg-white/30 flex-1" />
             </div>
 
-            {/* Clean Logo Grid - No Flashy Boxes */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-y-10 gap-x-8 items-center justify-items-center">
+            {/* Prominent, Highly-Visible Logo Grid */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8 items-center justify-items-center">
               {YATRA_25_SPONSORS.map((sponsor, i) => (
                 <div
                   key={i}
-                  className="w-full h-16 flex items-center justify-center p-2 group"
+                  className="w-full h-28 sm:h-36 rounded-2xl bg-white/15 hover:bg-white/25 backdrop-blur-xs border border-white/25 hover:border-white/50 flex items-center justify-center p-4 sm:p-5 transition-all duration-300 group shadow-xs hover:shadow-md"
                   title={sponsor.name}
                 >
                   <Image
                     src={sponsor.src}
                     alt={sponsor.name}
-                    width={150}
-                    height={55}
-                    className="max-h-12 max-w-[130px] w-auto h-auto object-contain transition-transform duration-200 group-hover:scale-105"
+                    width={260}
+                    height={100}
+                    className="max-h-20 sm:max-h-24 max-w-[200px] sm:max-w-[230px] w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-108 drop-shadow-[0_2px_8px_rgba(0,0,0,0.18)]"
                   />
                 </div>
               ))}
             </div>
           </div>
-        </section>
+        </div>
+      </section>
 
-        {/* ─────────────────── 3. BRAND KITS & CONTACT (CLEAN FOOTER) ─────────────────── */}
-        <section className="mt-16 pt-12 border-t border-zinc-200">
-          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
-            {/* Canva Reference Links */}
-            <div>
-              <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-zinc-400 block mb-2">
-                Brand Collateral & Assets
-              </span>
-              <div className="flex flex-wrap items-center gap-3">
-                <a
-                  href="https://canva.link/3k8g32dbermfr69"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-zinc-700 hover:text-[#ff2d87] transition-colors underline underline-offset-4"
-                >
-                  <span>Canva Partner Logo Kit</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-                <span className="text-zinc-300">•</span>
-                <a
-                  href="https://canva.link/3mp29gbrj3cu0xq"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-zinc-700 hover:text-[#ff2d87] transition-colors underline underline-offset-4"
-                >
-                  <span>Canva Launch Deck</span>
-                  <ExternalLink className="w-3.5 h-3.5" />
-                </a>
-              </div>
-            </div>
-
-            {/* Email Contact CTA */}
-            <div className="flex items-center gap-3">
+      {/* ─────────────────── 3. BRAND KITS & CONTACT (CLEAN FOOTER) ─────────────────── */}
+      <footer className="max-w-5xl mx-auto px-5 sm:px-8 py-14 w-full">
+        <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+          {/* Canva Reference Links */}
+          <div>
+            <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-zinc-400 block mb-2">
+              Brand Collateral & Assets
+            </span>
+            <div className="flex flex-wrap items-center gap-3">
               <a
-                href="mailto:hultprizeucek@gmail.com?subject=Custom%20Sponsorship%20Inquiry%20-%20Yathra%20'27"
-                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-zinc-950 text-white font-semibold text-xs uppercase tracking-wider hover:bg-[#ff2d87] transition-all"
-                style={{ fontFamily: "'Outfit', sans-serif" }}
+                href="https://canva.link/3k8g32dbermfr69"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-zinc-700 hover:text-[#ff2d87] transition-colors underline underline-offset-4"
               >
-                <Mail className="w-4 h-4" />
-                <span>Inquire for Sponsorship</span>
+                <span>Canva Partner Logo Kit</span>
+                <ExternalLink className="w-3.5 h-3.5" />
+              </a>
+              <span className="text-zinc-300">•</span>
+              <a
+                href="https://canva.link/3mp29gbrj3cu0xq"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1.5 text-xs font-semibold text-zinc-700 hover:text-[#ff2d87] transition-colors underline underline-offset-4"
+              >
+                <span>Canva Launch Deck</span>
+                <ExternalLink className="w-3.5 h-3.5" />
               </a>
             </div>
           </div>
-        </section>
-      </main>
+
+          {/* Email Contact CTA */}
+          <div className="flex items-center gap-3">
+            <a
+              href="mailto:hultprizeucek@gmail.com?subject=Custom%20Sponsorship%20Inquiry%20-%20Yathra%20'27"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-zinc-950 text-white font-semibold text-xs uppercase tracking-wider hover:bg-[#ff2d87] transition-all"
+              style={{ fontFamily: "'Outfit', sans-serif" }}
+            >
+              <Mail className="w-4 h-4" />
+              <span>Inquire for Sponsorship</span>
+            </a>
+          </div>
+        </div>
+      </footer>
     </div>
   )
 }
