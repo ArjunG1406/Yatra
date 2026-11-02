@@ -3,133 +3,75 @@
 import React from 'react'
 import Image from 'next/image'
 import Link from 'next/link'
-import { PlusCircle, ArrowRight } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
+
+// Same official partner assets from the yatra26 folder
+const HOMEPAGE_PARTNERS = [
+  { name: 'Kerala Startup Mission (KSUM)', src: '/partners/yatra26/ksum2.png', type: 'wide' },
+  { name: 'Udhyam Learning Foundation', src: '/partners/yatra26/udhayam2.png', type: 'wide' },
+  { name: 'MakeMyPass', src: '/partners/yatra26/makemypass.png', type: 'square' },
+  { name: 'IIITMK', src: '/partners/yatra26/iiitmk.png', type: 'wide' },
+  { name: 'KUBIIC', src: '/partners/yatra26/kubiic2.png', type: 'wide' },
+  { name: 'µLearn — A GTech Initiative', src: '/partners/yatra26/mlern.png', type: 'xwide' },
+  { name: 'Global Shapers Community', src: '/partners/yatra26/global2.png', type: 'wide' },
+  { name: 'Unstop', src: '/partners/yatra26/unstop2.png', type: 'wide' },
+  { name: 'Evara Microgreens', src: '/partners/yatra26/evara.png', type: 'square' },
+  { name: 'Luv Cutlet', src: '/partners/yatra26/luvcutlet.png', type: 'square' },
+  { name: 'Unstop Igniters Club', src: '/partners/yatra26/igniters.png', type: 'compact' },
+  { name: 'Idea Tribe', src: '/partners/yatra26/ideatribe.png', type: 'square' },
+  { name: 'Legacy IEDC UCEK', src: '/partners/yatra26/legacy2.png', type: 'wide' },
+  { name: 'IEDC UCEK', src: '/partners/yatra26/iedc2.png', type: 'xwide' },
+  { name: 'Helmet World', src: '/partners/yatra26/hw.png', type: 'square' },
+]
 
 export default function Sponsors() {
   return (
     <section
       id="partners"
-      className="w-full bg-white text-zinc-950 py-16 px-5 sm:px-8 border-b border-zinc-200"
+      className="w-full bg-white text-zinc-950 py-16 sm:py-24 px-5 sm:px-8 border-b border-zinc-200"
     >
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-5xl mx-auto">
         {/* Minimal Section Header */}
-        <div className="text-center max-w-xl mx-auto mb-12">
-          <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#ff2d87] block mb-1">
-            Partners & Sponsors
+        <div className="text-center max-w-xl mx-auto mb-14">
+          <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#ff2d87] block mb-2">
+            Partners & Ecosystem
           </span>
           <h2
-            className="text-2xl sm:text-3xl font-black tracking-tight text-zinc-950 uppercase"
+            className="text-2xl sm:text-4xl font-black tracking-tight text-zinc-950 uppercase"
             style={{ fontFamily: "'Outfit', sans-serif" }}
           >
-            Official Partners and Sponsors
+            Official Partners & Sponsors
           </h2>
-          <p className="mt-1.5 text-xs sm:text-sm text-zinc-500">
+          <p className="mt-2 text-xs sm:text-sm text-zinc-600">
             Backed by national innovation networks, corporate leaders, and student incubation ecosystems.
           </p>
         </div>
 
-        {/* ─── TIERED PARTNER CARDS (MINIMAL) ─── */}
-        <div className="flex flex-col items-center gap-8">
-          {/* Tier 1: Platform Partner */}
-          <div className="w-full max-w-sm flex flex-col items-center">
-            <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-1.5 text-center">
-              Official Platform Partner
-            </span>
-            <div className="w-full h-24 rounded-xl border border-zinc-200 bg-white shadow-sm flex items-center justify-center p-4 hover:border-zinc-300 transition-all">
+        {/* Clean Logo Grid without boxes */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 sm:gap-12 items-center justify-items-center">
+          {HOMEPAGE_PARTNERS.map((partner, i) => (
+            <div
+              key={i}
+              className="h-24 sm:h-28 w-full flex items-center justify-center p-2 group transition-transform duration-300 hover:scale-108"
+              title={partner.name}
+            >
               <Image
-                src="/partners/unstop.png"
-                alt="Unstop Igniters Club"
-                width={170}
-                height={50}
-                className="max-h-12 w-auto object-contain"
+                src={partner.src}
+                alt={partner.name}
+                width={240}
+                height={100}
+                className={`${
+                  partner.type === 'square'
+                    ? 'max-h-14 sm:max-h-16 max-w-[110px] sm:max-w-[130px]'
+                    : partner.type === 'compact'
+                    ? 'max-h-12 sm:max-h-14 max-w-[130px] sm:max-w-[150px]'
+                    : partner.type === 'xwide'
+                    ? 'max-h-8 sm:max-h-9 max-w-[170px] sm:max-w-[210px]'
+                    : 'max-h-10 sm:max-h-12 max-w-[150px] sm:max-w-[180px]'
+                } w-auto h-auto object-contain transition-transform`}
               />
             </div>
-          </div>
-
-          {/* Tier 2: Ecosystem & Skilling Partner */}
-          <div className="w-full max-w-sm flex flex-col items-center">
-            <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-1.5 text-center">
-              Ecosystem & Skilling Partner
-            </span>
-            <div className="w-full h-24 rounded-xl border border-zinc-200 bg-white shadow-sm flex items-center justify-center p-4 hover:border-zinc-300 transition-all">
-              <Image
-                src="/partners/mulearn.webp"
-                alt="µLearn GTech"
-                width={160}
-                height={50}
-                className="max-h-10 w-auto object-contain"
-              />
-            </div>
-          </div>
-
-          {/* Tier 3: Innovation & Campus Incubation Partners */}
-          <div className="w-full max-w-xl grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="flex flex-col items-center">
-              <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-1.5 text-center">
-                Innovation Partner
-              </span>
-              <div className="w-full h-24 rounded-xl border border-zinc-200 bg-white shadow-sm flex items-center justify-center p-4 hover:border-zinc-300 transition-all">
-                <Image
-                  src="/partners/udhayam.png"
-                  alt="Udhyam"
-                  width={140}
-                  height={45}
-                  className="max-h-9 w-auto object-contain"
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-col items-center">
-              <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-1.5 text-center">
-                Campus Incubation Partner
-              </span>
-              <div className="w-full h-24 rounded-xl border border-zinc-200 bg-white shadow-sm flex items-center justify-center p-4 hover:border-zinc-300 transition-all">
-                <Image
-                  src="/partners/iedc.png"
-                  alt="IEDC UCEK"
-                  width={140}
-                  height={45}
-                  className="max-h-9 w-auto object-contain"
-                />
-              </div>
-            </div>
-          </div>
-
-          {/* Tier 4: Network Partner & Open Sponsorship */}
-          <div className="w-full max-w-xl grid grid-cols-1 sm:grid-cols-2 gap-4">
-            <div className="flex flex-col items-center">
-              <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-1.5 text-center">
-                Alumni & Network Partner
-              </span>
-              <div className="w-full h-24 rounded-xl border border-zinc-200 bg-white shadow-sm flex items-center justify-center p-4 hover:border-zinc-300 transition-all">
-                <Image
-                  src="/partners/legacy.png"
-                  alt="Legacy IEDC"
-                  width={140}
-                  height={45}
-                  className="max-h-9 w-auto object-contain"
-                />
-              </div>
-            </div>
-
-            <div className="flex flex-col items-center">
-              <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-zinc-400 mb-1.5 text-center">
-                Title / Corporate Sponsor
-              </span>
-              <a
-                href="mailto:hultprizeucek@gmail.com"
-                className="w-full h-24 rounded-xl border border-dashed border-zinc-200 hover:border-pink-300 bg-zinc-50/50 hover:bg-pink-50/30 flex flex-col items-center justify-center p-3 transition-all group"
-              >
-                <div className="flex items-center gap-1.5 text-xs font-bold text-zinc-900 group-hover:text-[#ff2d87] transition-colors">
-                  <PlusCircle className="h-3.5 w-3.5 text-[#ff2d87]" />
-                  <span>Sponsorship Open</span>
-                </div>
-                <span className="text-[10px] text-zinc-500 mt-0.5">
-                  Partner with Yathra ’27 →
-                </span>
-              </a>
-            </div>
-          </div>
+          ))}
         </div>
 
         {/* ─── VIEW ALL SPONSORS & BENEFITS BUTTON ─── */}

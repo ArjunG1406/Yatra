@@ -95,40 +95,26 @@ const BENEFIT_CATEGORIES = [
 interface Sponsor {
   name: string
   src: string
-  compact?: boolean // Square / compact marks that need optical height boost
+  type: 'square' | 'compact' | 'wide' | 'xwide'
 }
 
-// Deduplicated, unified list of all unique partners & sponsors of Yathra
+// Unified list of all partners & sponsors of Yathra using the official yatra26 assets
 const YATRA_SPONSORS: Sponsor[] = [
-  // Government, Innovation Networks & Academic Ecosystems
-  { name: 'Kerala Startup Mission (KSUM)', src: '/partners/yatra26/ksum2.png' },
-  { name: 'Atal Innovation Mission (AIM)', src: '/partners/yatra25/aim.png' },
-  { name: 'IIITM-K / Digital University Kerala', src: '/partners/yatra26/iiitmk.png' },
-  { name: 'IEDC UCEK', src: '/partners/yatra26/iedc2.png' },
-  { name: 'KUBIIC', src: '/partners/yatra26/kubiic.png' },
-  { name: 'Legacy IEDC', src: '/partners/yatra26/legacy2.png' },
-  { name: 'Global Shapers Community', src: '/partners/yatra26/global.png' },
-
-  // Skilling, Education & Platform Partners
-  { name: 'µLearn — GTech', src: '/partners/yatra26/mulearn2.png' },
-  { name: 'Udhyam Learning Foundation', src: '/partners/yatra26/udhayam2.png' },
-  { name: 'Unstop', src: '/partners/yatra26/unstop2.png' },
-  { name: 'Unstop Igniters Club', src: '/partners/yatra26/igniters.png', compact: true },
-  { name: 'MakeMyPass', src: '/partners/yatra26/makemypass.png', compact: true },
-
-  // Industry, FMCG, Tech & Community Partners
-  { name: 'Milma', src: '/partners/yatra25/milma.png' },
-  { name: 'Unibic', src: '/partners/yatra25/unibic.png' },
-  { name: 'Helmet World', src: '/partners/yatra26/hw.png', compact: true },
-  { name: 'Camino', src: '/partners/yatra25/camino.png' },
-  { name: 'D-Tech', src: '/partners/yatra25/dtech.png' },
-  { name: 'Fulva', src: '/partners/yatra25/fulva.png', compact: true },
-  { name: 'Mithra', src: '/partners/yatra25/mithra.png', compact: true },
-  { name: 'UX Shots', src: '/partners/yatra25/uxshots.png' },
-  { name: 'Varsya', src: '/partners/yatra25/varsya.png', compact: true },
-  { name: 'IdeaTribe', src: '/partners/yatra26/ideatribe.png', compact: true },
-  { name: 'Luv Cutlet', src: '/partners/yatra26/luvcutlet.png', compact: true },
-  { name: 'Evara', src: '/partners/yatra26/evara.png', compact: true },
+  { name: 'Kerala Startup Mission (KSUM)', src: '/partners/yatra26/ksum2.png', type: 'wide' },
+  { name: 'Udhyam Learning Foundation', src: '/partners/yatra26/udhayam2.png', type: 'wide' },
+  { name: 'MakeMyPass', src: '/partners/yatra26/makemypass.png', type: 'square' },
+  { name: 'IIITMK', src: '/partners/yatra26/iiitmk.png', type: 'wide' },
+  { name: 'KUBIIC', src: '/partners/yatra26/kubiic2.png', type: 'wide' },
+  { name: 'µLearn — A GTech Initiative', src: '/partners/yatra26/mlern.png', type: 'xwide' },
+  { name: 'Global Shapers Community', src: '/partners/yatra26/global2.png', type: 'wide' },
+  { name: 'Unstop', src: '/partners/yatra26/unstop2.png', type: 'wide' },
+  { name: 'Evara Microgreens', src: '/partners/yatra26/evara.png', type: 'square' },
+  { name: 'Luv Cutlet', src: '/partners/yatra26/luvcutlet.png', type: 'square' },
+  { name: 'Unstop Igniters Club', src: '/partners/yatra26/igniters.png', type: 'compact' },
+  { name: 'Idea Tribe', src: '/partners/yatra26/ideatribe.png', type: 'square' },
+  { name: 'Legacy IEDC UCEK', src: '/partners/yatra26/legacy2.png', type: 'wide' },
+  { name: 'IEDC UCEK', src: '/partners/yatra26/iedc2.png', type: 'xwide' },
+  { name: 'Helmet World', src: '/partners/yatra26/hw.png', type: 'square' },
 ]
 
 export default function PartnersPage() {
@@ -241,9 +227,13 @@ export default function PartnersPage() {
                   width={240}
                   height={110}
                   className={`${
-                    sponsor.compact
-                      ? 'max-h-20 sm:max-h-24 max-w-[140px] sm:max-w-[160px]'
-                      : 'max-h-13 sm:max-h-16 max-w-[160px] sm:max-w-[190px]'
+                    sponsor.type === 'square'
+                      ? 'max-h-16 sm:max-h-20 max-w-[120px] sm:max-w-[140px]'
+                      : sponsor.type === 'compact'
+                      ? 'max-h-13 sm:max-h-16 max-w-[130px] sm:max-w-[150px]'
+                      : sponsor.type === 'xwide'
+                      ? 'max-h-9 sm:max-h-11 max-w-[170px] sm:max-w-[210px]'
+                      : 'max-h-11 sm:max-h-13 max-w-[150px] sm:max-w-[180px]'
                   } w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-108 drop-shadow-[0_2px_6px_rgba(0,0,0,0.12)]`}
                 />
               </div>
