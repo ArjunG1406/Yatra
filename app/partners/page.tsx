@@ -195,46 +195,46 @@ export default function PartnersPage() {
         </div>
       </main>
 
-      {/* ─────────────────── 2. SPONSORS OF YATHRA (UNIFIED PINK SECTION, NO DUPLICATES, BALANCED SIZE) ─────────────────── */}
-      <section className="w-full bg-[#ff2d87] text-white py-16 sm:py-24 border-y border-pink-600/30 shadow-lg">
-        <div className="max-w-5xl mx-auto px-5 sm:px-8">
-          <div className="max-w-3xl mb-12 sm:mb-14">
-            <span className="font-mono text-xs font-bold uppercase tracking-wider text-pink-100 block mb-2">
+      {/* ─────────────────── 2. SPONSORS OF YATHRA (CLEAN WHITE SECTION, NO DUPLICATES, GENEROUS LOGO SIZE) ─────────────────── */}
+      <section className="w-full bg-white text-zinc-950 py-16 sm:py-24 border-t border-zinc-200">
+        <div className="max-w-6xl mx-auto px-5 sm:px-8">
+          <div className="max-w-3xl mb-12 sm:mb-16">
+            <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#ff2d87] block mb-2">
               Our Network & Ecosystem
             </span>
             <h2
-              className="text-3xl sm:text-5xl font-black tracking-tight text-white uppercase"
+              className="text-3xl sm:text-5xl font-black tracking-tight text-zinc-950 uppercase"
               style={{ fontFamily: "'Outfit', sans-serif" }}
             >
               Sponsors of Yathra
             </h2>
-            <p className="mt-3 text-sm sm:text-base text-pink-100/90 leading-relaxed max-w-2xl">
+            <p className="mt-3 text-sm sm:text-base text-zinc-600 leading-relaxed max-w-2xl">
               Leading government bodies, corporations, technology platforms, and startup incubators that have supported Yathra.
             </p>
           </div>
 
-          {/* Unified Logo Grid - 4 Logos per Row */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12 sm:gap-y-16 gap-x-8 sm:gap-x-12 items-center justify-items-center">
+          {/* Unified Logo Grid - Responsive 4 Logos per Row */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-y-12 sm:gap-y-16 gap-x-8 sm:gap-x-12 items-center justify-items-center">
             {YATRA_SPONSORS.map((sponsor, i) => (
               <div
                 key={i}
-                className="w-full h-24 sm:h-30 flex items-center justify-center p-2 sm:p-3 group"
+                className="w-full h-28 sm:h-36 flex items-center justify-center p-2 sm:p-3 group"
                 title={sponsor.name}
               >
                 <Image
                   src={sponsor.src}
                   alt={sponsor.name}
-                  width={240}
-                  height={110}
+                  width={320}
+                  height={140}
                   className={`${
                     sponsor.type === 'square'
-                      ? 'max-h-16 sm:max-h-20 max-w-[120px] sm:max-w-[140px]'
+                      ? 'max-h-20 sm:max-h-24 max-w-[150px] sm:max-w-[180px]'
                       : sponsor.type === 'compact'
-                      ? 'max-h-13 sm:max-h-16 max-w-[130px] sm:max-w-[150px]'
+                      ? 'max-h-18 sm:max-h-22 max-w-[170px] sm:max-w-[210px]'
                       : sponsor.type === 'xwide'
-                      ? 'max-h-9 sm:max-h-11 max-w-[170px] sm:max-w-[210px]'
-                      : 'max-h-11 sm:max-h-13 max-w-[150px] sm:max-w-[180px]'
-                  } w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-108 drop-shadow-[0_2px_6px_rgba(0,0,0,0.12)]`}
+                      ? 'max-h-12 sm:max-h-15 max-w-[210px] sm:max-w-[270px]'
+                      : 'max-h-15 sm:max-h-18 max-w-[190px] sm:max-w-[240px]'
+                  } w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-108`}
                 />
               </div>
             ))}

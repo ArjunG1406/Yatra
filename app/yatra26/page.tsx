@@ -581,12 +581,12 @@ export default function Yatra26Page() {
                 height={140}
                 className={`${
                   partner.type === 'square'
-                    ? 'max-h-20 sm:max-h-24 max-w-[150px] sm:max-w-[180px]'
+                    ? 'max-h-22 sm:max-h-28 max-w-[160px] sm:max-w-[200px]'
                     : partner.type === 'compact'
-                    ? 'max-h-18 sm:max-h-20 max-w-[170px] sm:max-w-[200px]'
+                    ? 'max-h-20 sm:max-h-24 max-w-[180px] sm:max-w-[220px]'
                     : partner.type === 'xwide'
-                    ? 'max-h-11 sm:max-h-14 max-w-[220px] sm:max-w-[270px]'
-                    : 'max-h-14 sm:max-h-17 max-w-[200px] sm:max-w-[240px]'
+                    ? 'max-h-13 sm:max-h-16 max-w-[230px] sm:max-w-[290px]'
+                    : 'max-h-16 sm:max-h-20 max-w-[210px] sm:max-w-[260px]'
                 } w-auto h-auto object-contain transition-transform`}
               />
             </div>
