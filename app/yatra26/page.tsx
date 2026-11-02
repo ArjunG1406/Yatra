@@ -9,6 +9,9 @@ import {
   ChevronLeft,
   ChevronRight,
   Quote,
+  X,
+  Maximize2,
+  MapPin,
 } from 'lucide-react'
 import Footer from '../components/footer'
 
@@ -62,14 +65,43 @@ const WINNERS_26 = [
   },
 ]
 
-// Gallery photos
+// Gallery and moment photos with rich metadata
 const GALLERY_PHOTOS_26 = [
-  { src: '/yathra/yatra26part/event1.jpg', title: 'Stage Pitch Showcase' },
-  { src: '/yathra/yatra26part/event2.jpg', title: 'Executive Jury Panel' },
-  { src: '/yathra/yatra26part/event3.jpg', title: 'Innovation Evaluation' },
-  { src: '/yathra/yatra26part/2S0A2112.JPG', title: 'Campus Delegations' },
-  { src: '/yathra/yatra26part/2S0A2117.JPG', title: 'Valedictory Ceremony' },
-  { src: '/yathra/yatra26part/2S0A2125.JPG', title: 'Stage Recognition' },
+  {
+    src: '/yathra/yatra26winners/winner.jpg',
+    tag: 'Grand Champion',
+    title: 'The Victory Handover',
+    desc: 'The winning collegiate startup awarded top honors on stage at Travancore Hall, Technopark.',
+    location: 'Travancore Hall, Technopark',
+  },
+  {
+    src: '/yathra/yatra26part/event1.jpg',
+    tag: 'Stage Pitch',
+    title: 'Live Pitching Session',
+    desc: 'Student founders pitching scalable UN SDG business models before the executive jury.',
+    location: 'Main Auditorium',
+  },
+  {
+    src: '/yathra/yatra26winners/runnerup.JPG',
+    tag: 'Laureates',
+    title: '1st Runner-Up Honors',
+    desc: 'Celebration of runner-up innovators delivering sustainable technology solutions.',
+    location: 'Valedictory Podium',
+  },
+  {
+    src: '/yathra/yatra26part/event2.jpg',
+    tag: 'Jury Evaluation',
+    title: 'Executive Jury Deliberation',
+    desc: 'Venture capitalists and technology executives assessing business models and scalability.',
+    location: 'Jury Bench',
+  },
+  {
+    src: '/yathra/yatra26part/event3.jpg',
+    tag: 'Ecosystem',
+    title: 'Audience & Delegations Exchange',
+    desc: 'Student delegations and faculty coordinators exchanging insights during keynotes.',
+    location: 'Audience Pavilion',
+  },
 ]
 
 // Reviews & Reflections
@@ -116,6 +148,7 @@ const PARTNERS_26 = [
 export default function Yatra26Page() {
   const [activeIndex, setActiveIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
+  const [previewIndex, setPreviewIndex] = useState<number | null>(null)
   const total = CAROUSEL_PHOTOS_26.length
 
   const handleNext = useCallback(() => {
@@ -132,6 +165,30 @@ export default function Yatra26Page() {
     const interval = setInterval(handleNext, 4500)
     return () => clearInterval(interval)
   }, [isPaused, handleNext])
+
+  // Keyboard navigation & body scroll lock for preview modal
+  useEffect(() => {
+    if (previewIndex === null) return
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape') {
+        setPreviewIndex(null)
+      } else if (e.key === 'ArrowLeft') {
+        setPreviewIndex((prev) =>
+          prev !== null ? (prev - 1 + GALLERY_PHOTOS_26.length) % GALLERY_PHOTOS_26.length : null
+        )
+      } else if (e.key === 'ArrowRight') {
+        setPreviewIndex((prev) =>
+          prev !== null ? (prev + 1) % GALLERY_PHOTOS_26.length : null
+        )
+      }
+    }
+    document.body.style.overflow = 'hidden'
+    window.addEventListener('keydown', handleKeyDown)
+    return () => {
+      document.body.style.overflow = ''
+      window.removeEventListener('keydown', handleKeyDown)
+    }
+  }, [previewIndex])
 
   return (
     <div className="min-h-screen bg-white text-zinc-950 font-sans selection:bg-[#ff2d87] selection:text-white">
@@ -327,34 +384,112 @@ export default function Yatra26Page() {
         </div>
       </section>
 
-      {/* ─────────────────── 3. EVENT PHOTOS GALLERY ─────────────────── */}
-      <section className="py-20 max-w-5xl mx-auto px-5 sm:px-8 border-b border-zinc-200">
-        <div className="text-center max-w-2xl mx-auto mb-12">
+      {/* ─────────────────── 3. EVENT PHOTOS GALLERY & MOMENTS (EDITORIAL BENTO) ─────────────────── */}
+      <section className="py-20 sm:py-28 max-w-6xl mx-auto px-5 sm:px-8 border-b border-zinc-200">
+        <div className="text-center max-w-2xl mx-auto mb-14">
           <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#ff2d87] block mb-2">
             Visual Chronicles
           </span>
           <h2
-            className="text-2xl sm:text-4xl font-black uppercase tracking-tight text-zinc-950"
+            className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-zinc-950"
             style={{ fontFamily: "'Outfit', sans-serif" }}
           >
-            Yathra ’26 Gallery
+            Yathra ’26 Gallery & Moments
           </h2>
+          <p className="mt-3 text-sm sm:text-base text-zinc-600">
+            Click any moment to expand into full-screen high-resolution preview with stage details.
+          </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
-          {GALLERY_PHOTOS_26.map((photo, i) => (
-            <div
-              key={i}
-              className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-zinc-100 shadow-xs"
-            >
-              <Image
-                src={photo.src}
-                alt={photo.title}
-                fill
-                className="object-cover hover:scale-105 transition-transform duration-500"
-              />
+        {/* Unique Asymmetric Bento Mosaic */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
+          {/* Hero Highlight Card (Spans 2 cols, 2 rows) */}
+          <div
+            onClick={() => setPreviewIndex(0)}
+            className="group relative md:col-span-2 md:row-span-2 rounded-3xl overflow-hidden bg-zinc-950 cursor-pointer shadow-sm hover:shadow-xl transition-all duration-300 min-h-[320px] md:min-h-[440px]"
+          >
+            <Image
+              src={GALLERY_PHOTOS_26[0].src}
+              alt={GALLERY_PHOTOS_26[0].title}
+              fill
+              className="object-cover group-hover:scale-105 transition-transform duration-700 ease-out"
+            />
+            <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
+
+            {/* Top Badges */}
+            <div className="absolute top-5 left-5 right-5 flex items-center justify-between z-10">
+              <span className="px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#ff2d87] text-white shadow-sm">
+                {GALLERY_PHOTOS_26[0].tag}
+              </span>
+              <div className="w-9 h-9 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <Maximize2 className="w-4 h-4" />
+              </div>
             </div>
-          ))}
+
+            {/* Bottom Caption Overlay */}
+            <div className="absolute bottom-0 inset-x-0 p-6 sm:p-8 z-10">
+              <div className="flex items-center gap-1.5 text-xs text-zinc-300 mb-2">
+                <MapPin className="w-3.5 h-3.5 text-[#ff2d87]" />
+                <span>{GALLERY_PHOTOS_26[0].location}</span>
+              </div>
+              <h3
+                className="text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug"
+                style={{ fontFamily: "'Outfit', sans-serif" }}
+              >
+                {GALLERY_PHOTOS_26[0].title}
+              </h3>
+              <p className="text-xs sm:text-sm text-zinc-300 mt-1 max-w-lg line-clamp-2">
+                {GALLERY_PHOTOS_26[0].desc}
+              </p>
+            </div>
+          </div>
+
+          {/* Complementary Moment Cards */}
+          {GALLERY_PHOTOS_26.slice(1).map((photo, idx) => {
+            const actualIndex = idx + 1
+            return (
+              <div
+                key={actualIndex}
+                onClick={() => setPreviewIndex(actualIndex)}
+                className="group relative rounded-3xl overflow-hidden bg-zinc-950 cursor-pointer shadow-xs hover:shadow-lg transition-all duration-300 aspect-[16/10] min-h-[220px]"
+              >
+                <Image
+                  src={photo.src}
+                  alt={photo.title}
+                  fill
+                  className="object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:from-black/90 transition-colors" />
+
+                {/* Top Badge & Expand Icon */}
+                <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
+                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-black/50 backdrop-blur-md text-white border border-white/20">
+                    {photo.tag}
+                  </span>
+                  <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <Maximize2 className="w-3.5 h-3.5" />
+                  </div>
+                </div>
+
+                {/* Bottom Caption Overlay */}
+                <div className="absolute bottom-0 inset-x-0 p-5 z-10">
+                  <div className="flex items-center gap-1.5 text-[11px] text-zinc-300 mb-1">
+                    <MapPin className="w-3 h-3 text-[#ff2d87]" />
+                    <span>{photo.location}</span>
+                  </div>
+                  <h4
+                    className="text-base sm:text-lg font-bold text-white tracking-tight leading-snug line-clamp-1"
+                    style={{ fontFamily: "'Outfit', sans-serif" }}
+                  >
+                    {photo.title}
+                  </h4>
+                  <p className="text-xs text-zinc-300 mt-0.5 line-clamp-1">
+                    {photo.desc}
+                  </p>
+                </div>
+              </div>
+            )
+          })}
         </div>
       </section>
 
@@ -458,6 +593,113 @@ export default function Yatra26Page() {
 
       {/* ─────────────────── FOOTER ─────────────────── */}
       <Footer />
+
+      {/* ─────────────────── INTERACTIVE PREVIEW LIGHTBOX MODAL ─────────────────── */}
+      {previewIndex !== null && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-xl animate-in fade-in duration-200 p-4 sm:p-8"
+          onClick={() => setPreviewIndex(null)}
+        >
+          {/* Top Bar Controls */}
+          <div
+            className="absolute top-4 sm:top-6 inset-x-4 sm:inset-x-8 flex items-center justify-between z-50 text-white"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="flex items-center gap-3">
+              <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#ff2d87] bg-black/60 px-3 py-1 rounded-full border border-white/10">
+                Moment {previewIndex + 1} of {GALLERY_PHOTOS_26.length}
+              </span>
+              <span className="text-sm font-semibold hidden sm:inline text-zinc-300">
+                {GALLERY_PHOTOS_26[previewIndex].location}
+              </span>
+            </div>
+
+            <button
+              onClick={() => setPreviewIndex(null)}
+              aria-label="Close Preview"
+              className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
+            >
+              <X className="w-5 h-5" />
+            </button>
+          </div>
+
+          {/* Previous / Next Arrow Controls */}
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              setPreviewIndex(
+                (prev) => (prev! - 1 + GALLERY_PHOTOS_26.length) % GALLERY_PHOTOS_26.length
+              )
+            }}
+            aria-label="Previous Moment"
+            className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-black/60 hover:bg-black/90 text-white border border-white/15 flex items-center justify-center hover:scale-105 active:scale-95 transition-all cursor-pointer"
+          >
+            <ChevronLeft className="w-6 h-6" />
+          </button>
+
+          <button
+            onClick={(e) => {
+              e.stopPropagation()
+              setPreviewIndex((prev) => (prev! + 1) % GALLERY_PHOTOS_26.length)
+            }}
+            aria-label="Next Moment"
+            className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-black/60 hover:bg-black/90 text-white border border-white/15 flex items-center justify-center hover:scale-105 active:scale-95 transition-all cursor-pointer"
+          >
+            <ChevronRight className="w-6 h-6" />
+          </button>
+
+          {/* Main Focused Preview Image */}
+          <div
+            className="relative max-w-5xl max-h-[75vh] w-full aspect-[16/10] flex items-center justify-center"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="relative w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/10">
+              <Image
+                src={GALLERY_PHOTOS_26[previewIndex].src}
+                alt={GALLERY_PHOTOS_26[previewIndex].title}
+                fill
+                priority
+                className="object-contain"
+              />
+            </div>
+          </div>
+
+          {/* Bottom Caption & Thumbnail Strip */}
+          <div
+            className="absolute bottom-4 sm:bottom-6 inset-x-4 sm:inset-x-8 flex flex-col items-center gap-3 z-50 pointer-events-none"
+            onClick={(e) => e.stopPropagation()}
+          >
+            <div className="text-center bg-black/70 backdrop-blur-md px-5 py-2.5 rounded-2xl border border-white/10 max-w-xl pointer-events-auto">
+              <h3
+                className="text-base sm:text-lg font-bold text-white tracking-tight"
+                style={{ fontFamily: "'Outfit', sans-serif" }}
+              >
+                {GALLERY_PHOTOS_26[previewIndex].title}
+              </h3>
+              <p className="text-xs text-zinc-300 mt-0.5 line-clamp-1">
+                {GALLERY_PHOTOS_26[previewIndex].desc}
+              </p>
+            </div>
+
+            {/* Thumbnail Tray */}
+            <div className="flex items-center gap-2 pointer-events-auto bg-black/60 backdrop-blur-md p-1.5 rounded-xl border border-white/10 overflow-x-auto max-w-full">
+              {GALLERY_PHOTOS_26.map((thumb, tIdx) => (
+                <button
+                  key={tIdx}
+                  onClick={() => setPreviewIndex(tIdx)}
+                  className={`relative w-12 h-8 rounded-lg overflow-hidden transition-all cursor-pointer ${
+                    previewIndex === tIdx
+                      ? 'ring-2 ring-[#ff2d87] scale-105 opacity-100'
+                      : 'opacity-40 hover:opacity-80'
+                  }`}
+                >
+                  <Image src={thumb.src} alt={thumb.title} fill className="object-cover" />
+                </button>
+              ))}
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
