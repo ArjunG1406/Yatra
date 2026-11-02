@@ -405,19 +405,35 @@ export default function Yatra26Page() {
 
       {/* ─────────────────── 5. YATHRA ’26 PARTNERS & SPONSORS (INDIVIDUAL LOGOS) ─────────────────── */}
       <section className="py-20 max-w-6xl mx-auto px-5 sm:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-14">
-          <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#ff2d87] block mb-2">
-            Partners & Ecosystem
+        {/* Official Header lockup matching user reference */}
+        <div className="text-center max-w-2xl mx-auto mb-16 sm:mb-20">
+          <div className="flex flex-col items-center justify-center gap-1.5 mb-2">
+            <span className="font-mono text-[11px] sm:text-xs tracking-[0.2em] font-semibold uppercase text-zinc-400">
+              Hult Prize · University College of Engineering
+            </span>
+            <span className="font-mono text-xs sm:text-sm font-bold uppercase tracking-[0.2em] text-[#ff2d87]">
+              Presents
+            </span>
+          </div>
+
+          <div className="flex items-center justify-center gap-2.5 sm:gap-3 my-2">
+            <span
+              className="text-5xl sm:text-6xl md:text-7xl font-black tracking-tight text-[#ff2d87] lowercase"
+              style={{ fontFamily: "'Outfit', sans-serif" }}
+            >
+              yathra
+            </span>
+            <span
+              className="text-2xl sm:text-3xl md:text-4xl font-black px-3 py-1 sm:px-3.5 sm:py-1.5 rounded-xl bg-[#fcc30b] text-zinc-950 shadow-xs"
+              style={{ fontFamily: "'Outfit', sans-serif" }}
+            >
+              ’26
+            </span>
+          </div>
+
+          <span className="font-mono text-[11px] sm:text-xs font-semibold uppercase tracking-[0.3em] text-zinc-400 block mt-2">
+            A Million Dollar Journey
           </span>
-          <h2
-            className="text-2xl sm:text-4xl font-black uppercase tracking-tight text-zinc-950"
-            style={{ fontFamily: "'Outfit', sans-serif" }}
-          >
-            Partners & Sponsors of Yathra ’26
-          </h2>
-          <p className="mt-2 text-sm text-zinc-600">
-            Backed by premier startup enablers, university incubation centers, and industry leaders.
-          </p>
         </div>
 
         {/* Clean 4-in-a-row responsive grid without boxes */}
