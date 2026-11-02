@@ -5,18 +5,10 @@ import type { Metadata } from 'next'
 import {
   ArrowLeft,
   ArrowUpRight,
-  CheckCircle2,
   Mail,
-  Building,
-  Target,
+  CheckCircle2,
   Sparkles,
-  Trophy,
-  Users,
-  Compass,
   ExternalLink,
-  Layers,
-  Award,
-  Globe2,
 } from 'lucide-react'
 
 export const metadata: Metadata = {
@@ -27,184 +19,137 @@ export const metadata: Metadata = {
 
 const PINK = '#ff2d87'
 
-const IMPACT_STATS = [
-  { value: '10,000+', label: 'Collegiate Innovators', desc: 'Pan-India student outreach across engineering & business institutions' },
-  { value: '100+', label: 'Venture Pitches', desc: 'Scalable student startups solving real-world challenges' },
-  { value: '17', label: 'UN SDG Tracks', desc: 'Impact categories from Climate Action to Health & Clean Tech' },
-  { value: '$1M', label: 'Global Seed Track', desc: 'Direct nomination pipeline into the global Hult Prize acceleration program' },
-]
-
-const CORE_BENEFITS = [
+// Point-wise structured partner benefits
+const BENEFIT_CATEGORIES = [
   {
-    icon: Sparkles,
-    title: 'High-Impact Brand Dominance',
-    tag: 'Visibility',
+    number: '01',
+    title: 'High-Impact Brand Visibility & Media Dominance',
+    tag: 'Visibility & PR',
     points: [
-      'Prominent logo on main stage LED backdrops at Travancore Hall, Technopark.',
-      'Featured placement on the official Yathra website, printed collaterals, delegate kits, and certificates.',
-      'Co-branded digital press releases, social media campaigns, and official highlight videos.',
-      'Dedicated branding across qualifier materials and college communication broadcasts.',
+      'Prominent logo placement on main stage LED backdrops at Travancore Hall, Technopark throughout all pitching and keynote sessions.',
+      'Featured logo on the official Yathra ’27 website, delegate kits, event brochures, and winner certificates.',
+      'Dedicated sponsor spotlight reels and social media campaigns across Instagram, LinkedIn, and student community channels.',
+      'Co-branded mentions in regional press releases, post-event publications, and official aftermovie credits.',
+      'Branded digital broadcast banners across live-streamed semi-final and final pitching sessions.',
     ],
   },
   {
-    icon: Users,
-    title: 'Top-Tier Tech & Founder Talent Recruitment',
-    tag: 'Talent Access',
+    number: '02',
+    title: 'Top-Tier Tech & Student Founder Recruitment',
+    tag: 'Talent Acquisition',
     points: [
-      'Direct pipeline to recruit elite student engineers, product designers, and entrepreneurial problem-solvers.',
-      'Access to curated participant resume books and founder profiles.',
-      'Exclusive slots for campus pre-placement interactions or company culture talks.',
-      'Observe real-world execution, pitching poise, and technical acumen under pressure.',
+      'Direct hiring pipeline to 10,000+ collegiate innovators, software engineers, product designers, and problem solvers.',
+      'Exclusive access to curated participant resume books, team portfolios, and founder profiles.',
+      'Dedicated on-campus company presentation or recruitment booth to interact directly with top finalists.',
+      'Live observation of student candidates executing under pressure, problem-solving, and presenting technical solutions.',
+      'Priority consideration for campus placement drives and internship recruitment programs.',
     ],
   },
   {
-    icon: Compass,
-    title: 'Product Adoption, APIs & Platform Integration',
-    tag: 'Developer Evangelism',
+    number: '03',
+    title: 'Developer Evangelism & Product / API Adoption',
+    tag: 'Product Integration',
     points: [
-      'Encourage hundreds of collegiate teams to integrate your APIs, SDKs, cloud credits, or software tools.',
-      'Host an official brand workshop or hands-on developer masterclass during the qualifier timeline.',
-      'Sponsor a specialized custom problem-statement track aligned with your core technology.',
-      'Direct product feedback and feature testing by fast-moving collegiate dev teams.',
+      'Integrate your APIs, developer tools, cloud credits, or SDKs into hundreds of active student startup projects.',
+      'Host an official brand masterclass, workshop, or technical hackathon sprint during the summit prep timeline.',
+      'Sponsor a custom challenge track or problem statement aligned with your core technology or industry domain.',
+      'Gather authentic real-time developer feedback and edge-case testing from fast-moving student dev teams.',
+      'Showcase your company’s technology stack directly to the next generation of engineers.',
     ],
   },
   {
-    icon: Trophy,
+    number: '04',
     title: 'Executive Jury Presence & VIP Networking',
-    tag: 'Leadership',
+    tag: 'Executive Leadership',
     points: [
-      'Seat for your CXO, VP, or Venture Partner on the Grand Finale evaluation jury.',
-      'Deliver keynote opening remarks or present champion award trophies on stage.',
-      'Network with angel syndicates, venture capitalists, startup incubators, and state ecosystem leaders.',
-      'Access to private VIP networking receptions with keynote dignitaries.',
+      'VIP Grand Finale evaluation jury seat for your CXO, VP, technical lead, or Venture Partner.',
+      'Keynote stage address (10–15 mins) to share your company vision directly with hundreds of attendees.',
+      'Exclusive invitation to private VIP networking sessions with startup founders, venture capitalists, and university dignitaries.',
+      'On-stage presentation of champion trophies, track prizes, and student entrepreneurship awards.',
+      'Direct interaction with early-stage collegiate ventures for potential corporate venture investment or incubation.',
     ],
   },
   {
-    icon: Target,
+    number: '05',
     title: 'ESG & UN Sustainable Development Goals CSR Alignment',
-    tag: 'CSR Impact',
+    tag: 'CSR & ESG Impact',
     points: [
-      'Fulfill Corporate Social Responsibility (CSR) and ESG mandates by championing sustainable youth innovation.',
-      'Directly foster ventures addressing Clean Energy, Poverty Alleviation, Climate Action, and Quality Education.',
-      'Receive official CSR impact documentation and media recognition as a Social Venture Enabler.',
-      'Empower diverse, inclusive teams from across Kerala and pan-India academic hubs.',
+      'Direct alignment with the 17 United Nations Sustainable Development Goals (SDGs) addressing climate, education, and equality.',
+      'Comprehensive Corporate Social Responsibility (CSR) project fulfillment documentation and auditable impact reports.',
+      'Official recognition as an authorized Social Venture Enabler fostering grassroots student innovation.',
+      'Measurable community impact by empowering diverse collegiate teams across Kerala and South India.',
+      'Tangible support for female founder representation and inclusive technology initiatives.',
     ],
   },
   {
-    icon: Globe2,
-    title: 'National & Global Ecosystem Association',
-    tag: 'Prestige',
+    number: '06',
+    title: 'Global Hult Prize Association & Network Equity',
+    tag: 'Institutional Prestige',
     points: [
-      'Align your organization with the global Hult Prize Foundation, often dubbed the "Nobel Prize for Students".',
-      'Long-term association with University College of Engineering Kariavattom (UCEK), University of Kerala.',
-      'Presence in Technopark, Trivandrum — India’s premier IT hub and innovation corridor.',
-      'Sustained brand recall among the next generation of industry leaders and tech innovators.',
+      'Prestigious alignment with the worldwide Hult Prize Foundation ($1,000,000 Global Seed Fund accelerator track).',
+      'Institutional connection with University College of Engineering Kariavattom (UCEK), University of Kerala.',
+      'Strategic presence at Technopark, Trivandrum — India’s first and largest IT innovation corridor.',
+      'Long-term brand equity and lasting goodwill among student innovators, campus leaders, and alumni networks.',
+      'Ongoing visibility across all future Yathra chapter promotional campaigns.',
     ],
   },
 ]
 
-const TIERS = [
-  {
-    name: 'Title / Presenting Sponsor',
-    tier: 'Flagship Tier · Exclusive',
-    highlight: true,
-    desc: 'The definitive partnership tier providing comprehensive naming rights and maximum dominance across all digital and on-ground summit touchpoints.',
-    perks: [
-      'Exclusive naming rights: "Yathra ’27 Presented by [Your Brand]"',
-      'Grand Finale Keynote opening address (15 mins) & permanent Jury Seat',
-      'Highest prominence logo on main stage LED, website header, and all video reels',
-      'Dedicated experiential booth / demo lounge at Travancore Hall, Technopark',
-      'Named track award: "[Your Brand] Changemaker Award" with trophy handover',
-      'Unlimited company passes for leadership and recruitment scouts',
-    ],
-  },
-  {
-    name: 'Co-Sponsor / Platform Partner',
-    tier: 'Category Leader',
-    highlight: false,
-    desc: 'Ideal for leading technology companies, platforms, or skilling networks seeking deep integration and student adoption.',
-    perks: [
-      'Category exclusivity (e.g. Official Cloud, Platform, or AI Partner)',
-      'Host an official brand masterclass or developer challenge track',
-      'Jury presence in semi-final pitching rounds',
-      'Prominent logo on stage backdrop, participant ID badges, and delegate kits',
-      'Direct email newsletter feature sent to all participating student ventures',
-      'Access to talent directory and resume database',
-    ],
-  },
-  {
-    name: 'Innovation & Track Partner',
-    tier: 'Ecosystem & Mentorship',
-    highlight: false,
-    desc: 'Designed for incubators, startup accelerators, and specialized enterprises aiming to mentor and support sector-specific innovation.',
-    perks: [
-      'Sponsor a designated UN SDG track (e.g. Clean Energy, HealthTech, AgriTech)',
-      'Mentorship sprint engagement with shortlisted venture finalists',
-      'Logo on website partner wall, event brochures, and certificates',
-      'On-stage presentation of Track Finalist certificates',
-      'Access to pitch decks of sector-specific collegiate ventures',
-      'VIP passes to the Grand Finale showcase at Technopark',
-    ],
-  },
-  {
-    name: 'Associate / Community Partner',
-    tier: 'Community & Network',
-    highlight: false,
-    desc: 'Tailored for alumni networks, student initiatives, and creative media agencies wishing to foster student entrepreneurship.',
-    perks: [
-      'Logo on official summit website and community partner collaterals',
-      'Social media shoutouts across Instagram, LinkedIn, and campus networks',
-      'Partner acknowledgement during the valedictory award ceremony',
-      'Invitation to attend the Grand Finale at Technopark',
-    ],
-  },
+// Previous event sponsors for Yathra 26
+const YATRA_26_SPONSORS = [
+  { name: 'Kerala Startup Mission (KSUM)', src: '/partners/yatra26/ksum2.png' },
+  { name: 'IIITM-K / Digital University Kerala', src: '/partners/yatra26/iiitmk.png' },
+  { name: 'MakeMyPass', src: '/partners/yatra26/makemypass.png' },
+  { name: 'µLearn — GTech', src: '/partners/yatra26/mulearn2.png' },
+  { name: 'Udhyam Learning Foundation', src: '/partners/yatra26/udhayam2.png' },
+  { name: 'Unstop', src: '/partners/yatra26/unstop2.png' },
+  { name: 'Unstop Igniters Club', src: '/partners/yatra26/igniters.png' },
+  { name: 'IEDC UCEK', src: '/partners/yatra26/iedc2.png' },
+  { name: 'KUBIIC', src: '/partners/yatra26/kubiic.png' },
+  { name: 'Legacy IEDC', src: '/partners/yatra26/legacy2.png' },
+  { name: 'IdeaTribe', src: '/partners/yatra26/ideatribe.png' },
+  { name: 'Global', src: '/partners/yatra26/global.png' },
+  { name: 'Helmet World', src: '/partners/yatra26/hw.png' },
+  { name: 'Luv Cutlet', src: '/partners/yatra26/luvcutlet.png' },
+  { name: 'Evara', src: '/partners/yatra26/evara.png' },
 ]
 
-const CURRENT_PARTNERS = [
-  {
-    name: 'Unstop Igniters Club',
-    role: 'Official Platform Partner',
-    logo: '/partners/unstop.png',
-  },
-  {
-    name: 'µLearn — A GTech Initiative',
-    role: 'Ecosystem & Skilling Partner',
-    logo: '/partners/mulearn.webp',
-  },
-  {
-    name: 'Udhyam Learning Foundation',
-    role: 'Innovation Partner',
-    logo: '/partners/udhayam.png',
-  },
-  {
-    name: 'IEDC UCEK',
-    role: 'Campus Incubation Partner',
-    logo: '/partners/iedc.png',
-  },
-  {
-    name: 'Legacy IEDC',
-    role: 'Alumni & Network Partner',
-    logo: '/partners/legacy.png',
-  },
+// Previous event sponsors for Yathra 25
+const YATRA_25_SPONSORS = [
+  { name: 'Kerala Startup Mission (KSUM)', src: '/partners/yatra25/ksum.png' },
+  { name: 'Atal Innovation Mission (AIM)', src: '/partners/yatra25/aim.png' },
+  { name: 'IEDC UCEK', src: '/partners/yatra25/iedc.png' },
+  { name: 'µLearn — GTech', src: '/partners/yatra25/mulearn.png' },
+  { name: 'Unstop', src: '/partners/yatra25/unstop.png' },
+  { name: 'Milma', src: '/partners/yatra25/milma.png' },
+  { name: 'Unibic', src: '/partners/yatra25/unibic.png' },
+  { name: 'Helmet World', src: '/partners/yatra25/helmetworld.png' },
+  { name: 'Legacy IEDC', src: '/partners/yatra25/legacy.png' },
+  { name: 'Camino', src: '/partners/yatra25/camino.png' },
+  { name: 'D-Tech', src: '/partners/yatra25/dtech.png' },
+  { name: 'Fulva', src: '/partners/yatra25/fulva.png' },
+  { name: 'Mithra', src: '/partners/yatra25/mithra.png' },
+  { name: 'UX Shots', src: '/partners/yatra25/uxshots.png' },
+  { name: 'Varsya', src: '/partners/yatra25/varsya.png' },
 ]
 
 export default function PartnersPage() {
   return (
     <div className="min-h-screen bg-white text-zinc-950 font-sans">
-      {/* ─────────────────── TOP NAVIGATION BAR ─────────────────── */}
-      <header className="sticky top-0 z-50 w-full border-b border-zinc-200/80 bg-white/90 backdrop-blur-md">
-        <div className="max-w-6xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
+      {/* ─────────────────── TOP MINIMAL NAVIGATION ─────────────────── */}
+      <header className="sticky top-0 z-50 w-full border-b border-zinc-200/80 bg-white/95 backdrop-blur-sm">
+        <div className="max-w-5xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
           <Link
             href="/"
-            className="group inline-flex items-center gap-2 text-xs font-bold uppercase tracking-wider text-zinc-600 hover:text-zinc-950 transition-colors"
+            className="group inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-zinc-600 hover:text-zinc-950 transition-colors"
           >
             <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
             <span>Back to Yathra ’27</span>
           </Link>
 
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-1.5">
             <span
-              className="text-xl font-black tracking-tight uppercase"
+              className="text-lg font-black tracking-tight uppercase"
               style={{ fontFamily: "'Outfit', sans-serif" }}
             >
               Yathra
@@ -218,8 +163,8 @@ export default function PartnersPage() {
           </div>
 
           <a
-            href="mailto:hultprizeucek@gmail.com"
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-zinc-950 text-white font-bold text-xs uppercase tracking-wider hover:bg-[#ff2d87] transition-all shadow-2xs"
+            href="mailto:hultprizeucek@gmail.com?subject=Partnership%20Inquiry%20-%20Yathra%20'27"
+            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full bg-zinc-950 text-white font-semibold text-xs uppercase tracking-wider hover:bg-[#ff2d87] transition-all"
             style={{ fontFamily: "'Outfit', sans-serif" }}
           >
             <Mail className="w-3.5 h-3.5" />
@@ -229,363 +174,189 @@ export default function PartnersPage() {
         </div>
       </header>
 
-      {/* ─────────────────── HERO SECTION ─────────────────── */}
-      <section className="px-5 sm:px-8 pt-16 pb-16 max-w-6xl mx-auto border-b border-zinc-200">
-        <div className="max-w-3xl">
-          <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full text-[11px] font-mono font-bold tracking-wider uppercase bg-pink-50 text-[#ff2d87] border border-pink-200 mb-6">
-            <Sparkles className="w-3.5 h-3.5" />
-            <span>Partnership & Sponsorship Prospectus</span>
-          </div>
-
+      {/* ─────────────────── 1. PARTNER & SPONSOR BENEFITS (FIRST SECTION) ─────────────────── */}
+      <main className="max-w-5xl mx-auto px-5 sm:px-8 py-12 sm:py-16">
+        {/* Section Header */}
+        <div className="max-w-3xl mb-12 sm:mb-16">
+          <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#ff2d87] block mb-2">
+            Why Partner With Yathra ’27
+          </span>
           <h1
-            className="text-3xl sm:text-5xl lg:text-6xl font-black tracking-tight text-zinc-950 uppercase leading-[1.08]"
+            className="text-3xl sm:text-5xl font-black tracking-tight text-zinc-950 uppercase leading-tight"
             style={{ fontFamily: "'Outfit', sans-serif" }}
           >
-            Partner with <span style={{ color: PINK }}>Yathra ’27</span>
+            Partner & Sponsor Benefits
           </h1>
-
-          <p className="mt-5 text-base sm:text-xl text-zinc-600 leading-relaxed max-w-2xl">
-            Align your brand with India’s most visionary collegiate changemakers. Connect with <strong>10,000+ student innovators</strong> building scalable ventures for the UN Sustainable Development Goals and the global <strong>$1,000,000 Hult Prize</strong> acceleration track.
-          </p>
-
-          {/* Quick Action CTAs */}
-          <div className="mt-8 flex flex-wrap items-center gap-3 sm:gap-4">
-            <a
-              href="mailto:hultprizeucek@gmail.com?subject=Partnership%20Inquiry%20-%20Yathra%20'27"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-zinc-950 text-white font-bold text-xs sm:text-sm uppercase tracking-wider hover:bg-[#ff2d87] transition-all shadow-sm hover:shadow-md"
-              style={{ fontFamily: "'Outfit', sans-serif" }}
-            >
-              <Mail className="w-4 h-4" />
-              <span>Inquire for Sponsorship</span>
-            </a>
-
-            <a
-              href="https://canva.link/3k8g32dbermfr69"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-zinc-200 bg-white text-zinc-800 font-bold text-xs sm:text-sm uppercase tracking-wider hover:border-zinc-400 hover:text-zinc-950 transition-all shadow-2xs"
-              style={{ fontFamily: "'Outfit', sans-serif" }}
-            >
-              <span>Canva Partner Logo Kit</span>
-              <ArrowUpRight className="w-4 h-4 text-[#ff2d87]" />
-            </a>
-
-            <a
-              href="https://canva.link/3mp29gbrj3cu0xq"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 px-6 py-3.5 rounded-full border border-zinc-200 bg-white text-zinc-800 font-bold text-xs sm:text-sm uppercase tracking-wider hover:border-zinc-400 hover:text-zinc-950 transition-all shadow-2xs"
-              style={{ fontFamily: "'Outfit', sans-serif" }}
-            >
-              <span>Canva Launch Deck</span>
-              <ArrowUpRight className="w-4 h-4 text-[#ff2d87]" />
-            </a>
-          </div>
-        </div>
-
-        {/* ─── METRICS & REACH BAR ─── */}
-        <div className="mt-16 pt-10 border-t border-zinc-200 grid grid-cols-2 md:grid-cols-4 gap-6">
-          {IMPACT_STATS.map((stat, i) => (
-            <div key={i} className="flex flex-col">
-              <span
-                className="text-3xl sm:text-4xl font-black tracking-tight text-zinc-950"
-                style={{ fontFamily: "'Outfit', sans-serif" }}
-              >
-                {stat.value}
-              </span>
-              <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#ff2d87] mt-1">
-                {stat.label}
-              </span>
-              <p className="text-xs text-zinc-500 mt-1 leading-snug">
-                {stat.desc}
-              </p>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ─────────────────── CORE BENEFITS BREAKDOWN ─────────────────── */}
-      <section className="px-5 sm:px-8 py-16 sm:py-20 max-w-6xl mx-auto border-b border-zinc-200">
-        <div className="max-w-2xl mb-12">
-          <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#ff2d87] block mb-1">
-            Value Proposition
-          </span>
-          <h2
-            className="text-2xl sm:text-4xl font-black tracking-tight text-zinc-950 uppercase"
-            style={{ fontFamily: "'Outfit', sans-serif" }}
-          >
-            What Your Brand Gains
-          </h2>
-          <p className="mt-2 text-sm sm:text-base text-zinc-600">
-            A partnership with Yathra ’27 delivers concrete ROI through multi-channel visibility, elite campus recruiting, and genuine ESG social impact.
+          <p className="mt-4 text-sm sm:text-base text-zinc-600 leading-relaxed">
+            Partnering with Yathra ’27 connects your brand with India’s most promising student innovators, developers, and founders. Below is a comprehensive breakdown of the deliverables, brand visibility, and recruiting ROI your organization receives.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-          {CORE_BENEFITS.map((benefit, i) => {
-            const Icon = benefit.icon
-            return (
-              <div
-                key={i}
-                className="p-6 rounded-2xl border border-zinc-200 bg-white hover:border-zinc-300 transition-all shadow-xs flex flex-col justify-between"
-              >
-                <div>
-                  <div className="flex items-center justify-between mb-4">
-                    <div className="p-2.5 rounded-xl bg-pink-50 border border-pink-100 text-[#ff2d87]">
-                      <Icon className="w-5 h-5" />
-                    </div>
-                    <span className="font-mono text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full bg-zinc-100 text-zinc-600 border border-zinc-200">
-                      {benefit.tag}
-                    </span>
-                  </div>
-
-                  <h3
-                    className="text-lg font-bold text-zinc-950 leading-snug mb-3"
+        {/* Benefits Listed Point-Wise Neatly */}
+        <div className="space-y-12 sm:space-y-14">
+          {BENEFIT_CATEGORIES.map((category) => (
+            <div
+              key={category.number}
+              className="pb-10 border-b border-zinc-200 last:border-b-0"
+            >
+              {/* Category Header */}
+              <div className="flex flex-col sm:flex-row sm:items-baseline justify-between gap-1 mb-5">
+                <div className="flex items-center gap-3">
+                  <span className="font-mono text-xs font-bold text-[#ff2d87]">
+                    {category.number}
+                  </span>
+                  <h2
+                    className="text-lg sm:text-xl font-bold text-zinc-950 tracking-tight"
                     style={{ fontFamily: "'Outfit', sans-serif" }}
                   >
-                    {benefit.title}
-                  </h3>
-
-                  <ul className="space-y-2.5">
-                    {benefit.points.map((pt, pIdx) => (
-                      <li key={pIdx} className="flex items-start gap-2 text-xs text-zinc-600 leading-relaxed">
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#ff2d87] shrink-0 mt-0.5" />
-                        <span>{pt}</span>
-                      </li>
-                    ))}
-                  </ul>
+                    {category.title}
+                  </h2>
                 </div>
+                <span className="font-mono text-[11px] uppercase tracking-wider text-zinc-400">
+                  {category.tag}
+                </span>
               </div>
-            )
-          })}
-        </div>
-      </section>
 
-      {/* ─────────────────── SPONSORSHIP TIERS MATRIX ─────────────────── */}
-      <section className="px-5 sm:px-8 py-16 sm:py-20 max-w-6xl mx-auto border-b border-zinc-200">
-        <div className="text-center max-w-xl mx-auto mb-14">
-          <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#ff2d87] block mb-1">
-            Partnership Architecture
-          </span>
-          <h2
-            className="text-2xl sm:text-4xl font-black tracking-tight text-zinc-950 uppercase"
-            style={{ fontFamily: "'Outfit', sans-serif" }}
-          >
-            Sponsorship Tiers & Packages
-          </h2>
-          <p className="mt-2 text-xs sm:text-sm text-zinc-500">
-            Tailored investment tiers designed to meet your branding, recruitment, and corporate objectives.
-          </p>
-        </div>
-
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-          {TIERS.map((tier, i) => (
-            <div
-              key={i}
-              className={`p-6 rounded-2xl flex flex-col justify-between transition-all ${
-                tier.highlight
-                  ? 'border-2 border-[#ff2d87] bg-pink-50/20 shadow-md'
-                  : 'border border-zinc-200 bg-white hover:border-zinc-300 shadow-2xs'
-              }`}
-            >
-              <div>
-                <div className="mb-4">
-                  <span
-                    className={`font-mono text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded-full inline-block ${
-                      tier.highlight
-                        ? 'bg-[#ff2d87] text-white'
-                        : 'bg-zinc-100 text-zinc-600 border border-zinc-200'
-                    }`}
+              {/* Point-by-point bullets */}
+              <ul className="space-y-3 pl-1 sm:pl-7">
+                {category.points.map((point, idx) => (
+                  <li
+                    key={idx}
+                    className="flex items-start gap-3 text-sm text-zinc-700 leading-relaxed"
                   >
-                    {tier.tier}
-                  </span>
-                  <h3
-                    className="text-lg font-black text-zinc-950 uppercase mt-2.5 leading-snug"
-                    style={{ fontFamily: "'Outfit', sans-serif" }}
-                  >
-                    {tier.name}
-                  </h3>
-                  <p className="text-xs text-zinc-500 mt-2 leading-relaxed">
-                    {tier.desc}
-                  </p>
-                </div>
-
-                <div className="pt-4 border-t border-zinc-100">
-                  <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-zinc-400 block mb-2.5">
-                    Included Deliverables:
-                  </span>
-                  <ul className="space-y-2">
-                    {tier.perks.map((perk, perkIdx) => (
-                      <li key={perkIdx} className="flex items-start gap-2 text-xs text-zinc-700 leading-snug">
-                        <CheckCircle2
-                          className={`w-3.5 h-3.5 shrink-0 mt-0.5 ${
-                            tier.highlight ? 'text-[#ff2d87]' : 'text-zinc-400'
-                          }`}
-                        />
-                        <span>{perk}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </div>
-
-              <div className="mt-6 pt-4 border-t border-zinc-100">
-                <a
-                  href={`mailto:hultprizeucek@gmail.com?subject=Inquiry%20for%20${encodeURIComponent(
-                    tier.name
-                  )}%20-%20Yathra%20'27`}
-                  className={`w-full inline-flex items-center justify-center gap-1.5 py-2.5 px-4 rounded-xl font-bold text-xs uppercase tracking-wider transition-all ${
-                    tier.highlight
-                      ? 'bg-[#ff2d87] text-white hover:bg-zinc-950 shadow-sm'
-                      : 'bg-zinc-950 text-white hover:bg-[#ff2d87]'
-                  }`}
-                  style={{ fontFamily: "'Outfit', sans-serif" }}
-                >
-                  <span>Select {tier.name.split('/')[0].trim()}</span>
-                  <ArrowUpRight className="w-3.5 h-3.5" />
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
-      {/* ─────────────────── CURRENT PARTNERS & CANVA ASSETS ─────────────────── */}
-      <section className="px-5 sm:px-8 py-16 sm:py-20 max-w-6xl mx-auto border-b border-zinc-200">
-        <div className="text-center max-w-xl mx-auto mb-12">
-          <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#ff2d87] block mb-1">
-            Network & Ecosystem
-          </span>
-          <h2
-            className="text-2xl sm:text-3xl font-black tracking-tight text-zinc-950 uppercase"
-            style={{ fontFamily: "'Outfit', sans-serif" }}
-          >
-            Current Official Partners
-          </h2>
-          <p className="mt-1.5 text-xs sm:text-sm text-zinc-500">
-            Organizations backing student entrepreneurship and SDG innovation at UCEK.
-          </p>
-        </div>
-
-        {/* Partners Grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4 mb-12">
-          {CURRENT_PARTNERS.map((partner, i) => (
-            <div
-              key={i}
-              className="p-4 rounded-xl border border-zinc-200 bg-white flex flex-col items-center justify-center text-center shadow-2xs hover:border-zinc-300 transition-all"
-            >
-              <div className="h-16 w-full flex items-center justify-center mb-2">
-                <Image
-                  src={partner.logo}
-                  alt={partner.name}
-                  width={140}
-                  height={50}
-                  className="max-h-11 w-auto object-contain"
-                />
-              </div>
-              <span className="font-mono text-[9px] font-bold uppercase tracking-wider text-zinc-400 block mb-0.5">
-                {partner.role}
-              </span>
-              <span className="text-xs font-bold text-zinc-900 line-clamp-1">
-                {partner.name}
-              </span>
+                    <CheckCircle2
+                      className="w-4 h-4 shrink-0 mt-0.5"
+                      style={{ color: PINK }}
+                    />
+                    <span>{point}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           ))}
         </div>
 
-        {/* Canva Logo & Kit Access Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <a
-            href="https://canva.link/3k8g32dbermfr69"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-6 rounded-2xl border border-zinc-200 bg-zinc-50/70 hover:bg-white hover:border-[#ff2d87] transition-all group flex items-start justify-between"
-          >
-            <div>
-              <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#ff2d87] block mb-1">
-                Canva Resource Kit 01
-              </span>
-              <h4
-                className="text-base font-bold text-zinc-950 group-hover:text-[#ff2d87] transition-colors"
-                style={{ fontFamily: "'Outfit', sans-serif" }}
-              >
-                Official Partners & Sponsors Logo Asset Deck
-              </h4>
-              <p className="text-xs text-zinc-500 mt-1 max-w-sm">
-                Access official partner logo variations, badge vectors, and placement guidelines directly on Canva.
-              </p>
-            </div>
-            <div className="p-2 rounded-xl bg-white border border-zinc-200 text-zinc-700 group-hover:text-[#ff2d87] group-hover:border-pink-200 transition-all shrink-0">
-              <ExternalLink className="w-4 h-4" />
-            </div>
-          </a>
-
-          <a
-            href="https://canva.link/3mp29gbrj3cu0xq"
-            target="_blank"
-            rel="noopener noreferrer"
-            className="p-6 rounded-2xl border border-zinc-200 bg-zinc-50/70 hover:bg-white hover:border-[#ff2d87] transition-all group flex items-start justify-between"
-          >
-            <div>
-              <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#ff2d87] block mb-1">
-                Canva Resource Kit 02
-              </span>
-              <h4
-                className="text-base font-bold text-zinc-950 group-hover:text-[#ff2d87] transition-colors"
-                style={{ fontFamily: "'Outfit', sans-serif" }}
-              >
-                Yathra ’27 Launch & Sponsorship Collaterals
-              </h4>
-              <p className="text-xs text-zinc-500 mt-1 max-w-sm">
-                View promotional layouts, event social graphics, and sponsorship collateral designs on Canva.
-              </p>
-            </div>
-            <div className="p-2 rounded-xl bg-white border border-zinc-200 text-zinc-700 group-hover:text-[#ff2d87] group-hover:border-pink-200 transition-all shrink-0">
-              <ExternalLink className="w-4 h-4" />
-            </div>
-          </a>
-        </div>
-      </section>
-
-      {/* ─────────────────── CONTACT & INQUIRY FOOTER CALLOUT ─────────────────── */}
-      <section className="px-5 sm:px-8 py-16 sm:py-20 max-w-6xl mx-auto">
-        <div className="p-8 sm:p-12 rounded-3xl bg-zinc-950 text-white flex flex-col md:flex-row items-center justify-between gap-8 shadow-xl">
-          <div className="max-w-xl text-center md:text-left">
-            <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#ff2d87] block mb-2">
-              Ready to Shape the Future?
+        {/* ─────────────────── 2. PREVIOUS SPONSORS LOGO SECTION ─────────────────── */}
+        <section className="mt-20 pt-16 border-t border-zinc-200">
+          <div className="max-w-3xl mb-12">
+            <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#ff2d87] block mb-2">
+              Proven Track Record
             </span>
-            <h3
-              className="text-2xl sm:text-4xl font-black uppercase tracking-tight leading-tight"
+            <h2
+              className="text-2xl sm:text-4xl font-black tracking-tight text-zinc-950 uppercase"
               style={{ fontFamily: "'Outfit', sans-serif" }}
             >
-              Let’s Build a Custom Partnership for Your Brand
-            </h3>
-            <p className="mt-3 text-xs sm:text-sm text-zinc-400 leading-relaxed">
-              We work closely with corporate sponsors and ecosystem leaders to structure bespoke deliverables, challenge tracks, and recruitment initiatives that match your exact goals.
+              Previous Event Partners & Sponsors
+            </h2>
+            <p className="mt-3 text-sm text-zinc-600 leading-relaxed">
+              Leading government bodies, corporations, technology platforms, and startup incubators that have supported Yathra across our previous editions.
             </p>
           </div>
 
-          <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0">
-            <a
-              href="mailto:hultprizeucek@gmail.com?subject=Custom%20Sponsorship%20Discussion%20-%20Yathra%20'27"
-              className="inline-flex items-center gap-2 px-7 py-3.5 rounded-full bg-[#ff2d87] text-white font-bold text-xs sm:text-sm uppercase tracking-wider hover:bg-white hover:text-zinc-950 transition-all shadow-md"
-              style={{ fontFamily: "'Outfit', sans-serif" }}
-            >
-              <Mail className="w-4 h-4" />
-              <span>Contact Hult Prize UCEK</span>
-            </a>
+          {/* ─── YATHRA '26 PARTNERS ─── */}
+          <div className="mb-16">
+            <div className="flex items-center gap-3 mb-8">
+              <span className="font-mono text-xs font-bold uppercase tracking-wider text-zinc-900">
+                Yathra ’26 Partners & Sponsors
+              </span>
+              <div className="h-px bg-zinc-200 flex-1" />
+            </div>
 
-            <Link
-              href="/"
-              className="inline-flex items-center gap-1.5 px-6 py-3.5 rounded-full border border-white/20 text-white font-bold text-xs sm:text-sm uppercase tracking-wider hover:bg-white/10 transition-all"
-              style={{ fontFamily: "'Outfit', sans-serif" }}
-            >
-              <span>Back to Home</span>
-            </Link>
+            {/* Clean Logo Grid - No Flashy Boxes */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-y-10 gap-x-8 items-center justify-items-center">
+              {YATRA_26_SPONSORS.map((sponsor, i) => (
+                <div
+                  key={i}
+                  className="w-full h-16 flex items-center justify-center p-2 group"
+                  title={sponsor.name}
+                >
+                  <Image
+                    src={sponsor.src}
+                    alt={sponsor.name}
+                    width={150}
+                    height={55}
+                    className="max-h-12 max-w-[130px] w-auto h-auto object-contain transition-transform duration-200 group-hover:scale-105"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+
+          {/* ─── YATHRA '25 PARTNERS ─── */}
+          <div className="mb-16">
+            <div className="flex items-center gap-3 mb-8">
+              <span className="font-mono text-xs font-bold uppercase tracking-wider text-zinc-900">
+                Yathra ’25 Partners & Sponsors
+              </span>
+              <div className="h-px bg-zinc-200 flex-1" />
+            </div>
+
+            {/* Clean Logo Grid - No Flashy Boxes */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-y-10 gap-x-8 items-center justify-items-center">
+              {YATRA_25_SPONSORS.map((sponsor, i) => (
+                <div
+                  key={i}
+                  className="w-full h-16 flex items-center justify-center p-2 group"
+                  title={sponsor.name}
+                >
+                  <Image
+                    src={sponsor.src}
+                    alt={sponsor.name}
+                    width={150}
+                    height={55}
+                    className="max-h-12 max-w-[130px] w-auto h-auto object-contain transition-transform duration-200 group-hover:scale-105"
+                  />
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        {/* ─────────────────── 3. BRAND KITS & CONTACT (CLEAN FOOTER) ─────────────────── */}
+        <section className="mt-16 pt-12 border-t border-zinc-200">
+          <div className="flex flex-col md:flex-row md:items-center justify-between gap-6">
+            {/* Canva Reference Links */}
+            <div>
+              <span className="font-mono text-[11px] font-bold uppercase tracking-wider text-zinc-400 block mb-2">
+                Brand Collateral & Assets
+              </span>
+              <div className="flex flex-wrap items-center gap-3">
+                <a
+                  href="https://canva.link/3k8g32dbermfr69"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-zinc-700 hover:text-[#ff2d87] transition-colors underline underline-offset-4"
+                >
+                  <span>Canva Partner Logo Kit</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+                <span className="text-zinc-300">•</span>
+                <a
+                  href="https://canva.link/3mp29gbrj3cu0xq"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-1.5 text-xs font-semibold text-zinc-700 hover:text-[#ff2d87] transition-colors underline underline-offset-4"
+                >
+                  <span>Canva Launch Deck</span>
+                  <ExternalLink className="w-3.5 h-3.5" />
+                </a>
+              </div>
+            </div>
+
+            {/* Email Contact CTA */}
+            <div className="flex items-center gap-3">
+              <a
+                href="mailto:hultprizeucek@gmail.com?subject=Custom%20Sponsorship%20Inquiry%20-%20Yathra%20'27"
+                className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-zinc-950 text-white font-semibold text-xs uppercase tracking-wider hover:bg-[#ff2d87] transition-all"
+                style={{ fontFamily: "'Outfit', sans-serif" }}
+              >
+                <Mail className="w-4 h-4" />
+                <span>Inquire for Sponsorship</span>
+              </a>
+            </div>
+          </div>
+        </section>
+      </main>
     </div>
   )
 }
-
