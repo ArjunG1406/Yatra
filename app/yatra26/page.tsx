@@ -1,100 +1,82 @@
 'use client'
 
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useCallback } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import {
   ArrowLeft,
   ArrowRight,
-  Trophy,
-  Award,
-  Sparkles,
-  MapPin,
-  Calendar,
-  Camera,
+  ChevronLeft,
+  ChevronRight,
   Quote,
-  Flame,
-  CheckCircle2,
 } from 'lucide-react'
 import Footer from '../components/footer'
 
 const PINK = '#ff2d87'
 
-// Flashback scenes for memory reel
-const FLASHBACK_SCENES = [
+// Flashback event photos for the 3D Carousel
+const CAROUSEL_PHOTOS_26 = [
   {
-    image: '/yathra/yatra26winners/winner.jpg',
-    tag: 'CHAMPION MOMENT',
+    src: '/yathra/yatra26winners/winner.jpg',
     title: 'Grand Champions Award Handover',
-    desc: 'The winning collegiate venture claims victory at Travancore Hall, Technopark.',
+    desc: 'The winning collegiate venture awarded 1st place at Travancore Hall, Technopark.',
   },
   {
-    image: '/yathra/yatra26part/event1.jpg',
-    tag: 'LIVE PITCH SPRINT',
-    title: 'High-Stakes Stage Pitching',
+    src: '/yathra/yatra26part/event1.jpg',
+    title: 'Live Pitching Session',
     desc: 'Student founders pitching scalable UN SDG business models before the executive jury.',
   },
   {
-    image: '/yathra/yatra26winners/runnerup.JPG',
-    tag: 'RUNNER-UP TRIUMPH',
+    src: '/yathra/yatra26winners/runnerup.JPG',
     title: '1st Runner-Up Honors',
-    desc: 'Celebration of runner-up innovators delivering groundbreaking social impact.',
+    desc: 'Celebration of runner-up innovators delivering sustainable technology solutions.',
   },
   {
-    image: '/yathra/yatra26part/event2.jpg',
-    tag: 'EXECUTIVE JURY',
-    title: 'Jury Q&A & Investor Deliberation',
-    desc: 'CXOs and venture capitalists rigorously grilling final pitches on viability.',
+    src: '/yathra/yatra26part/event2.jpg',
+    title: 'Executive Jury Deliberation',
+    desc: 'Venture capitalists and technology executives grilling pitches on market viability.',
   },
   {
-    image: '/yathra/yatra26part/2S0A2117.JPG',
-    tag: 'AUDIENCE & COMMUNITY',
-    title: 'Packed Travancore Hall Audience',
-    desc: 'Innovators from campuses across Kerala gathered at Technopark, Trivandrum.',
+    src: '/yathra/yatra26part/2S0A2117.JPG',
+    title: 'Travancore Hall Assembly',
+    desc: 'Student delegations and faculty coordinators gathered at Technopark, Trivandrum.',
   },
   {
-    image: '/yathra/yatra26part/event3.jpg',
-    tag: 'EVALUATION BENCH',
-    title: 'Scoring & Champion Selection',
-    desc: 'The panel tallying scores to nominate the representative to the global Hult track.',
+    src: '/yathra/yatra26part/event3.jpg',
+    title: 'Evaluation & Score Tallying',
+    desc: 'Jury panel deliberating nominations for the global Hult Prize accelerator track.',
   },
 ]
 
-// Winners data
-const WINNERS = [
+// Winners data (clean, no cheesy badges or arbitrary perk pills)
+const WINNERS_26 = [
   {
-    rank: '1st Place',
-    title: 'Grand Champion',
-    badge: 'Hult Prize Global Qualifier Nominee',
+    place: 'Grand Champion · 1st Place',
     image: '/yathra/yatra26winners/winner.jpg',
-    desc: 'Awarded 1st Place for extraordinary execution, viable unit economics, and scalable impact aligned with the UN Sustainable Development Goals. Directly nominated into the global acceleration pipeline.',
-    perks: ['Global Accelerator Nomination', '₹ Cash Prize & Trophy', '1-on-1 Seed Mentorship'],
+    desc: 'Awarded 1st place for extraordinary execution, viable unit economics, and scalable social impact aligned with the UN Sustainable Development Goals. Nominated to represent the campus in the global Hult Prize acceleration pipeline.',
   },
   {
-    rank: '2nd Place',
-    title: '1st Runner-Up',
-    badge: 'Silver Laureate',
+    place: '1st Runner-Up · 2nd Place',
     image: '/yathra/yatra26winners/runnerup.JPG',
-    desc: 'Recognized for high-impact innovation, outstanding product prototype, and strong market feasibility demonstrated during the live pitching sprint.',
-    perks: ['Incubation Support', 'Runner-Up Trophy & Certificate', 'Investor Introductions'],
+    desc: 'Recognized for high-impact innovation, outstanding product prototype, and strong market feasibility demonstrated during the live pitching rounds.',
   },
 ]
 
 // Gallery photos
-const GALLERY_PHOTOS = [
-  { src: '/yathra/yatra26part/event1.jpg', caption: 'Founder Pitch Showcase on Main Stage' },
-  { src: '/yathra/yatra26part/event2.jpg', caption: 'Executive Jury Panel Deliberating' },
-  { src: '/yathra/yatra26part/event3.jpg', caption: 'Evaluating Innovation Benchmarks' },
-  { src: '/yathra/yatra26part/2S0A2112.JPG', caption: 'Campus Delegations & Networking' },
-  { src: '/yathra/yatra26part/2S0A2117.JPG', caption: 'Valedictory Session at Travancore Hall' },
-  { src: '/yathra/yatra26part/2S0A2125.JPG', caption: 'Certificate & Award Presentation' },
+const GALLERY_PHOTOS_26 = [
+  { src: '/yathra/yatra26part/event1.jpg', title: 'Stage Pitch Showcase' },
+  { src: '/yathra/yatra26part/event2.jpg', title: 'Executive Jury Panel' },
+  { src: '/yathra/yatra26part/event3.jpg', title: 'Innovation Evaluation' },
+  { src: '/yathra/yatra26part/2S0A2112.JPG', title: 'Campus Delegations' },
+  { src: '/yathra/yatra26part/2S0A2117.JPG', title: 'Valedictory Ceremony' },
+  { src: '/yathra/yatra26part/2S0A2125.JPG', title: 'Stage Recognition' },
 ]
 
-// Testimonials / Reviews
-const REVIEWS = [
+// Reviews & Reflections
+const REVIEWS_26 = [
   {
     quote:
-      'The caliber of social impact ideas at Yathra ’26 was truly international. The student founders demonstrated extraordinary poise, real unit economics, and deep alignment with the UN SDGs.',
+      'The caliber of social impact ideas at Yathra ’26 was truly international. The founders demonstrated extraordinary poise, real unit economics, and deep alignment with the UN SDGs.',
     author: 'Executive Jury Member',
     role: 'Venture Partner & Angel Investor',
   },
@@ -112,37 +94,25 @@ const REVIEWS = [
   },
 ]
 
-// All 15 Yathra 26 Sponsors (no classification, all white marks made black for visibility)
-const YATRA_26_SPONSORS = [
-  { name: 'Kerala Startup Mission (KSUM)', src: '/partners/yatra26/ksum2.png', isWhite: false, compact: false },
-  { name: 'IIITM-K / Digital University Kerala', src: '/partners/yatra26/iiitmk.png', isWhite: false, compact: false },
-  { name: 'MakeMyPass', src: '/partners/yatra26/makemypass.png', isWhite: false, compact: true },
-  { name: 'µLearn — GTech', src: '/partners/yatra26/mulearn2.png', isWhite: false, compact: false },
-  { name: 'Udhyam Learning Foundation', src: '/partners/yatra26/udhayam2.png', isWhite: false, compact: false },
-  { name: 'Unstop', src: '/partners/yatra26/unstop2.png', isWhite: false, compact: false },
-  { name: 'Unstop Igniters Club', src: '/partners/yatra26/igniters.png', isWhite: false, compact: true },
-  { name: 'IEDC UCEK', src: '/partners/yatra26/iedc2.png', isWhite: false, compact: false },
-  { name: 'KUBIIC', src: '/partners/yatra26/kubiic.png', isWhite: true, compact: false },
-  { name: 'Legacy IEDC', src: '/partners/yatra26/legacy2.png', isWhite: true, compact: false },
-  { name: 'IdeaTribe', src: '/partners/yatra26/ideatribe.png', isWhite: false, compact: true },
-  { name: 'Global Shapers Community', src: '/partners/yatra26/global.png', isWhite: true, compact: false },
-  { name: 'Helmet World', src: '/partners/yatra26/hw.png', isWhite: false, compact: true },
-  { name: 'Luv Cutlet', src: '/partners/yatra26/luvcutlet.png', isWhite: false, compact: true },
-  { name: 'Evara', src: '/partners/yatra26/evara.png', isWhite: false, compact: true },
-]
-
 export default function Yatra26Page() {
-  const [activeScene, setActiveScene] = useState(0)
-  const [flashKey, setFlashKey] = useState(0)
+  const [activeIndex, setActiveIndex] = useState(0)
+  const [isPaused, setIsPaused] = useState(false)
+  const total = CAROUSEL_PHOTOS_26.length
 
-  // Auto-advance flashback scenes with memory flash effect
+  const handleNext = useCallback(() => {
+    setActiveIndex((prev) => (prev + 1) % total)
+  }, [total])
+
+  const handlePrev = useCallback(() => {
+    setActiveIndex((prev) => (prev - 1 + total) % total)
+  }, [total])
+
+  // Auto-play carousel unless hovered
   useEffect(() => {
-    const timer = setInterval(() => {
-      setActiveScene((prev) => (prev + 1) % FLASHBACK_SCENES.length)
-      setFlashKey((k) => k + 1)
-    }, 4000)
-    return () => clearInterval(timer)
-  }, [])
+    if (isPaused) return
+    const interval = setInterval(handleNext, 4500)
+    return () => clearInterval(interval)
+  }, [isPaused, handleNext])
 
   return (
     <div className="min-h-screen bg-white text-zinc-950 font-sans selection:bg-[#ff2d87] selection:text-white">
@@ -183,93 +153,134 @@ export default function Yatra26Page() {
         </div>
       </header>
 
-      {/* ─────────────────── 1. CINEMATIC FLASHBACK HERO ─────────────────── */}
-      <section className="relative w-full bg-zinc-950 text-white overflow-hidden py-16 sm:py-24">
-        {/* Background ambient glow */}
-        <div className="absolute inset-0 bg-radial from-pink-900/30 via-zinc-950 to-zinc-950 pointer-events-none" />
-
-        <div className="relative max-w-6xl mx-auto px-5 sm:px-8">
-          <div className="text-center max-w-3xl mx-auto mb-10">
-            <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-pink-500/20 border border-pink-500/40 text-pink-300 text-xs font-mono font-bold uppercase tracking-wider mb-4">
-              <Camera className="w-3.5 h-3.5 text-[#ff2d87]" />
-              <span>Flashback Archives · 2026 Edition</span>
-            </div>
+      {/* ─────────────────── 1. 3D COVER-FLOW PHOTO CAROUSEL HERO (WHITE BACKGROUND) ─────────────────── */}
+      <section
+        className="w-full bg-white pt-12 sm:pt-16 pb-16 sm:pb-20 overflow-hidden border-b border-zinc-200"
+        onMouseEnter={() => setIsPaused(true)}
+        onMouseLeave={() => setIsPaused(false)}
+      >
+        <div className="max-w-6xl mx-auto px-5 sm:px-8">
+          {/* Clean Editorial Title */}
+          <div className="text-center max-w-3xl mx-auto mb-10 sm:mb-12">
+            <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#ff2d87] block mb-2">
+              Event Memories & Highlights
+            </span>
             <h1
-              className="text-3xl sm:text-5xl lg:text-6xl font-black uppercase tracking-tight text-white leading-tight"
+              className="text-3xl sm:text-5xl font-black uppercase tracking-tight text-zinc-950 leading-tight"
               style={{ fontFamily: "'Outfit', sans-serif" }}
             >
               The Journey of <span style={{ color: PINK }}>Yathra ’26</span>
             </h1>
-            <p className="mt-3 text-sm sm:text-base text-zinc-400 max-w-xl mx-auto">
-              Relive the electric energy, intense jury deliberations, and historic venture pitches at Travancore Hall, Technopark.
+            <p className="mt-3 text-sm sm:text-base text-zinc-600 max-w-xl mx-auto">
+              Relive the venture pitches, stage moments, and celebrations at Travancore Hall, Technopark.
             </p>
           </div>
 
-          {/* Flashback Center Stage */}
-          <div className="relative max-w-4xl mx-auto aspect-video sm:aspect-[16/9] rounded-3xl overflow-hidden border-2 border-white/20 shadow-2xl bg-black">
-            {/* Flashing Through Zoom Animation Container */}
-            <div
-              key={flashKey}
-              className="relative w-full h-full animate-[flashbackZoom_4s_cubic-bezier(0.16,1,0.3,1)_forwards]"
-            >
-              <Image
-                src={FLASHBACK_SCENES[activeScene].image}
-                alt={FLASHBACK_SCENES[activeScene].title}
-                fill
-                priority
-                className="object-cover"
-              />
-              {/* Cinematic Vignette */}
-              <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-black/30" />
-            </div>
+          {/* 3D Depth Carousel Container */}
+          <div className="relative w-full h-[320px] sm:h-[420px] md:h-[480px] flex items-center justify-center">
+            {CAROUSEL_PHOTOS_26.map((photo, i) => {
+              const diff = i - activeIndex
+              // Normalized circular distance
+              let normDiff = diff
+              if (normDiff > total / 2) normDiff -= total
+              if (normDiff < -total / 2) normDiff += total
 
-            {/* Shutter White Flash overlay */}
-            <div
-              key={`flash-${flashKey}`}
-              className="pointer-events-none absolute inset-0 bg-white animate-[whiteFlash_0.5s_ease-out_forwards]"
-            />
+              const isActive = normDiff === 0
+              const isPrev = normDiff === -1
+              const isNext = normDiff === 1
+              const isVisible = Math.abs(normDiff) <= 1
 
-            {/* Scene Info Overlay */}
-            <div className="absolute bottom-0 inset-x-0 p-6 sm:p-8 flex flex-col sm:flex-row sm:items-end justify-between gap-4 z-20">
-              <div>
-                <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold tracking-widest uppercase bg-[#ff2d87] text-white mb-2 inline-block">
-                  {FLASHBACK_SCENES[activeScene].tag}
-                </span>
-                <h3
-                  className="text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug"
-                  style={{ fontFamily: "'Outfit', sans-serif" }}
+              return (
+                <div
+                  key={i}
+                  onClick={() => {
+                    if (isPrev) handlePrev()
+                    if (isNext) handleNext()
+                  }}
+                  className={`absolute top-1/2 left-1/2 w-[84vw] sm:w-[580px] md:w-[680px] aspect-[16/10] rounded-2xl sm:rounded-3xl overflow-hidden transition-all duration-500 ease-[cubic-bezier(0.25,1,0.5,1)] ${
+                    isVisible ? 'cursor-pointer' : 'pointer-events-none'
+                  }`}
+                  style={{
+                    transform: isActive
+                      ? 'translate(-50%, -50%) scale(1)'
+                      : isPrev
+                      ? 'translate(-92%, -50%) scale(0.85)'
+                      : isNext
+                      ? 'translate(-8%, -50%) scale(0.85)'
+                      : `translate(${normDiff < 0 ? '-140%' : '40%'}, -50%) scale(0.7)`,
+                    zIndex: isActive ? 30 : isVisible ? 20 : 10,
+                    opacity: isActive ? 1 : isVisible ? 0.55 : 0,
+                    filter: isActive ? 'blur(0px)' : 'blur(1.5px)',
+                    boxShadow: isActive
+                      ? '0 25px 60px -15px rgba(0, 0, 0, 0.22), 0 0 0 1px rgba(0, 0, 0, 0.06)'
+                      : '0 10px 30px -10px rgba(0, 0, 0, 0.12)',
+                  }}
                 >
-                  {FLASHBACK_SCENES[activeScene].title}
-                </h3>
-                <p className="text-xs sm:text-sm text-zinc-300 mt-1 max-w-md">
-                  {FLASHBACK_SCENES[activeScene].desc}
-                </p>
-              </div>
-
-              {/* Scene Indicator Dots */}
-              <div className="flex items-center gap-2 self-start sm:self-end">
-                {FLASHBACK_SCENES.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => {
-                      setActiveScene(idx)
-                      setFlashKey((k) => k + 1)
-                    }}
-                    aria-label={`Go to scene ${idx + 1}`}
-                    className={`h-2 rounded-full transition-all duration-300 ${
-                      activeScene === idx ? 'w-8 bg-[#ff2d87]' : 'w-2 bg-white/40 hover:bg-white/70'
-                    }`}
+                  <Image
+                    src={photo.src}
+                    alt={photo.title}
+                    fill
+                    priority={isActive}
+                    className="object-cover"
                   />
-                ))}
-              </div>
-            </div>
+                  {/* Subtle Gradient & Caption on Active Slide */}
+                  <div
+                    className={`absolute inset-0 bg-gradient-to-t from-black/80 via-black/10 to-transparent transition-opacity duration-300 flex items-end p-5 sm:p-7 ${
+                      isActive ? 'opacity-100' : 'opacity-0'
+                    }`}
+                  >
+                    <div>
+                      <h2
+                        className="text-lg sm:text-2xl font-bold text-white tracking-tight leading-snug"
+                        style={{ fontFamily: "'Outfit', sans-serif" }}
+                      >
+                        {photo.title}
+                      </h2>
+                      <p className="text-xs sm:text-sm text-zinc-200 mt-1 max-w-md line-clamp-2">
+                        {photo.desc}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )
+            })}
+
+            {/* Left & Right Arrow Controls */}
+            <button
+              onClick={handlePrev}
+              aria-label="Previous Photo"
+              className="absolute left-2 sm:left-4 z-40 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-white/95 hover:bg-white text-zinc-900 shadow-md border border-zinc-200/80 flex items-center justify-center hover:scale-105 active:scale-95 transition-all"
+            >
+              <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
+            </button>
+            <button
+              onClick={handleNext}
+              aria-label="Next Photo"
+              className="absolute right-2 sm:right-4 z-40 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-white/95 hover:bg-white text-zinc-900 shadow-md border border-zinc-200/80 flex items-center justify-center hover:scale-105 active:scale-95 transition-all"
+            >
+              <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
+            </button>
+          </div>
+
+          {/* Carousel Dot Indicators */}
+          <div className="flex items-center justify-center gap-2 mt-8">
+            {CAROUSEL_PHOTOS_26.map((_, idx) => (
+              <button
+                key={idx}
+                onClick={() => setActiveIndex(idx)}
+                aria-label={`Go to slide ${idx + 1}`}
+                className={`h-1.5 rounded-full transition-all duration-300 ${
+                  activeIndex === idx ? 'w-8 bg-[#ff2d87]' : 'w-2 bg-zinc-300 hover:bg-zinc-400'
+                }`}
+              />
+            ))}
           </div>
         </div>
       </section>
 
-      {/* ─────────────────── 2. WINNERS & RUNNERS-UP ─────────────────── */}
-      <section className="py-20 max-w-6xl mx-auto px-5 sm:px-8 border-b border-zinc-200">
-        <div className="text-center max-w-2xl mx-auto mb-16">
+      {/* ─────────────────── 2. WINNERS & RUNNERS-UP (CLEAN, NO CHEESY BADGES) ─────────────────── */}
+      <section className="py-20 max-w-5xl mx-auto px-5 sm:px-8 border-b border-zinc-200">
+        <div className="text-center max-w-2xl mx-auto mb-14">
           <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#ff2d87] block mb-2">
             Hall of Fame
           </span>
@@ -279,65 +290,26 @@ export default function Yatra26Page() {
           >
             Yathra ’26 Champions & Laureates
           </h2>
-          <p className="mt-2 text-sm text-zinc-600">
-            Selected by an esteemed panel of venture capitalists and industry dignitaries after grueling pitching sprints.
-          </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          {WINNERS.map((winner, i) => (
-            <div
-              key={i}
-              className="rounded-3xl border border-zinc-200 bg-white overflow-hidden shadow-sm hover:shadow-lg transition-all duration-300 flex flex-col group"
-            >
-              {/* Photo */}
-              <div className="relative aspect-[16/10] w-full overflow-hidden bg-zinc-100">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-10">
+          {WINNERS_26.map((winner, i) => (
+            <div key={i} className="flex flex-col">
+              <div className="relative aspect-[16/10] w-full rounded-2xl overflow-hidden bg-zinc-100 shadow-sm">
                 <Image
                   src={winner.image}
-                  alt={winner.title}
+                  alt={winner.place}
                   fill
-                  className="object-cover group-hover:scale-105 transition-transform duration-500"
+                  className="object-cover"
                 />
-                <div className="absolute top-4 left-4 flex items-center gap-2">
-                  <span className="px-3 py-1 rounded-full text-xs font-bold uppercase tracking-wider bg-zinc-950 text-white shadow-md">
-                    {winner.rank}
-                  </span>
-                  <span className="px-3 py-1 rounded-full text-[11px] font-mono font-bold tracking-tight bg-pink-50 text-[#ff2d87] border border-pink-200">
-                    {winner.badge}
-                  </span>
-                </div>
               </div>
-
-              {/* Details */}
-              <div className="p-6 sm:p-8 flex-1 flex flex-col justify-between">
-                <div>
-                  <h3
-                    className="text-2xl font-black uppercase text-zinc-950"
-                    style={{ fontFamily: "'Outfit', sans-serif" }}
-                  >
-                    {winner.title}
-                  </h3>
-                  <p className="mt-3 text-sm text-zinc-600 leading-relaxed">
-                    {winner.desc}
-                  </p>
-                </div>
-
-                <div className="mt-6 pt-5 border-t border-zinc-100">
-                  <span className="font-mono text-[10px] uppercase font-bold text-zinc-400 block mb-2">
-                    Recognition & Deliverables
-                  </span>
-                  <div className="flex flex-wrap gap-2">
-                    {winner.perks.map((perk, pIdx) => (
-                      <span
-                        key={pIdx}
-                        className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full text-xs font-medium bg-zinc-100 text-zinc-800"
-                      >
-                        <CheckCircle2 className="w-3.5 h-3.5 text-[#ff2d87]" />
-                        <span>{perk}</span>
-                      </span>
-                    ))}
-                  </div>
-                </div>
+              <div className="mt-4">
+                <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#ff2d87] block mb-1">
+                  {winner.place}
+                </span>
+                <p className="text-sm text-zinc-600 leading-relaxed">
+                  {winner.desc}
+                </p>
               </div>
             </div>
           ))}
@@ -345,49 +317,38 @@ export default function Yatra26Page() {
       </section>
 
       {/* ─────────────────── 3. EVENT PHOTOS GALLERY ─────────────────── */}
-      <section className="py-20 max-w-6xl mx-auto px-5 sm:px-8 border-b border-zinc-200">
-        <div className="flex flex-col sm:flex-row sm:items-end justify-between gap-4 mb-12">
-          <div>
-            <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#ff2d87] block mb-2">
-              Visual Chronicles
-            </span>
-            <h2
-              className="text-2xl sm:text-4xl font-black uppercase tracking-tight text-zinc-950"
-              style={{ fontFamily: "'Outfit', sans-serif" }}
-            >
-              Yathra ’26 Moments & Gallery
-            </h2>
-          </div>
-          <span className="font-mono text-xs text-zinc-400 uppercase tracking-wider">
-            Technopark · Trivandrum
+      <section className="py-20 max-w-5xl mx-auto px-5 sm:px-8 border-b border-zinc-200">
+        <div className="text-center max-w-2xl mx-auto mb-12">
+          <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#ff2d87] block mb-2">
+            Visual Chronicles
           </span>
+          <h2
+            className="text-2xl sm:text-4xl font-black uppercase tracking-tight text-zinc-950"
+            style={{ fontFamily: "'Outfit', sans-serif" }}
+          >
+            Yathra ’26 Gallery
+          </h2>
         </div>
 
-        {/* Gallery Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {GALLERY_PHOTOS.map((photo, i) => (
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-5">
+          {GALLERY_PHOTOS_26.map((photo, i) => (
             <div
               key={i}
-              className="group relative aspect-[4/3] rounded-2xl overflow-hidden border border-zinc-200 bg-zinc-100 shadow-xs hover:shadow-md transition-all"
+              className="relative aspect-[4/3] rounded-2xl overflow-hidden bg-zinc-100 shadow-xs"
             >
               <Image
                 src={photo.src}
-                alt={photo.caption}
+                alt={photo.title}
                 fill
-                className="object-cover group-hover:scale-105 transition-transform duration-500"
+                className="object-cover hover:scale-105 transition-transform duration-500"
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end p-4">
-                <span className="text-xs font-medium text-white">
-                  {photo.caption}
-                </span>
-              </div>
             </div>
           ))}
         </div>
       </section>
 
       {/* ─────────────────── 4. REVIEWS & REFLECTIONS ─────────────────── */}
-      <section className="py-20 max-w-6xl mx-auto px-5 sm:px-8 border-b border-zinc-200">
+      <section className="py-20 max-w-5xl mx-auto px-5 sm:px-8 border-b border-zinc-200">
         <div className="text-center max-w-2xl mx-auto mb-14">
           <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#ff2d87] block mb-2">
             Ecosystem Reflections
@@ -401,18 +362,15 @@ export default function Yatra26Page() {
         </div>
 
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-          {REVIEWS.map((rev, i) => (
-            <div
-              key={i}
-              className="p-8 rounded-3xl border border-zinc-200 bg-zinc-50/70 hover:bg-white transition-all flex flex-col justify-between"
-            >
+          {REVIEWS_26.map((rev, i) => (
+            <div key={i} className="flex flex-col justify-between">
               <div>
-                <Quote className="w-8 h-8 text-[#ff2d87] opacity-60 mb-4" />
+                <Quote className="w-7 h-7 text-[#ff2d87] opacity-60 mb-3" />
                 <p className="text-sm text-zinc-700 leading-relaxed italic">
                   “{rev.quote}”
                 </p>
               </div>
-              <div className="mt-6 pt-4 border-t border-zinc-200/60">
+              <div className="mt-5 pt-3 border-t border-zinc-200/60">
                 <span
                   className="text-sm font-bold text-zinc-950 block"
                   style={{ fontFamily: "'Outfit', sans-serif" }}
@@ -426,9 +384,9 @@ export default function Yatra26Page() {
         </div>
       </section>
 
-      {/* ─────────────────── 5. YATHRA 26 SPONSORS (NO CLASSIFICATION, WHITE LOGOS MADE VISIBLE) ─────────────────── */}
-      <section className="py-20 max-w-6xl mx-auto px-5 sm:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-14">
+      {/* ─────────────────── 5. OFFICIAL YATHRA 26 PARTNERS & SPONSORS BANNER ─────────────────── */}
+      <section className="py-20 max-w-5xl mx-auto px-5 sm:px-8">
+        <div className="text-center max-w-2xl mx-auto mb-10">
           <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#ff2d87] block mb-2">
             Partners & Ecosystem
           </span>
@@ -436,74 +394,25 @@ export default function Yatra26Page() {
             className="text-2xl sm:text-4xl font-black uppercase tracking-tight text-zinc-950"
             style={{ fontFamily: "'Outfit', sans-serif" }}
           >
-            Sponsors of Yathra ’26
+            Partners & Sponsors of Yathra ’26
           </h2>
-          <p className="mt-2 text-xs sm:text-sm text-zinc-500">
-            Backed by visionary corporations, innovation networks, and student incubation ecosystems.
-          </p>
         </div>
 
-        {/* Clean Logo Grid - No Classification, White marks converted to black for 100% visibility */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-y-12 gap-x-8 sm:gap-x-12 items-center justify-items-center">
-          {YATRA_26_SPONSORS.map((sponsor, i) => (
-            <div
-              key={i}
-              className="w-full h-20 sm:h-24 flex items-center justify-center p-2 sm:p-3 group"
-              title={sponsor.name}
-            >
-              <Image
-                src={sponsor.src}
-                alt={sponsor.name}
-                width={220}
-                height={90}
-                className={`${
-                  sponsor.compact
-                    ? 'max-h-18 sm:max-h-20 max-w-[130px] sm:max-w-[150px]'
-                    : 'max-h-12 sm:max-h-14 max-w-[140px] sm:max-w-[170px]'
-                } ${
-                  sponsor.isWhite ? 'brightness-0 opacity-85 hover:opacity-100' : 'opacity-90 hover:opacity-100'
-                } w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-108`}
-              />
-            </div>
-          ))}
+        {/* Official "THANK YOU PARTNERS" Banner Image (Every white logo is 100% visible) */}
+        <div className="w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg border border-zinc-200/80 bg-black">
+          <Image
+            src="/partners/yatra26/thank-you-partners.jpg"
+            alt="Yathra ’26 Official Partners - Thank You Partners"
+            width={1024}
+            height={412}
+            className="w-full h-auto object-contain"
+            priority
+          />
         </div>
       </section>
 
       {/* ─────────────────── FOOTER ─────────────────── */}
       <Footer />
-
-      {/* ─────────────────── FLASHBACK KEYFRAME STYLES ─────────────────── */}
-      <style>{`
-        @keyframes flashbackZoom {
-          0% {
-            transform: scale(0.7);
-            opacity: 0;
-            filter: blur(10px) brightness(1.7);
-          }
-          15% {
-            opacity: 1;
-            filter: blur(0px) brightness(1.15);
-          }
-          85% {
-            opacity: 1;
-            filter: blur(0px) brightness(1);
-            transform: scale(1.03);
-          }
-          100% {
-            transform: scale(1.08);
-            opacity: 0.95;
-          }
-        }
-        @keyframes whiteFlash {
-          0% {
-            opacity: 0.85;
-          }
-          100% {
-            opacity: 0;
-          }
-        }
-      `}</style>
     </div>
   )
 }
-
