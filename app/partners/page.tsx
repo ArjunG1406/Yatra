@@ -262,12 +262,12 @@ export default function PartnersPage() {
               <div className="h-px bg-white/30 flex-1" />
             </div>
 
-            {/* Prominent, Highly-Visible Logo Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8 items-center justify-items-center">
+            {/* Prominent, Highly-Visible Logo Grid - No Boxes */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-y-12 gap-x-8 items-center justify-items-center">
               {YATRA_26_SPONSORS.map((sponsor, i) => (
                 <div
                   key={i}
-                  className="w-full h-28 sm:h-36 rounded-2xl bg-white/15 hover:bg-white/25 backdrop-blur-xs border border-white/25 hover:border-white/50 flex items-center justify-center p-4 sm:p-5 transition-all duration-300 group shadow-xs hover:shadow-md"
+                  className="w-full h-24 sm:h-32 flex items-center justify-center p-2 sm:p-4 group"
                   title={sponsor.name}
                 >
                   <Image
@@ -275,7 +275,7 @@ export default function PartnersPage() {
                     alt={sponsor.name}
                     width={260}
                     height={100}
-                    className="max-h-20 sm:max-h-24 max-w-[200px] sm:max-w-[230px] w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-108 drop-shadow-[0_2px_8px_rgba(0,0,0,0.18)]"
+                    className="max-h-20 sm:max-h-24 max-w-[200px] sm:max-w-[230px] w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-110 drop-shadow-[0_2px_8px_rgba(0,0,0,0.14)]"
                   />
                 </div>
               ))}
@@ -291,12 +291,12 @@ export default function PartnersPage() {
               <div className="h-px bg-white/30 flex-1" />
             </div>
 
-            {/* Prominent, Highly-Visible Logo Grid */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8 items-center justify-items-center">
+            {/* Prominent, Highly-Visible Logo Grid - No Boxes */}
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-y-12 gap-x-8 items-center justify-items-center">
               {YATRA_25_SPONSORS.map((sponsor, i) => (
                 <div
                   key={i}
-                  className="w-full h-28 sm:h-36 rounded-2xl bg-white/15 hover:bg-white/25 backdrop-blur-xs border border-white/25 hover:border-white/50 flex items-center justify-center p-4 sm:p-5 transition-all duration-300 group shadow-xs hover:shadow-md"
+                  className="w-full h-24 sm:h-32 flex items-center justify-center p-2 sm:p-4 group"
                   title={sponsor.name}
                 >
                   <Image
@@ -304,7 +304,7 @@ export default function PartnersPage() {
                     alt={sponsor.name}
                     width={260}
                     height={100}
-                    className="max-h-20 sm:max-h-24 max-w-[200px] sm:max-w-[230px] w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-108 drop-shadow-[0_2px_8px_rgba(0,0,0,0.18)]"
+                    className="max-h-20 sm:max-h-24 max-w-[200px] sm:max-w-[230px] w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-110 drop-shadow-[0_2px_8px_rgba(0,0,0,0.14)]"
                   />
                 </div>
               ))}
