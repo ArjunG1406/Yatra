@@ -2,7 +2,8 @@
 
 import React from 'react'
 import Image from 'next/image'
-import { PlusCircle } from 'lucide-react'
+import Link from 'next/link'
+import { PlusCircle, ArrowRight } from 'lucide-react'
 
 export default function Sponsors() {
   return (
@@ -14,16 +15,16 @@ export default function Sponsors() {
         {/* Minimal Section Header */}
         <div className="text-center max-w-xl mx-auto mb-12">
           <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#ff2d87] block mb-1">
-            Partners & Ecosystem
+            Partners & Sponsors
           </span>
           <h2
             className="text-2xl sm:text-3xl font-black tracking-tight text-zinc-950 uppercase"
             style={{ fontFamily: "'Outfit', sans-serif" }}
           >
-            Official Summit Partners
+            Official Partners and Sponsors
           </h2>
           <p className="mt-1.5 text-xs sm:text-sm text-zinc-500">
-            Backed by national innovation networks and student incubation ecosystems.
+            Backed by national innovation networks, corporate leaders, and student incubation ecosystems.
           </p>
         </div>
 
@@ -37,10 +38,10 @@ export default function Sponsors() {
             <div className="w-full h-24 rounded-xl border border-zinc-200 bg-white shadow-sm flex items-center justify-center p-4 hover:border-zinc-300 transition-all">
               <Image
                 src="/partners/unstop.png"
-                alt="Unstop"
+                alt="Unstop Igniters Club"
                 width={170}
                 height={50}
-                className="max-h-10 w-auto object-contain"
+                className="max-h-12 w-auto object-contain"
               />
             </div>
           </div>
@@ -128,6 +129,35 @@ export default function Sponsors() {
                 </span>
               </a>
             </div>
+          </div>
+        </div>
+
+        {/* ─── EXPLORE PARTNER & SPONSOR BENEFITS CALLOUT BUTTON ─── */}
+        <div className="mt-14 pt-10 border-t border-zinc-200/90 flex flex-col sm:flex-row items-center justify-between gap-6 bg-zinc-50/80 p-6 sm:p-8 rounded-2xl border border-zinc-200">
+          <div className="text-center sm:text-left">
+            <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#ff2d87] block mb-1">
+              Why Partner With Us?
+            </span>
+            <h3
+              className="text-lg sm:text-xl font-black text-zinc-950 uppercase"
+              style={{ fontFamily: "'Outfit', sans-serif" }}
+            >
+              Partner & Sponsor Benefits
+            </h3>
+            <p className="mt-1 text-xs text-zinc-500 max-w-md leading-relaxed">
+              Discover sponsorship tiers, brand visibility perks, campus talent recruitment access, and ROI deliverables for your organization.
+            </p>
+          </div>
+
+          <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 w-full sm:w-auto">
+            <Link
+              href="/partners"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-zinc-950 text-white font-bold text-xs uppercase tracking-wider hover:bg-[#ff2d87] transition-all shadow-sm hover:shadow-md group"
+              style={{ fontFamily: "'Outfit', sans-serif" }}
+            >
+              <span>Explore Benefits & Tiers</span>
+              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+            </Link>
           </div>
         </div>
       </div>
