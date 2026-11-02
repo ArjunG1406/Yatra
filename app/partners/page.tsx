@@ -3,9 +3,10 @@ import Link from 'next/link'
 import Image from 'next/image'
 import type { Metadata } from 'next'
 import {
-  Home,
+  ArrowLeft,
   CheckCircle2,
 } from 'lucide-react'
+import Footer from '../components/footer'
 
 export const metadata: Metadata = {
   title: 'What You Get by Sponsoring Yathra | Partner Benefits',
@@ -132,9 +133,21 @@ const YATRA_SPONSORS: Sponsor[] = [
 
 export default function PartnersPage() {
   return (
-    <div className="min-h-screen bg-white text-zinc-950 font-sans relative pb-28">
+    <div className="min-h-screen bg-white text-zinc-950 font-sans flex flex-col justify-between">
       {/* ─────────────────── 1. WHAT YOU GET BY SPONSORING YATHRA (BENEFITS) ─────────────────── */}
-      <main className="max-w-5xl mx-auto px-5 sm:px-8 pt-16 sm:pt-20 pb-12 sm:pb-16 w-full">
+      <main className="max-w-5xl mx-auto px-5 sm:px-8 pt-8 sm:pt-12 pb-12 sm:pb-16 w-full">
+        {/* Top Left: Back to Home Button */}
+        <div className="mb-8">
+          <Link
+            href="/"
+            className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-zinc-200 bg-white text-zinc-800 text-xs font-semibold uppercase tracking-wider hover:border-[#ff2d87] hover:text-[#ff2d87] transition-all shadow-xs group"
+            style={{ fontFamily: "'Outfit', sans-serif" }}
+          >
+            <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
+            <span>Back to Home</span>
+          </Link>
+        </div>
+
         {/* Section Header */}
         <div className="max-w-3xl mb-12 sm:mb-16">
           <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#ff2d87] block mb-2">
@@ -197,7 +210,7 @@ export default function PartnersPage() {
       </main>
 
       {/* ─────────────────── 2. SPONSORS OF YATHRA (UNIFIED PINK SECTION, NO DUPLICATES, BALANCED SIZE) ─────────────────── */}
-      <section className="w-full bg-[#ff2d87] text-white py-16 sm:py-24 my-10 border-y border-pink-600/30 shadow-lg">
+      <section className="w-full bg-[#ff2d87] text-white py-16 sm:py-24 border-y border-pink-600/30 shadow-lg">
         <div className="max-w-5xl mx-auto px-5 sm:px-8">
           <div className="max-w-3xl mb-12 sm:mb-14">
             <span className="font-mono text-xs font-bold uppercase tracking-wider text-pink-100 block mb-2">
@@ -239,20 +252,8 @@ export default function PartnersPage() {
         </div>
       </section>
 
-      {/* ─────────────────── FLOATING HOME BUBBLE AT BOTTOM CENTER ─────────────────── */}
-      <div className="fixed bottom-6 sm:bottom-8 left-1/2 -translate-x-1/2 z-[999] pointer-events-auto">
-        <Link
-          href="/"
-          aria-label="Back to Home"
-          title="Back to Home"
-          className="relative w-14 h-14 sm:w-16 sm:h-16 rounded-full flex items-center justify-center bg-white shadow-[0_10px_35px_rgba(0,0,0,0.18),0_4px_18px_rgba(255,45,135,0.35)] border border-pink-100 hover:scale-110 active:scale-95 transition-all duration-300 group hover:border-[#ff2d87] hover:shadow-[0_14px_40px_rgba(255,45,135,0.45)]"
-        >
-          <Home
-            className="w-6 h-6 sm:w-7 sm:h-7 text-[#ff2d87] group-hover:scale-110 transition-transform duration-200"
-            strokeWidth={2.4}
-          />
-        </Link>
-      </div>
+      {/* ─────────────────── 3. OFFICIAL FOOTER ─────────────────── */}
+      <Footer />
     </div>
   )
 }
