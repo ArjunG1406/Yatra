@@ -402,11 +402,11 @@ export default function Yatra26Page() {
         </div>
 
         {/* Unique Asymmetric Bento Mosaic */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-5">
-          {/* Hero Highlight Card (Spans 2 cols, 2 rows) */}
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-5">
+          {/* Hero Highlight Card (Spans 2 cols on mobile, 2 cols + 2 rows on desktop) */}
           <div
             onClick={() => setPreviewIndex(0)}
-            className="group relative md:col-span-2 md:row-span-2 rounded-3xl overflow-hidden bg-zinc-950 cursor-pointer shadow-sm hover:shadow-xl transition-all duration-300 min-h-[320px] md:min-h-[440px]"
+            className="group relative col-span-2 md:col-span-2 md:row-span-2 rounded-2xl sm:rounded-3xl overflow-hidden bg-zinc-950 cursor-pointer shadow-sm hover:shadow-xl transition-all duration-300 aspect-[16/10] sm:aspect-[18/10] md:aspect-auto md:min-h-[440px]"
           >
             <Image
               src={GALLERY_PHOTOS_26[0].src}
@@ -417,23 +417,23 @@ export default function Yatra26Page() {
             <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent" />
 
             {/* Top Badges */}
-            <div className="absolute top-5 left-5 right-5 flex items-center justify-between z-10">
-              <span className="px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#ff2d87] text-white shadow-sm">
+            <div className="absolute top-3.5 left-3.5 right-3.5 sm:top-5 sm:left-5 sm:right-5 flex items-center justify-between z-10">
+              <span className="px-2.5 py-1 sm:px-3 sm:py-1 rounded-full text-[10px] sm:text-xs font-mono font-bold uppercase tracking-wider bg-[#ff2d87] text-white shadow-sm">
                 {GALLERY_PHOTOS_26[0].tag}
               </span>
-              <div className="w-9 h-9 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                <Maximize2 className="w-4 h-4" />
+              <div className="w-8 h-8 sm:w-9 sm:h-9 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-80 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                <Maximize2 className="w-3.5 h-3.5 sm:w-4 sm:h-4" />
               </div>
             </div>
 
             {/* Bottom Caption Overlay */}
-            <div className="absolute bottom-0 inset-x-0 p-6 sm:p-8 z-10">
-              <div className="flex items-center gap-1.5 text-xs text-zinc-300 mb-2">
-                <MapPin className="w-3.5 h-3.5 text-[#ff2d87]" />
+            <div className="absolute bottom-0 inset-x-0 p-4 sm:p-7 z-10">
+              <div className="flex items-center gap-1.5 text-[11px] sm:text-xs text-zinc-300 mb-1 sm:mb-2">
+                <MapPin className="w-3 h-3 sm:w-3.5 sm:h-3.5 text-[#ff2d87]" />
                 <span>{GALLERY_PHOTOS_26[0].location}</span>
               </div>
               <h3
-                className="text-xl sm:text-2xl font-bold text-white tracking-tight leading-snug"
+                className="text-base sm:text-2xl font-bold text-white tracking-tight leading-snug"
                 style={{ fontFamily: "'Outfit', sans-serif" }}
               >
                 {GALLERY_PHOTOS_26[0].title}
@@ -444,14 +444,17 @@ export default function Yatra26Page() {
             </div>
           </div>
 
-          {/* Complementary Moment Cards */}
+          {/* Complementary Moment Cards (Paired 2-col on mobile, editorial bento on desktop) */}
           {GALLERY_PHOTOS_26.slice(1).map((photo, idx) => {
             const actualIndex = idx + 1
+            const isWideCard = idx === 2 // Photo 3 spans 2 cols on desktop for a complete 3-col layout
             return (
               <div
                 key={actualIndex}
                 onClick={() => setPreviewIndex(actualIndex)}
-                className="group relative rounded-3xl overflow-hidden bg-zinc-950 cursor-pointer shadow-xs hover:shadow-lg transition-all duration-300 aspect-[16/10] min-h-[220px]"
+                className={`group relative rounded-2xl sm:rounded-3xl overflow-hidden bg-zinc-950 cursor-pointer shadow-xs hover:shadow-lg transition-all duration-300 aspect-[4/3] sm:aspect-[16/10] ${
+                  isWideCard ? 'col-span-1 md:col-span-2' : 'col-span-1 md:col-span-1'
+                }`}
               >
                 <Image
                   src={photo.src}
@@ -459,31 +462,31 @@ export default function Yatra26Page() {
                   fill
                   className="object-cover group-hover:scale-108 transition-transform duration-700 ease-out"
                 />
-                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent group-hover:from-black/90 transition-colors" />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/85 via-black/20 to-transparent group-hover:from-black/90 transition-colors" />
 
                 {/* Top Badge & Expand Icon */}
-                <div className="absolute top-4 left-4 right-4 flex items-center justify-between z-10">
-                  <span className="px-2.5 py-0.5 rounded-full text-[10px] font-mono font-bold uppercase tracking-wider bg-black/50 backdrop-blur-md text-white border border-white/20">
+                <div className="absolute top-2.5 left-2.5 right-2.5 sm:top-4 sm:left-4 sm:right-4 flex items-center justify-between z-10">
+                  <span className="px-2 py-0.5 sm:px-2.5 sm:py-0.5 rounded-full text-[9px] sm:text-[10px] font-mono font-bold uppercase tracking-wider bg-black/60 backdrop-blur-md text-white border border-white/20">
                     {photo.tag}
                   </span>
-                  <div className="w-8 h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                    <Maximize2 className="w-3.5 h-3.5" />
+                  <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-full bg-white/20 backdrop-blur-md text-white flex items-center justify-center opacity-80 sm:opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+                    <Maximize2 className="w-3 h-3 sm:w-3.5 sm:h-3.5" />
                   </div>
                 </div>
 
                 {/* Bottom Caption Overlay */}
-                <div className="absolute bottom-0 inset-x-0 p-5 z-10">
-                  <div className="flex items-center gap-1.5 text-[11px] text-zinc-300 mb-1">
-                    <MapPin className="w-3 h-3 text-[#ff2d87]" />
-                    <span>{photo.location}</span>
+                <div className="absolute bottom-0 inset-x-0 p-3 sm:p-5 z-10">
+                  <div className="flex items-center gap-1 text-[10px] sm:text-[11px] text-zinc-300 mb-0.5 sm:mb-1">
+                    <MapPin className="w-2.5 h-2.5 sm:w-3 sm:h-3 text-[#ff2d87]" />
+                    <span className="truncate">{photo.location}</span>
                   </div>
                   <h4
-                    className="text-base sm:text-lg font-bold text-white tracking-tight leading-snug line-clamp-1"
+                    className="text-xs sm:text-base font-bold text-white tracking-tight leading-snug line-clamp-1"
                     style={{ fontFamily: "'Outfit', sans-serif" }}
                   >
                     {photo.title}
                   </h4>
-                  <p className="text-xs text-zinc-300 mt-0.5 line-clamp-1">
+                  <p className="hidden sm:block text-xs text-zinc-300 mt-0.5 line-clamp-1">
                     {photo.desc}
                   </p>
                 </div>
@@ -597,7 +600,7 @@ export default function Yatra26Page() {
       {/* ─────────────────── INTERACTIVE PREVIEW LIGHTBOX MODAL ─────────────────── */}
       {previewIndex !== null && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/95 backdrop-blur-xl animate-in fade-in duration-200 p-4 sm:p-8"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-2xl animate-in fade-in duration-200 p-4 sm:p-8"
           onClick={() => setPreviewIndex(null)}
         >
           {/* Top Bar Controls */}
@@ -605,11 +608,11 @@ export default function Yatra26Page() {
             className="absolute top-4 sm:top-6 inset-x-4 sm:inset-x-8 flex items-center justify-between z-50 text-white"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="flex items-center gap-3">
-              <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#ff2d87] bg-black/60 px-3 py-1 rounded-full border border-white/10">
+            <div className="flex items-center gap-2.5 sm:gap-3">
+              <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#ff2d87] bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/15">
                 Moment {previewIndex + 1} of {GALLERY_PHOTOS_26.length}
               </span>
-              <span className="text-sm font-semibold hidden sm:inline text-zinc-300">
+              <span className="text-xs sm:text-sm font-semibold hidden sm:inline text-zinc-300">
                 {GALLERY_PHOTOS_26[previewIndex].location}
               </span>
             </div>
@@ -617,7 +620,7 @@ export default function Yatra26Page() {
             <button
               onClick={() => setPreviewIndex(null)}
               aria-label="Close Preview"
-              className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer"
+              className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer border border-white/10"
             >
               <X className="w-5 h-5" />
             </button>
@@ -632,9 +635,9 @@ export default function Yatra26Page() {
               )
             }}
             aria-label="Previous Moment"
-            className="absolute left-3 sm:left-6 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-black/60 hover:bg-black/90 text-white border border-white/15 flex items-center justify-center hover:scale-105 active:scale-95 transition-all cursor-pointer"
+            className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-black/90 text-white border border-white/20 flex items-center justify-center hover:scale-105 active:scale-95 transition-all cursor-pointer backdrop-blur-md"
           >
-            <ChevronLeft className="w-6 h-6" />
+            <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
 
           <button
@@ -643,51 +646,49 @@ export default function Yatra26Page() {
               setPreviewIndex((prev) => (prev! + 1) % GALLERY_PHOTOS_26.length)
             }}
             aria-label="Next Moment"
-            className="absolute right-3 sm:right-6 top-1/2 -translate-y-1/2 z-50 w-12 h-12 rounded-full bg-black/60 hover:bg-black/90 text-white border border-white/15 flex items-center justify-center hover:scale-105 active:scale-95 transition-all cursor-pointer"
+            className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-black/90 text-white border border-white/20 flex items-center justify-center hover:scale-105 active:scale-95 transition-all cursor-pointer backdrop-blur-md"
           >
-            <ChevronRight className="w-6 h-6" />
+            <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
 
-          {/* Main Focused Preview Image */}
+          {/* Main Focused Preview Image Card Frame */}
           <div
-            className="relative max-w-5xl max-h-[75vh] w-full aspect-[16/10] flex items-center justify-center"
+            className="relative w-full max-w-4xl aspect-[4/3] sm:aspect-[16/10] max-h-[52vh] sm:max-h-[66vh] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/20 bg-zinc-900"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="relative w-full h-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/10">
-              <Image
-                src={GALLERY_PHOTOS_26[previewIndex].src}
-                alt={GALLERY_PHOTOS_26[previewIndex].title}
-                fill
-                priority
-                className="object-contain"
-              />
-            </div>
+            <Image
+              src={GALLERY_PHOTOS_26[previewIndex].src}
+              alt={GALLERY_PHOTOS_26[previewIndex].title}
+              fill
+              priority
+              className="object-cover"
+            />
           </div>
 
           {/* Bottom Caption & Thumbnail Strip */}
           <div
-            className="absolute bottom-4 sm:bottom-6 inset-x-4 sm:inset-x-8 flex flex-col items-center gap-3 z-50 pointer-events-none"
+            className="absolute bottom-4 sm:bottom-6 inset-x-4 sm:inset-x-8 flex flex-col items-center gap-2.5 sm:gap-3 z-50 pointer-events-none"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="text-center bg-black/70 backdrop-blur-md px-5 py-2.5 rounded-2xl border border-white/10 max-w-xl pointer-events-auto">
+            <div className="text-center bg-black/75 backdrop-blur-xl px-4 py-2 sm:px-5 sm:py-2.5 rounded-2xl border border-white/15 max-w-xl pointer-events-auto shadow-lg">
               <h3
-                className="text-base sm:text-lg font-bold text-white tracking-tight"
+                className="text-sm sm:text-lg font-bold text-white tracking-tight"
                 style={{ fontFamily: "'Outfit', sans-serif" }}
               >
                 {GALLERY_PHOTOS_26[previewIndex].title}
               </h3>
-              <p className="text-xs text-zinc-300 mt-0.5 line-clamp-1">
+              <p className="text-[11px] sm:text-xs text-zinc-300 mt-0.5 line-clamp-1">
                 {GALLERY_PHOTOS_26[previewIndex].desc}
               </p>
             </div>
 
             {/* Thumbnail Tray */}
-            <div className="flex items-center gap-2 pointer-events-auto bg-black/60 backdrop-blur-md p-1.5 rounded-xl border border-white/10 overflow-x-auto max-w-full">
+            <div className="flex items-center gap-2 pointer-events-auto bg-black/70 backdrop-blur-xl p-1.5 rounded-xl border border-white/15 overflow-x-auto max-w-full shadow-lg">
               {GALLERY_PHOTOS_26.map((thumb, tIdx) => (
                 <button
                   key={tIdx}
                   onClick={() => setPreviewIndex(tIdx)}
-                  className={`relative w-12 h-8 rounded-lg overflow-hidden transition-all cursor-pointer ${
+                  className={`relative w-11 h-7 sm:w-13 sm:h-8 rounded-lg overflow-hidden transition-all cursor-pointer shrink-0 ${
                     previewIndex === tIdx
                       ? 'ring-2 ring-[#ff2d87] scale-105 opacity-100'
                       : 'opacity-40 hover:opacity-80'
