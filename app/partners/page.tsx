@@ -98,8 +98,8 @@ interface Sponsor {
   type: 'square' | 'compact' | 'wide' | 'xwide'
 }
 
-// All official partner & sponsor assets from public/partners/yatra26
-const YATRA26_SPONSORS: Sponsor[] = [
+// Unified list of all partners & sponsors from public/partners across all editions
+const ALL_YATRA_SPONSORS: Sponsor[] = [
   { name: 'Kerala Startup Mission (KSUM)', src: '/partners/yatra26/ksum2.png', type: 'wide' },
   { name: 'Udhyam Learning Foundation', src: '/partners/yatra26/udhayam2.png', type: 'wide' },
   { name: 'MakeMyPass', src: '/partners/yatra26/makemypass.png', type: 'square' },
@@ -115,22 +115,12 @@ const YATRA26_SPONSORS: Sponsor[] = [
   { name: 'Legacy IEDC UCEK', src: '/partners/yatra26/legacy2.png', type: 'wide' },
   { name: 'IEDC UCEK', src: '/partners/yatra26/iedc2.png', type: 'xwide' },
   { name: 'Helmet World', src: '/partners/yatra26/hw.png', type: 'square' },
-]
-
-// All official partner & sponsor assets from public/partners/yatra25
-const YATRA25_SPONSORS: Sponsor[] = [
-  { name: 'Kerala Startup Mission (KSUM)', src: '/partners/yatra25/ksum.png', type: 'wide' },
-  { name: 'IEDC UCEK', src: '/partners/yatra25/iedc.png', type: 'wide' },
-  { name: 'µLearn — A GTech Initiative', src: '/partners/yatra25/mulearn.png', type: 'wide' },
-  { name: 'Legacy IEDC UCEK', src: '/partners/yatra25/legacy.png', type: 'wide' },
+  { name: 'Unibic', src: '/partners/yatra25/unibic.png', type: 'wide' },
+  { name: 'Milma', src: '/partners/yatra25/milma.png', type: 'wide' },
   { name: 'Camino Infotech', src: '/partners/yatra25/camino.png', type: 'wide' },
-  { name: 'Unstop', src: '/partners/yatra25/unstop.png', type: 'wide' },
   { name: 'UXShots', src: '/partners/yatra25/uxshots.png', type: 'wide' },
   { name: 'Kaumaram Mithra', src: '/partners/yatra25/mithra.png', type: 'compact' },
-  { name: 'Unibic', src: '/partners/yatra25/unibic.png', type: 'wide' },
-  { name: 'Helmet World', src: '/partners/yatra25/helmetworld.png', type: 'compact' },
   { name: 'Fulva', src: '/partners/yatra25/fulva.png', type: 'compact' },
-  { name: 'Milma', src: '/partners/yatra25/milma.png', type: 'wide' },
   { name: 'Varsya', src: '/partners/yatra25/varsya.png', type: 'compact' },
   { name: 'Aim Britz', src: '/partners/yatra25/aim.png', type: 'wide' },
   { name: 'ID Tech Systems', src: '/partners/yatra25/dtech.png', type: 'wide' },
@@ -214,7 +204,7 @@ export default function PartnersPage() {
         </div>
       </main>
 
-      {/* ─────────────────── 2. SPONSORS OF YATHRA (ALL PARTNERS & SPONSORS FROM PUBLIC/PARTNERS) ─────────────────── */}
+      {/* ─────────────────── 2. SPONSORS OF YATHRA (ALL SPONSORS IN ONE UNIFIED SECTION) ─────────────────── */}
       <section className="w-full bg-white text-zinc-950 py-16 sm:py-24 border-t border-zinc-200">
         <div className="max-w-6xl mx-auto px-5 sm:px-8">
           <div className="max-w-3xl mb-14 sm:mb-16">
@@ -232,86 +222,31 @@ export default function PartnersPage() {
             </p>
           </div>
 
-          {/* ─── YATHRA '26 PARTNERS & ECOSYSTEM ─── */}
-          <div className="mb-20">
-            <div className="flex items-center gap-3 mb-10 pb-4 border-b border-zinc-200">
-              <span className="px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-[#ff2d87] text-white">
-                Yathra ’26
-              </span>
-              <h3
-                className="text-xl sm:text-2xl font-bold text-zinc-950 tracking-tight"
-                style={{ fontFamily: "'Outfit', sans-serif" }}
+          {/* Unified Logo Grid - All Sponsors in One Section */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-y-12 sm:gap-y-16 gap-x-8 sm:gap-x-12 items-center justify-items-center">
+            {ALL_YATRA_SPONSORS.map((sponsor, i) => (
+              <div
+                key={i}
+                className="w-full h-28 sm:h-36 flex items-center justify-center p-2 sm:p-3 group"
+                title={sponsor.name}
               >
-                Partners & Ecosystem
-              </h3>
-            </div>
-
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-y-12 sm:gap-y-16 gap-x-8 sm:gap-x-12 items-center justify-items-center">
-              {YATRA26_SPONSORS.map((sponsor, i) => (
-                <div
-                  key={i}
-                  className="w-full h-28 sm:h-36 flex items-center justify-center p-2 sm:p-3 group"
-                  title={sponsor.name}
-                >
-                  <Image
-                    src={sponsor.src}
-                    alt={sponsor.name}
-                    width={320}
-                    height={140}
-                    className={`${
-                      sponsor.type === 'square'
-                        ? 'max-h-20 sm:max-h-24 max-w-[150px] sm:max-w-[180px]'
-                        : sponsor.type === 'compact'
-                        ? 'max-h-18 sm:max-h-22 max-w-[170px] sm:max-w-[210px]'
-                        : sponsor.type === 'xwide'
-                        ? 'max-h-12 sm:max-h-15 max-w-[210px] sm:max-w-[270px]'
-                        : 'max-h-15 sm:max-h-18 max-w-[190px] sm:max-w-[240px]'
-                    } w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-108`}
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* ─── YATHRA '25 PARTNERS & SPONSORS ─── */}
-          <div>
-            <div className="flex items-center gap-3 mb-10 pb-4 border-b border-zinc-200">
-              <span className="px-3 py-1 rounded-full text-xs font-mono font-bold uppercase tracking-wider bg-zinc-900 text-white">
-                Yathra ’25
-              </span>
-              <h3
-                className="text-xl sm:text-2xl font-bold text-zinc-950 tracking-tight"
-                style={{ fontFamily: "'Outfit', sans-serif" }}
-              >
-                Inaugural Partners & Sponsors
-              </h3>
-            </div>
-
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-y-12 sm:gap-y-16 gap-x-8 sm:gap-x-12 items-center justify-items-center">
-              {YATRA25_SPONSORS.map((sponsor, i) => (
-                <div
-                  key={i}
-                  className="w-full h-28 sm:h-36 flex items-center justify-center p-2 sm:p-3 group"
-                  title={sponsor.name}
-                >
-                  <Image
-                    src={sponsor.src}
-                    alt={sponsor.name}
-                    width={320}
-                    height={140}
-                    className={`${
-                      sponsor.type === 'square'
-                        ? 'max-h-20 sm:max-h-24 max-w-[150px] sm:max-w-[180px]'
-                        : sponsor.type === 'compact'
-                        ? 'max-h-18 sm:max-h-22 max-w-[170px] sm:max-w-[210px]'
-                        : sponsor.type === 'xwide'
-                        ? 'max-h-12 sm:max-h-15 max-w-[210px] sm:max-w-[270px]'
-                        : 'max-h-15 sm:max-h-18 max-w-[190px] sm:max-w-[240px]'
-                    } w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-108`}
-                  />
-                </div>
-              ))}
-            </div>
+                <Image
+                  src={sponsor.src}
+                  alt={sponsor.name}
+                  width={320}
+                  height={140}
+                  className={`${
+                    sponsor.type === 'square'
+                      ? 'max-h-20 sm:max-h-24 max-w-[150px] sm:max-w-[180px]'
+                      : sponsor.type === 'compact'
+                      ? 'max-h-18 sm:max-h-22 max-w-[170px] sm:max-w-[210px]'
+                      : sponsor.type === 'xwide'
+                      ? 'max-h-12 sm:max-h-15 max-w-[210px] sm:max-w-[270px]'
+                      : 'max-h-15 sm:max-h-18 max-w-[190px] sm:max-w-[240px]'
+                  } w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-108`}
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>
