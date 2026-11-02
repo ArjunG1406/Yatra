@@ -421,26 +421,26 @@ export default function Yatra26Page() {
         </div>
 
         {/* Clean 4-in-a-row responsive grid without boxes */}
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 sm:gap-12 items-center justify-items-center">
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-10 sm:gap-14 md:gap-16 items-center justify-items-center">
           {PARTNERS_26.map((partner, i) => (
             <div
               key={i}
-              className="h-24 sm:h-28 w-full flex items-center justify-center p-2 group transition-transform duration-300 hover:scale-108"
+              className="h-28 sm:h-36 w-full flex items-center justify-center p-2 group transition-transform duration-300 hover:scale-108"
               title={partner.name}
             >
               <Image
                 src={partner.src}
                 alt={partner.name}
-                width={240}
-                height={100}
+                width={320}
+                height={140}
                 className={`${
                   partner.type === 'square'
-                    ? 'max-h-14 sm:max-h-16 max-w-[110px] sm:max-w-[130px]'
+                    ? 'max-h-20 sm:max-h-24 max-w-[150px] sm:max-w-[180px]'
                     : partner.type === 'compact'
-                    ? 'max-h-12 sm:max-h-14 max-w-[130px] sm:max-w-[150px]'
+                    ? 'max-h-18 sm:max-h-20 max-w-[170px] sm:max-w-[200px]'
                     : partner.type === 'xwide'
-                    ? 'max-h-8 sm:max-h-9 max-w-[170px] sm:max-w-[210px]'
-                    : 'max-h-10 sm:max-h-12 max-w-[150px] sm:max-w-[180px]'
+                    ? 'max-h-11 sm:max-h-14 max-w-[220px] sm:max-w-[270px]'
+                    : 'max-h-14 sm:max-h-17 max-w-[200px] sm:max-w-[240px]'
                 } w-auto h-auto object-contain transition-transform`}
               />
             </div>
