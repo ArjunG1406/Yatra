@@ -8,9 +8,9 @@ import {
 } from 'lucide-react'
 
 export const metadata: Metadata = {
-  title: 'Partner & Sponsor Benefits | Yathra ’27 · Hult Prize UCEK',
+  title: 'What You Get by Sponsoring Yathra | Partner Benefits',
   description:
-    'Discover the ROI, talent access, keynote brand visibility, and ESG impact of partnering with Yathra ’27 at Technopark, Trivandrum.',
+    'Discover the ROI, talent access, keynote brand visibility, and ESG impact of sponsoring our event, Yathra.',
 }
 
 const PINK = '#ff2d87'
@@ -23,7 +23,7 @@ const BENEFIT_CATEGORIES = [
     tag: 'Visibility & PR',
     points: [
       'Prominent logo placement on main stage LED backdrops at Travancore Hall, Technopark throughout all pitching and keynote sessions.',
-      'Featured logo on the official Yathra ’27 website, delegate kits, event brochures, and winner certificates.',
+      'Featured logo on the official Yathra website, delegate kits, event brochures, and winner certificates.',
       'Dedicated sponsor spotlight reels and social media campaigns across Instagram, LinkedIn, and student community channels.',
       'Co-branded mentions in regional press releases, post-event publications, and official aftermovie credits.',
       'Branded digital broadcast banners across live-streamed semi-final and final pitching sessions.',
@@ -86,67 +86,62 @@ const BENEFIT_CATEGORIES = [
       'Institutional connection with University College of Engineering Kariavattom (UCEK), University of Kerala.',
       'Strategic presence at Technopark, Trivandrum — India’s first and largest IT innovation corridor.',
       'Long-term brand equity and lasting goodwill among student innovators, campus leaders, and alumni networks.',
-      'Ongoing visibility across all future Yathra chapter promotional campaigns.',
+      'Ongoing visibility across all future Yathra promotional campaigns.',
     ],
   },
 ]
 
-// Previous event sponsors for Yathra 26
-const YATRA_26_SPONSORS = [
+// Deduplicated, unified list of all unique partners & sponsors of Yathra
+const YATRA_SPONSORS = [
+  // Government, Innovation Networks & Academic Ecosystems
   { name: 'Kerala Startup Mission (KSUM)', src: '/partners/yatra26/ksum2.png' },
+  { name: 'Atal Innovation Mission (AIM)', src: '/partners/yatra25/aim.png' },
   { name: 'IIITM-K / Digital University Kerala', src: '/partners/yatra26/iiitmk.png' },
-  { name: 'MakeMyPass', src: '/partners/yatra26/makemypass.png' },
+  { name: 'IEDC UCEK', src: '/partners/yatra26/iedc2.png' },
+  { name: 'KUBIIC', src: '/partners/yatra26/kubiic.png' },
+  { name: 'Legacy IEDC', src: '/partners/yatra26/legacy2.png' },
+  { name: 'Global Shapers Community', src: '/partners/yatra26/global.png' },
+
+  // Skilling, Education & Platform Partners
   { name: 'µLearn — GTech', src: '/partners/yatra26/mulearn2.png' },
   { name: 'Udhyam Learning Foundation', src: '/partners/yatra26/udhayam2.png' },
   { name: 'Unstop', src: '/partners/yatra26/unstop2.png' },
   { name: 'Unstop Igniters Club', src: '/partners/yatra26/igniters.png' },
-  { name: 'IEDC UCEK', src: '/partners/yatra26/iedc2.png' },
-  { name: 'KUBIIC', src: '/partners/yatra26/kubiic.png' },
-  { name: 'Legacy IEDC', src: '/partners/yatra26/legacy2.png' },
-  { name: 'IdeaTribe', src: '/partners/yatra26/ideatribe.png' },
-  { name: 'Global', src: '/partners/yatra26/global.png' },
-  { name: 'Helmet World', src: '/partners/yatra26/hw.png' },
-  { name: 'Luv Cutlet', src: '/partners/yatra26/luvcutlet.png' },
-  { name: 'Evara', src: '/partners/yatra26/evara.png' },
-]
+  { name: 'MakeMyPass', src: '/partners/yatra26/makemypass.png' },
 
-// Previous event sponsors for Yathra 25
-const YATRA_25_SPONSORS = [
-  { name: 'Kerala Startup Mission (KSUM)', src: '/partners/yatra25/ksum.png' },
-  { name: 'Atal Innovation Mission (AIM)', src: '/partners/yatra25/aim.png' },
-  { name: 'IEDC UCEK', src: '/partners/yatra25/iedc.png' },
-  { name: 'µLearn — GTech', src: '/partners/yatra25/mulearn.png' },
-  { name: 'Unstop', src: '/partners/yatra25/unstop.png' },
+  // Industry, FMCG, Tech & Community Partners
   { name: 'Milma', src: '/partners/yatra25/milma.png' },
   { name: 'Unibic', src: '/partners/yatra25/unibic.png' },
-  { name: 'Helmet World', src: '/partners/yatra25/helmetworld.png' },
-  { name: 'Legacy IEDC', src: '/partners/yatra25/legacy.png' },
+  { name: 'Helmet World', src: '/partners/yatra26/hw.png' },
   { name: 'Camino', src: '/partners/yatra25/camino.png' },
   { name: 'D-Tech', src: '/partners/yatra25/dtech.png' },
   { name: 'Fulva', src: '/partners/yatra25/fulva.png' },
   { name: 'Mithra', src: '/partners/yatra25/mithra.png' },
   { name: 'UX Shots', src: '/partners/yatra25/uxshots.png' },
   { name: 'Varsya', src: '/partners/yatra25/varsya.png' },
+  { name: 'IdeaTribe', src: '/partners/yatra26/ideatribe.png' },
+  { name: 'Luv Cutlet', src: '/partners/yatra26/luvcutlet.png' },
+  { name: 'Evara', src: '/partners/yatra26/evara.png' },
 ]
 
 export default function PartnersPage() {
   return (
     <div className="min-h-screen bg-white text-zinc-950 font-sans relative pb-28">
-      {/* ─────────────────── 1. PARTNER & SPONSOR BENEFITS (FIRST SECTION) ─────────────────── */}
+      {/* ─────────────────── 1. WHAT YOU GET BY SPONSORING YATHRA (BENEFITS) ─────────────────── */}
       <main className="max-w-5xl mx-auto px-5 sm:px-8 pt-16 sm:pt-20 pb-12 sm:pb-16 w-full">
         {/* Section Header */}
         <div className="max-w-3xl mb-12 sm:mb-16">
           <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#ff2d87] block mb-2">
-            Why Partner With Yathra ’27
+            Why Sponsor Our Event?
           </span>
           <h1
             className="text-3xl sm:text-5xl font-black tracking-tight text-zinc-950 uppercase leading-tight"
             style={{ fontFamily: "'Outfit', sans-serif" }}
           >
-            Partner & Sponsor Benefits
+            What You Get by Sponsoring Yathra
           </h1>
           <p className="mt-4 text-sm sm:text-base text-zinc-600 leading-relaxed">
-            Partnering with Yathra ’27 connects your brand with India’s most promising student innovators, developers, and founders. Below is a comprehensive breakdown of the deliverables, brand visibility, and recruiting ROI your organization receives.
+            Sponsoring our event, Yathra, connects your brand with India’s most promising collegiate innovators, developers, and founders. Below is a comprehensive point-by-point breakdown of the deliverables, brand visibility, and recruiting ROI your organization receives.
           </p>
         </div>
 
@@ -195,80 +190,41 @@ export default function PartnersPage() {
         </div>
       </main>
 
-      {/* ─────────────────── 2. PREVIOUS SPONSORS LOGO SECTION (PINK BACKGROUND, NO BOXES) ─────────────────── */}
-      <section className="w-full bg-[#ff2d87] text-white py-20 sm:py-28 my-10 border-y border-pink-600/30 shadow-lg">
+      {/* ─────────────────── 2. SPONSORS OF YATHRA (UNIFIED PINK SECTION, NO DUPLICATES, BALANCED SIZE) ─────────────────── */}
+      <section className="w-full bg-[#ff2d87] text-white py-16 sm:py-24 my-10 border-y border-pink-600/30 shadow-lg">
         <div className="max-w-5xl mx-auto px-5 sm:px-8">
-          <div className="max-w-3xl mb-14 sm:mb-16">
+          <div className="max-w-3xl mb-12 sm:mb-14">
             <span className="font-mono text-xs font-bold uppercase tracking-wider text-pink-100 block mb-2">
-              Proven Track Record
+              Our Network & Ecosystem
             </span>
             <h2
               className="text-3xl sm:text-5xl font-black tracking-tight text-white uppercase"
               style={{ fontFamily: "'Outfit', sans-serif" }}
             >
-              Previous Event Partners & Sponsors
+              Sponsors of Yathra
             </h2>
             <p className="mt-3 text-sm sm:text-base text-pink-100/90 leading-relaxed max-w-2xl">
-              Leading government bodies, corporations, technology platforms, and startup incubators that have supported Yathra across our previous editions.
+              Leading government bodies, corporations, technology platforms, and startup incubators that have supported Yathra.
             </p>
           </div>
 
-          {/* ─── YATHRA '26 PARTNERS ─── */}
-          <div className="mb-20">
-            <div className="flex items-center gap-4 mb-10">
-              <span className="font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-white">
-                Yathra ’26 Partners & Sponsors
-              </span>
-              <div className="h-px bg-white/30 flex-1" />
-            </div>
-
-            {/* Prominent, Highly-Visible Logo Grid - No Boxes */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-y-12 gap-x-8 items-center justify-items-center">
-              {YATRA_26_SPONSORS.map((sponsor, i) => (
-                <div
-                  key={i}
-                  className="w-full h-24 sm:h-32 flex items-center justify-center p-2 sm:p-4 group"
-                  title={sponsor.name}
-                >
-                  <Image
-                    src={sponsor.src}
-                    alt={sponsor.name}
-                    width={260}
-                    height={100}
-                    className="max-h-20 sm:max-h-24 max-w-[200px] sm:max-w-[230px] w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-110 drop-shadow-[0_2px_8px_rgba(0,0,0,0.14)]"
-                  />
-                </div>
-              ))}
-            </div>
-          </div>
-
-          {/* ─── YATHRA '25 PARTNERS ─── */}
-          <div>
-            <div className="flex items-center gap-4 mb-10">
-              <span className="font-mono text-xs sm:text-sm font-bold uppercase tracking-wider text-white">
-                Yathra ’25 Partners & Sponsors
-              </span>
-              <div className="h-px bg-white/30 flex-1" />
-            </div>
-
-            {/* Prominent, Highly-Visible Logo Grid - No Boxes */}
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-y-12 gap-x-8 items-center justify-items-center">
-              {YATRA_25_SPONSORS.map((sponsor, i) => (
-                <div
-                  key={i}
-                  className="w-full h-24 sm:h-32 flex items-center justify-center p-2 sm:p-4 group"
-                  title={sponsor.name}
-                >
-                  <Image
-                    src={sponsor.src}
-                    alt={sponsor.name}
-                    width={260}
-                    height={100}
-                    className="max-h-20 sm:max-h-24 max-w-[200px] sm:max-w-[230px] w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-110 drop-shadow-[0_2px_8px_rgba(0,0,0,0.14)]"
-                  />
-                </div>
-              ))}
-            </div>
+          {/* Unified Logo Grid - Clean, Deduplicated, Properly Sized & Spaced */}
+          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-y-10 gap-x-8 sm:gap-x-10 items-center justify-items-center">
+            {YATRA_SPONSORS.map((sponsor, i) => (
+              <div
+                key={i}
+                className="w-full h-20 sm:h-24 flex items-center justify-center p-2 sm:p-3 group"
+                title={sponsor.name}
+              >
+                <Image
+                  src={sponsor.src}
+                  alt={sponsor.name}
+                  width={200}
+                  height={80}
+                  className="max-h-12 sm:max-h-14 max-w-[130px] sm:max-w-[160px] w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-108 drop-shadow-[0_2px_6px_rgba(0,0,0,0.12)]"
+                />
+              </div>
+            ))}
           </div>
         </div>
       </section>
