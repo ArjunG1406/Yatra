@@ -132,33 +132,16 @@ export default function Sponsors() {
           </div>
         </div>
 
-        {/* ─── EXPLORE PARTNER & SPONSOR BENEFITS CALLOUT BUTTON ─── */}
-        <div className="mt-14 pt-10 border-t border-zinc-200/90 flex flex-col sm:flex-row items-center justify-between gap-6 bg-zinc-50/80 p-6 sm:p-8 rounded-2xl border border-zinc-200">
-          <div className="text-center sm:text-left">
-            <span className="font-mono text-[10px] font-bold uppercase tracking-wider text-[#ff2d87] block mb-1">
-              Why Partner With Us?
-            </span>
-            <h3
-              className="text-lg sm:text-xl font-black text-zinc-950 uppercase"
-              style={{ fontFamily: "'Outfit', sans-serif" }}
-            >
-              Partner & Sponsor Benefits
-            </h3>
-            <p className="mt-1 text-xs text-zinc-500 max-w-md leading-relaxed">
-              Discover sponsorship tiers, brand visibility perks, campus talent recruitment access, and ROI deliverables for your organization.
-            </p>
-          </div>
-
-          <div className="flex flex-col sm:flex-row items-center gap-3 shrink-0 w-full sm:w-auto">
-            <Link
-              href="/partners"
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-full bg-zinc-950 text-white font-bold text-xs uppercase tracking-wider hover:bg-[#ff2d87] transition-all shadow-sm hover:shadow-md group"
-              style={{ fontFamily: "'Outfit', sans-serif" }}
-            >
-              <span>Explore Benefits & Tiers</span>
-              <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
-            </Link>
-          </div>
+        {/* ─── VIEW ALL SPONSORS & BENEFITS BUTTON ─── */}
+        <div className="mt-14 flex justify-center">
+          <Link
+            href="/partners"
+            className="inline-flex items-center justify-center gap-2 px-8 py-3.5 rounded-full bg-zinc-950 text-white font-bold text-xs sm:text-sm uppercase tracking-wider hover:bg-[#ff2d87] transition-all shadow-sm hover:shadow-md group"
+            style={{ fontFamily: "'Outfit', sans-serif" }}
+          >
+            <span>View All Sponsors & Benefits</span>
+            <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+          </Link>
         </div>
       </div>
     </section>
