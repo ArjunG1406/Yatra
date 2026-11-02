@@ -208,20 +208,20 @@ export default function PartnersPage() {
             </p>
           </div>
 
-          {/* Unified Logo Grid - Clean, Deduplicated, Properly Sized & Spaced */}
-          <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-y-10 gap-x-8 sm:gap-x-10 items-center justify-items-center">
+          {/* Unified Logo Grid - 4 Logos per Row */}
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12 sm:gap-y-14 gap-x-8 sm:gap-x-12 items-center justify-items-center">
             {YATRA_SPONSORS.map((sponsor, i) => (
               <div
                 key={i}
-                className="w-full h-20 sm:h-24 flex items-center justify-center p-2 sm:p-3 group"
+                className="w-full h-24 sm:h-28 flex items-center justify-center p-3 sm:p-4 group"
                 title={sponsor.name}
               >
                 <Image
                   src={sponsor.src}
                   alt={sponsor.name}
-                  width={200}
-                  height={80}
-                  className="max-h-12 sm:max-h-14 max-w-[130px] sm:max-w-[160px] w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-108 drop-shadow-[0_2px_6px_rgba(0,0,0,0.12)]"
+                  width={220}
+                  height={90}
+                  className="max-h-14 sm:max-h-16 max-w-[160px] sm:max-w-[190px] w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-108 drop-shadow-[0_2px_6px_rgba(0,0,0,0.12)]"
                 />
               </div>
             ))}
