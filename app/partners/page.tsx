@@ -91,8 +91,14 @@ const BENEFIT_CATEGORIES = [
   },
 ]
 
+interface Sponsor {
+  name: string
+  src: string
+  compact?: boolean // Square / compact marks that need optical height boost
+}
+
 // Deduplicated, unified list of all unique partners & sponsors of Yathra
-const YATRA_SPONSORS = [
+const YATRA_SPONSORS: Sponsor[] = [
   // Government, Innovation Networks & Academic Ecosystems
   { name: 'Kerala Startup Mission (KSUM)', src: '/partners/yatra26/ksum2.png' },
   { name: 'Atal Innovation Mission (AIM)', src: '/partners/yatra25/aim.png' },
@@ -106,22 +112,22 @@ const YATRA_SPONSORS = [
   { name: 'µLearn — GTech', src: '/partners/yatra26/mulearn2.png' },
   { name: 'Udhyam Learning Foundation', src: '/partners/yatra26/udhayam2.png' },
   { name: 'Unstop', src: '/partners/yatra26/unstop2.png' },
-  { name: 'Unstop Igniters Club', src: '/partners/yatra26/igniters.png' },
-  { name: 'MakeMyPass', src: '/partners/yatra26/makemypass.png' },
+  { name: 'Unstop Igniters Club', src: '/partners/yatra26/igniters.png', compact: true },
+  { name: 'MakeMyPass', src: '/partners/yatra26/makemypass.png', compact: true },
 
   // Industry, FMCG, Tech & Community Partners
   { name: 'Milma', src: '/partners/yatra25/milma.png' },
   { name: 'Unibic', src: '/partners/yatra25/unibic.png' },
-  { name: 'Helmet World', src: '/partners/yatra26/hw.png' },
+  { name: 'Helmet World', src: '/partners/yatra26/hw.png', compact: true },
   { name: 'Camino', src: '/partners/yatra25/camino.png' },
   { name: 'D-Tech', src: '/partners/yatra25/dtech.png' },
-  { name: 'Fulva', src: '/partners/yatra25/fulva.png' },
-  { name: 'Mithra', src: '/partners/yatra25/mithra.png' },
+  { name: 'Fulva', src: '/partners/yatra25/fulva.png', compact: true },
+  { name: 'Mithra', src: '/partners/yatra25/mithra.png', compact: true },
   { name: 'UX Shots', src: '/partners/yatra25/uxshots.png' },
-  { name: 'Varsya', src: '/partners/yatra25/varsya.png' },
-  { name: 'IdeaTribe', src: '/partners/yatra26/ideatribe.png' },
-  { name: 'Luv Cutlet', src: '/partners/yatra26/luvcutlet.png' },
-  { name: 'Evara', src: '/partners/yatra26/evara.png' },
+  { name: 'Varsya', src: '/partners/yatra25/varsya.png', compact: true },
+  { name: 'IdeaTribe', src: '/partners/yatra26/ideatribe.png', compact: true },
+  { name: 'Luv Cutlet', src: '/partners/yatra26/luvcutlet.png', compact: true },
+  { name: 'Evara', src: '/partners/yatra26/evara.png', compact: true },
 ]
 
 export default function PartnersPage() {
@@ -209,19 +215,23 @@ export default function PartnersPage() {
           </div>
 
           {/* Unified Logo Grid - 4 Logos per Row */}
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12 sm:gap-y-14 gap-x-8 sm:gap-x-12 items-center justify-items-center">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-y-12 sm:gap-y-16 gap-x-8 sm:gap-x-12 items-center justify-items-center">
             {YATRA_SPONSORS.map((sponsor, i) => (
               <div
                 key={i}
-                className="w-full h-24 sm:h-28 flex items-center justify-center p-3 sm:p-4 group"
+                className="w-full h-24 sm:h-30 flex items-center justify-center p-2 sm:p-3 group"
                 title={sponsor.name}
               >
                 <Image
                   src={sponsor.src}
                   alt={sponsor.name}
-                  width={220}
-                  height={90}
-                  className="max-h-14 sm:max-h-16 max-w-[160px] sm:max-w-[190px] w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-108 drop-shadow-[0_2px_6px_rgba(0,0,0,0.12)]"
+                  width={240}
+                  height={110}
+                  className={`${
+                    sponsor.compact
+                      ? 'max-h-20 sm:max-h-24 max-w-[140px] sm:max-w-[160px]'
+                      : 'max-h-13 sm:max-h-16 max-w-[160px] sm:max-w-[190px]'
+                  } w-auto h-auto object-contain transition-transform duration-300 group-hover:scale-108 drop-shadow-[0_2px_6px_rgba(0,0,0,0.12)]`}
                 />
               </div>
             ))}
