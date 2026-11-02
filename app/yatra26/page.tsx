@@ -94,6 +94,25 @@ const REVIEWS_26 = [
   },
 ]
 
+// Yathra ’26 Partners & Sponsors (individual logos neatly sized, all white text/logos rendered in black)
+const PARTNERS_26 = [
+  { name: 'Kerala Startup Mission (KSUM)', src: '/partners/yatra26/ksum2.png', type: 'wide' },
+  { name: 'Udhyam Learning Foundation', src: '/partners/yatra26/udhayam2.png', type: 'wide' },
+  { name: 'MakeMyPass', src: '/partners/yatra26/makemypass.png', type: 'square' },
+  { name: 'IIITMK', src: '/partners/yatra26/iiitmk.png', type: 'wide' },
+  { name: 'KUBIIC', src: '/partners/yatra26/kubiic.png', type: 'xwide' },
+  { name: 'µLearn — A GTech Initiative', src: '/partners/yatra26/mulearn2.png', type: 'xwide' },
+  { name: 'Global Shapers Community', src: '/partners/yatra26/global.png', type: 'wide' },
+  { name: 'Unstop', src: '/partners/yatra26/unstop2.png', type: 'wide' },
+  { name: 'Evara Microgreens', src: '/partners/yatra26/evara.png', type: 'square' },
+  { name: 'Luv Cutlet', src: '/partners/yatra26/luvcutlet.png', type: 'square' },
+  { name: 'Unstop Igniters Club', src: '/partners/yatra26/igniters.png', type: 'compact' },
+  { name: 'Idea Tribe', src: '/partners/yatra26/ideatribe.png', type: 'square' },
+  { name: 'Legacy IEDC UCEK', src: '/partners/yatra26/legacy2.png', type: 'wide' },
+  { name: 'IEDC UCEK', src: '/partners/yatra26/iedc2.png', type: 'xwide' },
+  { name: 'Helmet World', src: '/partners/yatra26/hw.png', type: 'square' },
+]
+
 export default function Yatra26Page() {
   const [activeIndex, setActiveIndex] = useState(0)
   const [isPaused, setIsPaused] = useState(false)
@@ -384,9 +403,9 @@ export default function Yatra26Page() {
         </div>
       </section>
 
-      {/* ─────────────────── 5. OFFICIAL YATHRA 26 PARTNERS & SPONSORS BANNER ─────────────────── */}
-      <section className="py-20 max-w-5xl mx-auto px-5 sm:px-8">
-        <div className="text-center max-w-2xl mx-auto mb-10">
+      {/* ─────────────────── 5. YATHRA ’26 PARTNERS & SPONSORS (INDIVIDUAL LOGOS) ─────────────────── */}
+      <section className="py-20 max-w-6xl mx-auto px-5 sm:px-8">
+        <div className="text-center max-w-2xl mx-auto mb-14">
           <span className="font-mono text-xs font-bold uppercase tracking-wider text-[#ff2d87] block mb-2">
             Partners & Ecosystem
           </span>
@@ -396,18 +415,36 @@ export default function Yatra26Page() {
           >
             Partners & Sponsors of Yathra ’26
           </h2>
+          <p className="mt-2 text-sm text-zinc-600">
+            Backed by premier startup enablers, university incubation centers, and industry leaders.
+          </p>
         </div>
 
-        {/* Official "THANK YOU PARTNERS" Banner Image (Every white logo is 100% visible) */}
-        <div className="w-full rounded-2xl sm:rounded-3xl overflow-hidden shadow-lg border border-zinc-200/80 bg-black">
-          <Image
-            src="/partners/yatra26/thank-you-partners.jpg"
-            alt="Yathra ’26 Official Partners - Thank You Partners"
-            width={1024}
-            height={412}
-            className="w-full h-auto object-contain"
-            priority
-          />
+        {/* Clean 4-in-a-row responsive grid without boxes */}
+        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 gap-8 sm:gap-12 items-center justify-items-center">
+          {PARTNERS_26.map((partner, i) => (
+            <div
+              key={i}
+              className="h-24 sm:h-28 w-full flex items-center justify-center p-2 group transition-transform duration-300 hover:scale-108"
+              title={partner.name}
+            >
+              <Image
+                src={partner.src}
+                alt={partner.name}
+                width={240}
+                height={100}
+                className={`${
+                  partner.type === 'square'
+                    ? 'max-h-14 sm:max-h-16 max-w-[110px] sm:max-w-[130px]'
+                    : partner.type === 'compact'
+                    ? 'max-h-12 sm:max-h-14 max-w-[130px] sm:max-w-[150px]'
+                    : partner.type === 'xwide'
+                    ? 'max-h-8 sm:max-h-9 max-w-[170px] sm:max-w-[210px]'
+                    : 'max-h-10 sm:max-h-12 max-w-[150px] sm:max-w-[180px]'
+                } w-auto h-auto object-contain transition-transform`}
+              />
+            </div>
+          ))}
         </div>
       </section>
 
