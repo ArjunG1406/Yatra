@@ -131,8 +131,8 @@ export default function PartnersPage() {
     <div className="min-h-screen bg-white text-zinc-950 font-sans flex flex-col justify-between">
       {/* ─────────────────── 1. WHAT YOU GET BY SPONSORING YATHRA (BENEFITS) ─────────────────── */}
       <main className="max-w-5xl mx-auto px-5 sm:px-8 pt-8 sm:pt-12 pb-12 sm:pb-16 w-full">
-        {/* Top Left: Back to Home Button */}
-        <div className="mb-8">
+        {/* Top Header Bar: Back to Home (Left) & Yathra '27 Logo (Right) */}
+        <div className="mb-8 sm:mb-12 flex items-center justify-between">
           <Link
             href="/"
             className="inline-flex items-center gap-2 px-4 py-2 rounded-full border border-zinc-200 bg-white text-zinc-800 text-xs font-semibold uppercase tracking-wider hover:border-[#ff2d87] hover:text-[#ff2d87] transition-all shadow-xs group"
@@ -141,6 +141,18 @@ export default function PartnersPage() {
             <ArrowLeft className="w-3.5 h-3.5 group-hover:-translate-x-1 transition-transform" />
             <span>Back to Home</span>
           </Link>
+
+          {/* Top Right: Yathra '27 Logo */}
+          <div className="flex items-center">
+            <Image
+              src="/yathra27.png"
+              alt="Yathra '27"
+              width={182}
+              height={81}
+              priority
+              className="h-8 sm:h-10 w-auto object-contain hover:scale-105 transition-transform"
+            />
+          </div>
         </div>
 
         {/* Section Header */}
