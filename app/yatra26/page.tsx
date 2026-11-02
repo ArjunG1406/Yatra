@@ -135,42 +135,34 @@ export default function Yatra26Page() {
 
   return (
     <div className="min-h-screen bg-white text-zinc-950 font-sans selection:bg-[#ff2d87] selection:text-white">
-      {/* ─────────────────── TOP NAVIGATION ─────────────────── */}
-      <header className="sticky top-0 z-50 w-full border-b border-zinc-200/80 bg-white/95 backdrop-blur-md">
-        <div className="max-w-6xl mx-auto px-5 sm:px-8 h-16 flex items-center justify-between">
-          <Link
-            href="/"
-            className="group inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-zinc-600 hover:text-zinc-950 transition-colors"
-          >
-            <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
-            <span>Back to Home</span>
-          </Link>
+      {/* ─────────────────── MINIMAL TOP BAR ─────────────────── */}
+      <nav className="max-w-6xl mx-auto px-5 sm:px-8 pt-6 sm:pt-8 flex items-center justify-between">
+        <Link
+          href="/"
+          className="group inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-zinc-500 hover:text-zinc-950 transition-colors"
+        >
+          <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+          <span>Back to Home</span>
+        </Link>
 
-          <div className="flex items-center gap-2">
-            <span
-              className="text-lg font-black tracking-tight uppercase"
-              style={{ fontFamily: "'Outfit', sans-serif" }}
-            >
-              Yathra
-            </span>
-            <span
-              className="px-2 py-0.5 rounded-full text-xs font-black text-white bg-[#ff2d87]"
-              style={{ fontFamily: "'Outfit', sans-serif" }}
-            >
-              ’26
-            </span>
-          </div>
-
+        {/* Minimal Edition Switcher Pill */}
+        <div className="inline-flex items-center p-1 rounded-full bg-zinc-100 border border-zinc-200/80 text-xs">
           <Link
             href="/yatra25"
-            className="inline-flex items-center gap-1.5 px-4 py-2 rounded-full border border-zinc-200 bg-zinc-50 hover:bg-zinc-100 text-zinc-800 text-xs font-semibold uppercase tracking-wider transition-all"
+            className="px-3.5 py-1.5 rounded-full font-bold transition-all text-zinc-500 hover:text-zinc-900"
             style={{ fontFamily: "'Outfit', sans-serif" }}
           >
-            <span>Explore ’25</span>
-            <ArrowRight className="w-3.5 h-3.5" />
+            Yathra ’25
+          </Link>
+          <Link
+            href="/yatra26"
+            className="px-3.5 py-1.5 rounded-full font-bold transition-all bg-white text-zinc-950 shadow-xs"
+            style={{ fontFamily: "'Outfit', sans-serif" }}
+          >
+            Yathra ’26
           </Link>
         </div>
-      </header>
+      </nav>
 
       {/* ─────────────────── 1. 3D COVER-FLOW PHOTO CAROUSEL HERO (WHITE BACKGROUND) ─────────────────── */}
       <section
