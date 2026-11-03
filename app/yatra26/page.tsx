@@ -684,20 +684,24 @@ export default function Yatra26Page() {
             </div>
 
             {/* Liquid Glass Thumbnail Tray */}
-            <div className="flex items-center gap-2 pointer-events-auto bg-gradient-to-b from-white/18 to-white/8 backdrop-blur-3xl p-1.5 sm:p-2 rounded-2xl border border-white/30 shadow-[0_10px_30px_rgba(0,0,0,0.3),inset_0_1px_2px_rgba(255,255,255,0.4)] overflow-x-auto max-w-full">
-              {GALLERY_PHOTOS_26.map((thumb, tIdx) => (
-                <button
-                  key={tIdx}
-                  onClick={() => setPreviewIndex(tIdx)}
-                  className={`relative w-11 h-7 sm:w-13 sm:h-8 rounded-lg overflow-hidden transition-all cursor-pointer shrink-0 border ${
-                    previewIndex === tIdx
-                      ? 'ring-2 ring-[#ff2d87] border-white/60 scale-105 opacity-100 shadow-md'
-                      : 'border-white/20 opacity-40 hover:opacity-80'
-                  }`}
-                >
-                  <Image src={thumb.src} alt={thumb.title} fill className="object-cover" />
-                </button>
-              ))}
+            <div className="flex items-center gap-2 sm:gap-2.5 pointer-events-auto bg-gradient-to-b from-white/18 to-white/8 backdrop-blur-3xl p-2 sm:p-2.5 rounded-2xl sm:rounded-3xl border border-white/30 shadow-[0_10px_30px_rgba(0,0,0,0.3),inset_0_1px_2px_rgba(255,255,255,0.4)] overflow-x-auto max-w-full min-h-[52px] sm:min-h-[64px]">
+              {GALLERY_PHOTOS_26.map((thumb, tIdx) => {
+                const isSelected = previewIndex === tIdx
+                return (
+                  <button
+                    key={tIdx}
+                    onClick={() => setPreviewIndex(tIdx)}
+                    aria-label={`Preview moment ${tIdx + 1}`}
+                    className={`relative overflow-hidden transition-all duration-300 ease-out cursor-pointer shrink-0 border ${
+                      isSelected
+                        ? 'w-16 h-10 sm:w-20 sm:h-12.5 rounded-xl ring-2 ring-[#ff2d87] border-white/90 opacity-100 shadow-[0_4px_20px_rgba(255,45,135,0.5),0_0_0_1px_rgba(255,255,255,0.4)] z-10'
+                        : 'w-10 h-6.5 sm:w-12 sm:h-7.5 rounded-lg border-white/20 opacity-40 hover:opacity-80 hover:scale-105'
+                    }`}
+                  >
+                    <Image src={thumb.src} alt={thumb.title} fill className="object-cover" />
+                  </button>
+                )
+              })}
             </div>
           </div>
         </div>
