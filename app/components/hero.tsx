@@ -239,8 +239,11 @@ export default function Hero() {
     return () => cancelAnimationFrame(animationFrameId);
   }, [computeGeometry, dimensions]);
 
-  // Pointer drag interactions (touch + mouse)
+  // Pointer drag interactions (touch + mouse) - Desktop/tablet only
   const handlePointerDown = (e: React.PointerEvent) => {
+    // Disable manual swipe/drag on mobile view (< 640px)
+    if (dimensions.width < 640) return;
+
     isPointerDownRef.current = true;
     setIsDragging(true);
     lastPointerXRef.current = e.clientX;
@@ -307,7 +310,7 @@ export default function Hero() {
           >
             <span className="h-1.5 w-1.5 rounded-full bg-[#ff2d87] animate-pulse" />
             <span className="text-xs sm:text-[13px] font-bold tracking-tight">
-              Trusted by 10,000+ collegiate innovators
+              On-Campus Event
             </span>
           </div>
         </div>
@@ -370,11 +373,15 @@ export default function Hero() {
           onPointerUp={handlePointerUp}
           onPointerCancel={handlePointerUp}
           className={`relative z-10 w-full mt-4 sm:mt-6 overflow-hidden select-none ${
-            isDragging ? "cursor-grabbing" : "cursor-grab"
+            dimensions.width < 640
+              ? "cursor-default"
+              : isDragging
+              ? "cursor-grabbing"
+              : "cursor-grab"
           }`}
           style={{
             height: `${dimensions.height}px`,
-            touchAction: "none",
+            touchAction: dimensions.width < 640 ? "pan-y" : "none",
           }}
         >
           {computedCards.map((item) => (

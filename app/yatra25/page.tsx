@@ -700,22 +700,22 @@ export default function Yatra25Page() {
       {/* ─────────────────── FOOTER ─────────────────── */}
       <Footer />
 
-      {/* ─────────────────── INTERACTIVE PREVIEW LIGHTBOX MODAL ─────────────────── */}
+      {/* ─────────────────── INTERACTIVE PREVIEW LIGHTBOX MODAL (LIQUID GLASS STYLE) ─────────────────── */}
       {previewIndex !== null && (
         <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 backdrop-blur-2xl animate-in fade-in duration-200 p-4 sm:p-8"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/45 backdrop-blur-3xl animate-in fade-in duration-200 p-4 sm:p-8"
           onClick={() => setPreviewIndex(null)}
         >
-          {/* Top Bar Controls */}
+          {/* Top Bar Controls (Liquid Glass) */}
           <div
             className="absolute top-4 sm:top-6 inset-x-4 sm:inset-x-8 flex items-center justify-between z-50 text-white"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center gap-2.5 sm:gap-3">
-              <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#ff2d87] bg-black/60 backdrop-blur-md px-3 py-1 rounded-full border border-white/15">
+              <span className="font-mono text-xs font-bold uppercase tracking-widest text-[#ff2d87] bg-white/12 backdrop-blur-2xl px-3.5 py-1.5 rounded-full border border-white/25 shadow-[inset_0_1px_1px_rgba(255,255,255,0.4),0_4px_16px_rgba(0,0,0,0.25)]">
                 Moment {previewIndex + 1} of {GALLERY_PHOTOS_25.length}
               </span>
-              <span className="text-xs sm:text-sm font-semibold hidden sm:inline text-zinc-300">
+              <span className="text-xs sm:text-sm font-semibold hidden sm:inline text-white/90 drop-shadow-xs">
                 {GALLERY_PHOTOS_25[previewIndex].location}
               </span>
             </div>
@@ -723,13 +723,13 @@ export default function Yatra25Page() {
             <button
               onClick={() => setPreviewIndex(null)}
               aria-label="Close Preview"
-              className="w-10 h-10 rounded-full bg-white/10 hover:bg-white/20 text-white flex items-center justify-center transition-colors cursor-pointer border border-white/10"
+              className="w-10 h-10 rounded-full bg-white/12 hover:bg-white/25 active:scale-95 text-white backdrop-blur-2xl border border-white/30 flex items-center justify-center transition-all cursor-pointer shadow-[inset_0_1px_1px_rgba(255,255,255,0.4),0_4px_16px_rgba(0,0,0,0.25)]"
             >
               <X className="w-5 h-5" />
             </button>
           </div>
 
-          {/* Previous / Next Arrow Controls */}
+          {/* Previous / Next Arrow Controls (Liquid Glass) */}
           <button
             onClick={(e) => {
               e.stopPropagation()
@@ -738,7 +738,7 @@ export default function Yatra25Page() {
               )
             }}
             aria-label="Previous Moment"
-            className="absolute left-2 sm:left-6 top-1/2 -translate-y-1/2 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-black/90 text-white border border-white/20 flex items-center justify-center hover:scale-105 active:scale-95 transition-all cursor-pointer backdrop-blur-md"
+            className="absolute left-2.5 sm:left-6 top-1/2 -translate-y-1/2 z-50 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-white/12 hover:bg-white/25 text-white backdrop-blur-2xl border border-white/30 flex items-center justify-center hover:scale-105 active:scale-95 transition-all cursor-pointer shadow-[inset_0_1px_1px_rgba(255,255,255,0.4),0_8px_24px_rgba(0,0,0,0.3)]"
           >
             <ChevronLeft className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
@@ -749,14 +749,14 @@ export default function Yatra25Page() {
               setPreviewIndex((prev) => (prev! + 1) % GALLERY_PHOTOS_25.length)
             }}
             aria-label="Next Moment"
-            className="absolute right-2 sm:right-6 top-1/2 -translate-y-1/2 z-50 w-10 h-10 sm:w-12 sm:h-12 rounded-full bg-black/60 hover:bg-black/90 text-white border border-white/20 flex items-center justify-center hover:scale-105 active:scale-95 transition-all cursor-pointer backdrop-blur-md"
+            className="absolute right-2.5 sm:right-6 top-1/2 -translate-y-1/2 z-50 w-11 h-11 sm:w-13 sm:h-13 rounded-full bg-white/12 hover:bg-white/25 text-white backdrop-blur-2xl border border-white/30 flex items-center justify-center hover:scale-105 active:scale-95 transition-all cursor-pointer shadow-[inset_0_1px_1px_rgba(255,255,255,0.4),0_8px_24px_rgba(0,0,0,0.3)]"
           >
             <ChevronRight className="w-5 h-5 sm:w-6 sm:h-6" />
           </button>
 
-          {/* Main Focused Preview Image Card Frame */}
+          {/* Main Focused Preview Image Card Frame (Liquid Glass Frame) */}
           <div
-            className="relative w-full max-w-4xl aspect-[4/3] sm:aspect-[16/10] max-h-[52vh] sm:max-h-[66vh] rounded-2xl sm:rounded-3xl overflow-hidden shadow-2xl border border-white/20 bg-zinc-900"
+            className="relative w-full max-w-4xl aspect-[4/3] sm:aspect-[16/10] max-h-[52vh] sm:max-h-[66vh] rounded-2xl sm:rounded-3xl overflow-hidden border border-white/30 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.5),inset_0_1px_2px_rgba(255,255,255,0.4)] bg-white/5 backdrop-blur-md"
             onClick={(e) => e.stopPropagation()}
           >
             <Image
@@ -768,38 +768,43 @@ export default function Yatra25Page() {
             />
           </div>
 
-          {/* Bottom Caption & Thumbnail Strip */}
+          {/* Bottom Caption & Thumbnail Strip (Liquid Glass - No Black Background) */}
           <div
             className="absolute bottom-4 sm:bottom-6 inset-x-4 sm:inset-x-8 flex flex-col items-center gap-2.5 sm:gap-3 z-50 pointer-events-none"
             onClick={(e) => e.stopPropagation()}
           >
-            <div className="text-center bg-black/75 backdrop-blur-xl px-4 py-2 sm:px-5 sm:py-2.5 rounded-2xl border border-white/15 max-w-xl pointer-events-auto shadow-lg">
+            {/* Liquid Glass Caption Card */}
+            <div className="text-center bg-gradient-to-b from-white/20 via-white/12 to-white/8 backdrop-blur-3xl px-5 py-3 sm:px-6 sm:py-3.5 rounded-2xl sm:rounded-3xl border border-white/35 shadow-[0_12px_40px_rgba(0,0,0,0.35),inset_0_1px_2px_rgba(255,255,255,0.5)] max-w-xl pointer-events-auto">
               <h3
-                className="text-sm sm:text-lg font-bold text-white tracking-tight"
+                className="text-sm sm:text-lg font-bold text-white tracking-tight drop-shadow-sm"
                 style={{ fontFamily: "'Outfit', sans-serif" }}
               >
                 {GALLERY_PHOTOS_25[previewIndex].title}
               </h3>
-              <p className="text-[11px] sm:text-xs text-zinc-300 mt-0.5 line-clamp-1">
+              <p className="text-[11px] sm:text-xs text-white/90 mt-0.5 line-clamp-1 leading-relaxed drop-shadow-xs">
                 {GALLERY_PHOTOS_25[previewIndex].desc}
               </p>
             </div>
 
-            {/* Thumbnail Tray */}
-            <div className="flex items-center gap-2 pointer-events-auto bg-black/70 backdrop-blur-xl p-1.5 rounded-xl border border-white/15 overflow-x-auto max-w-full shadow-lg">
-              {GALLERY_PHOTOS_25.map((thumb, tIdx) => (
-                <button
-                  key={tIdx}
-                  onClick={() => setPreviewIndex(tIdx)}
-                  className={`relative w-11 h-7 sm:w-13 sm:h-8 rounded-lg overflow-hidden transition-all cursor-pointer shrink-0 ${
-                    previewIndex === tIdx
-                      ? 'ring-2 ring-[#ff2d87] scale-105 opacity-100'
-                      : 'opacity-40 hover:opacity-80'
-                  }`}
-                >
-                  <Image src={thumb.src} alt={thumb.title} fill className="object-cover" />
-                </button>
-              ))}
+            {/* Liquid Glass Thumbnail Tray */}
+            <div className="flex items-center gap-2 sm:gap-2.5 pointer-events-auto bg-gradient-to-b from-white/18 to-white/8 backdrop-blur-3xl p-2 sm:p-2.5 rounded-2xl sm:rounded-3xl border border-white/30 shadow-[0_10px_30px_rgba(0,0,0,0.3),inset_0_1px_2px_rgba(255,255,255,0.4)] overflow-x-auto max-w-full min-h-[52px] sm:min-h-[64px]">
+              {GALLERY_PHOTOS_25.map((thumb, tIdx) => {
+                const isSelected = previewIndex === tIdx
+                return (
+                  <button
+                    key={tIdx}
+                    onClick={() => setPreviewIndex(tIdx)}
+                    aria-label={`Preview moment ${tIdx + 1}`}
+                    className={`relative overflow-hidden transition-all duration-300 ease-out cursor-pointer shrink-0 border ${
+                      isSelected
+                        ? 'w-16 h-10 sm:w-20 sm:h-12.5 rounded-xl ring-2 ring-[#ff2d87] border-white/90 opacity-100 shadow-[0_4px_20px_rgba(255,45,135,0.5),0_0_0_1px_rgba(255,255,255,0.4)] z-10'
+                        : 'w-10 h-6.5 sm:w-12 sm:h-7.5 rounded-lg border-white/20 opacity-40 hover:opacity-80 hover:scale-105'
+                    }`}
+                  >
+                    <Image src={thumb.src} alt={thumb.title} fill className="object-cover" />
+                  </button>
+                )
+              })}
             </div>
           </div>
         </div>
