@@ -11,83 +11,83 @@ import Footer from '../components/footer'
 export const metadata: Metadata = {
   title: 'What You Get by Sponsoring Yathra | Partner Benefits',
   description:
-    'Discover the ROI, talent access, keynote brand visibility, and ESG impact of sponsoring our event, Yathra.',
+    'Discover the digital reach, email campaigns, on-stage branding, on-ground presence, and media coverage of sponsoring Yathra ‘27.',
 }
 
 const PINK = '#ff2d87'
 
-// Point-wise structured partner benefits
+// Point-wise structured partner benefits from the official Yathra '27 partnership deck
 const BENEFIT_CATEGORIES = [
   {
     number: '01',
-    title: 'High-Impact Brand Visibility & Media Dominance',
-    tag: 'Visibility & PR',
+    title: 'Digital Reach and Promotion',
+    tag: 'Digital & Social',
+    description:
+      'We maximise your brand’s reach through our digital platforms. Sponsors will be featured across our website, Instagram, LinkedIn, and WhatsApp communities through dedicated sponsor posts, reels, stories, and collaborative posts. Your brand will also be included in event countdown campaigns, speaker and judge announcements, and live updates during the event, so that it stays visible to our audience before, during, and after Yathra ‘27.',
     points: [
-      'Prominent logo placement on main stage LED backdrops at Travancore Hall, Technopark throughout all pitching and keynote sessions.',
-      'Featured logo on the official Yathra website, delegate kits, event brochures, and winner certificates.',
-      'Dedicated sponsor spotlight reels and social media campaigns across Instagram, LinkedIn, and student community channels.',
-      'Co-branded mentions in regional press releases, post-event publications, and official aftermovie credits.',
-      'Branded digital broadcast banners across live-streamed semi-final and final pitching sessions.',
+      'Featured across our official website, Instagram, LinkedIn, and WhatsApp community channels.',
+      'Dedicated sponsor spotlight posts, reels, stories, and collaborative announcements.',
+      'Active inclusion in countdown campaigns, speaker & judge reveals, and live summit updates.',
     ],
   },
   {
     number: '02',
-    title: 'Top-Tier Tech & Student Founder Recruitment',
-    tag: 'Talent Acquisition',
+    title: 'Email Campaigns',
+    tag: 'Direct Marketing',
+    description:
+      'Sponsors will be highlighted in our email campaigns sent to students, institutions, and partner communities. These include event announcement mailers, registration reminders, and post-event thank-you emails, each carrying sponsor branding and a link to your website or offer.',
     points: [
-      'Direct hiring pipeline to 10,000+ collegiate innovators, software engineers, product designers, and problem solvers.',
-      'Exclusive access to curated participant resume books, team portfolios, and founder profiles.',
-      'Dedicated on-campus company presentation or recruitment booth to interact directly with top finalists.',
-      'Live observation of student candidates executing under pressure, problem-solving, and presenting technical solutions.',
-      'Priority consideration for campus placement drives and internship recruitment programs.',
+      'Direct email dispatches sent to thousands of students, university campuses, and partner communities.',
+      'Prominent sponsor logo placement across event mailers, registration pushes, and post-event communications.',
+      'Direct call-to-action link embedded in all mailers driving targeted traffic to your website or promotional offer.',
     ],
   },
   {
     number: '03',
-    title: 'Developer Evangelism & Product / API Adoption',
-    tag: 'Product Integration',
+    title: 'On-Stage Branding',
+    tag: 'Venue & Stage',
+    description:
+      'Your brand will have a strong presence at the main venue. This includes logo placement on the stage backdrop, podium, and LED screens, along with verbal acknowledgement by the hosts during the opening, key sessions, and closing ceremony. Sponsors may also be invited to present awards, deliver a short address, or showcase a brand video between sessions.',
     points: [
-      'Integrate your APIs, developer tools, cloud credits, or SDKs into hundreds of active student startup projects.',
-      'Host an official brand masterclass, workshop, or technical hackathon sprint during the summit prep timeline.',
-      'Sponsor a custom challenge track or problem statement aligned with your core technology or industry domain.',
-      'Gather authentic real-time developer feedback and edge-case testing from fast-moving student dev teams.',
-      'Showcase your company’s technology stack directly to the next generation of engineers.',
+      'Prominent logo visibility across the primary stage backdrop, presentation podium, and high-resolution LED screens.',
+      'Verbal acknowledgements by event hosts during the opening ceremony, keynote sessions, and valedictory finale.',
+      'Opportunities to present venture awards, deliver a stage address, or stream brand promo reels between pitching tracks.',
     ],
   },
   {
     number: '04',
-    title: 'Executive Jury Presence & VIP Networking',
-    tag: 'Executive Leadership',
+    title: 'Brand Visibility',
+    tag: 'Event Collateral',
+    description:
+      'Sponsors will be featured prominently across all event materials, including posters, banners, standees, certificates, ID cards, and lanyards. Recognition such as “Presented by” or “Powered by” will be given according to the sponsorship tier.',
     points: [
-      'VIP Grand Finale evaluation jury seat for your CXO, VP, technical lead, or Venture Partner.',
-      'Keynote stage address (10–15 mins) to share your company vision directly with hundreds of attendees.',
-      'Exclusive invitation to private VIP networking sessions with startup founders, venture capitalists, and university dignitaries.',
-      'On-stage presentation of champion trophies, track prizes, and student entrepreneurship awards.',
-      'Direct interaction with early-stage collegiate ventures for potential corporate venture investment or incubation.',
+      'Comprehensive branding on physical promotional posters, venue banners, and entrance standees.',
+      'Official sponsor marks on all delegate certificates, badge credentials, and attendee lanyards.',
+      'Tier-specific titular association such as “Presented by” or “Powered by” based on sponsorship commitment.',
     ],
   },
   {
     number: '05',
-    title: 'ESG & UN Sustainable Development Goals CSR Alignment',
-    tag: 'CSR & ESG Impact',
+    title: 'On-Ground Presence',
+    tag: 'Experiential & Booths',
+    description:
+      'Partners may set up a branded stall or booth at the venue, place banners and standees in high-footfall areas, and include flyers or branded merchandise in participant kits.',
     points: [
-      'Direct alignment with the 17 United Nations Sustainable Development Goals (SDGs) addressing climate, education, and equality.',
-      'Comprehensive Corporate Social Responsibility (CSR) project fulfillment documentation and auditable impact reports.',
-      'Official recognition as an authorized Social Venture Enabler fostering grassroots student innovation.',
-      'Measurable community impact by empowering diverse collegiate teams across Kerala and South India.',
-      'Tangible support for female founder representation and inclusive technology initiatives.',
+      'Dedicated branded stall or demonstration booth setup directly at the Technopark summit venue.',
+      'Strategic placement of banners and standees in high-traffic registration, networking, and foyer corridors.',
+      'Distribution of brochures, recruitment flyers, or custom branded swag directly inside participant delegate kits.',
     ],
   },
   {
     number: '06',
-    title: 'Global Hult Prize Association & Network Equity',
-    tag: 'Institutional Prestige',
+    title: 'Media and Content Coverage',
+    tag: 'PR & Post-Event Impact',
+    description:
+      'Every sponsor will be acknowledged in our official event coverage, including the aftermovie, photo and video highlights, and a post-event impact report detailing reach, participation, and engagement.',
     points: [
-      'Prestigious alignment with the worldwide Hult Prize Foundation ($1,000,000 Global Seed Fund accelerator track).',
-      'Institutional connection with University College of Engineering Kariavattom (UCEK), University of Kerala.',
-      'Strategic presence at Technopark, Trivandrum — India’s first and largest IT innovation corridor.',
-      'Long-term brand equity and lasting goodwill among student innovators, campus leaders, and alumni networks.',
-      'Ongoing visibility across all future Yathra promotional campaigns.',
+      'Brand feature and sponsor credits in the official cinematic Yathra ‘27 aftermovie.',
+      'Tagged visibility across post-event highlight reels, photo albums, and press coverage.',
+      'Comprehensive post-event impact report with auditable data on total impressions, attendance, and student engagement.',
     ],
   },
 ]
@@ -196,12 +196,17 @@ export default function PartnersPage() {
                 </span>
               </div>
 
-              {/* Point-by-point bullets */}
-              <ul className="space-y-3 pl-1 sm:pl-7">
+              {/* Exact Description Paragraph */}
+              <p className="text-sm sm:text-base text-zinc-600 leading-relaxed pl-1 sm:pl-7 mb-4">
+                {category.description}
+              </p>
+
+              {/* Point-by-point deliverable highlights */}
+              <ul className="space-y-2.5 pl-1 sm:pl-7">
                 {category.points.map((point, idx) => (
                   <li
                     key={idx}
-                    className="flex items-start gap-3 text-sm text-zinc-700 leading-relaxed"
+                    className="flex items-start gap-2.5 text-xs sm:text-sm text-zinc-700 leading-relaxed"
                   >
                     <CheckCircle2
                       className="w-4 h-4 shrink-0 mt-0.5"
