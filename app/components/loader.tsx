@@ -19,19 +19,18 @@ export default function Loader() {
     }
 
     // Sequence timing:
-    // 0.0s - 1.65s: handwriting stroke draws "Yathra"
-    // 1.15s: hand-drawn underline doodle draws in
-    // 1.25s: "'27" badge pops in
-    // 1.40s: "Hult Prize UCEK" fades in
-    // 2.05s: start smooth exit transition
-    // 2.65s: completely remove from DOM
+    // 0.0s - 1.55s: pink writing stroke animation draws "Yathra" and fills in
+    // 1.05s: "'27" badge smoothly pops in strictly on the right side
+    // 1.30s: "Hult Prize UCEK • Technopark" subline fades in
+    // 2.15s: start smooth exit transition
+    // 2.75s: completely remove from DOM
     const exitTimer = setTimeout(() => {
       setExiting(true);
-    }, 2050);
+    }, 2150);
 
     const removeTimer = setTimeout(() => {
       setVisible(false);
-    }, 2650);
+    }, 2750);
 
     return () => {
       clearTimeout(exitTimer);
@@ -50,14 +49,14 @@ export default function Loader() {
   return (
     <>
       <style>{`
-        @keyframes drawCaveatStroke {
+        @keyframes drawOutfitPinkStroke {
           0% {
-            stroke-dashoffset: 1300;
-            fill: transparent;
+            stroke-dashoffset: 1500;
+            fill: rgba(255, 45, 135, 0);
           }
           65% {
             stroke-dashoffset: 0;
-            fill: transparent;
+            fill: rgba(255, 45, 135, 0);
           }
           85%, 100% {
             stroke-dashoffset: 0;
@@ -65,38 +64,26 @@ export default function Loader() {
           }
         }
 
-        @keyframes drawDoodleLine {
-          0% {
-            stroke-dashoffset: 320;
-            opacity: 0;
-          }
-          20% {
-            opacity: 1;
-          }
-          100% {
-            stroke-dashoffset: 0;
-            opacity: 1;
-          }
-        }
-
-        @keyframes popBadge {
+        /* Subtle, non-flashy smooth pop & settle for '27 */
+        @keyframes smoothPopBadge {
           0% {
             opacity: 0;
-            transform: scale(0.3) rotate(-14deg);
+            transform: scale(0.65) translateY(4px);
           }
-          65% {
-            transform: scale(1.15) rotate(4deg);
+          70% {
+            opacity: 1;
+            transform: scale(1.06) translateY(-1px);
           }
           100% {
             opacity: 1;
-            transform: scale(1) rotate(0deg);
+            transform: scale(1) translateY(0);
           }
         }
 
         @keyframes fadeInSubline {
           0% {
             opacity: 0;
-            transform: translateY(6px);
+            transform: translateY(8px);
           }
           100% {
             opacity: 1;
@@ -115,35 +102,26 @@ export default function Loader() {
           }
         }
 
-        .caveat-draw-text {
-          font-family: 'Caveat', cursive;
+        .outfit-pink-draw-text {
+          font-family: 'Outfit', sans-serif;
           stroke: #ff2d87;
-          stroke-width: 3.6;
+          stroke-width: 2.2;
           stroke-linecap: round;
           stroke-linejoin: round;
-          stroke-dasharray: 1300;
-          stroke-dashoffset: 1300;
-          animation: drawCaveatStroke 1.7s cubic-bezier(0.42, 0, 0.22, 1) forwards;
+          stroke-dasharray: 1500;
+          stroke-dashoffset: 1500;
+          letter-spacing: 0.08em;
+          animation: drawOutfitPinkStroke 1.65s cubic-bezier(0.42, 0, 0.22, 1) forwards;
         }
 
-        .caveat-underline-doodle {
-          stroke: #ff2d87;
-          stroke-width: 3;
-          stroke-linecap: round;
-          stroke-dasharray: 320;
-          stroke-dashoffset: 320;
-          animation: drawDoodleLine 0.75s ease-out 1.1s forwards;
-        }
-
-        .yathra-year-badge {
+        .yathra-badge-reveal {
           opacity: 0;
-          transform-origin: center;
-          animation: popBadge 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) 1.25s forwards;
+          animation: smoothPopBadge 0.45s cubic-bezier(0.16, 1, 0.3, 1) 1.05s forwards;
         }
 
         .yathra-subline {
           opacity: 0;
-          animation: fadeInSubline 0.55s ease-out 1.4s forwards;
+          animation: fadeInSubline 0.6s ease-out 1.3s forwards;
         }
 
         .yathra-bg-glow {
@@ -163,106 +141,83 @@ export default function Loader() {
       >
         {/* Soft Radial Ambient Pink Glow Behind Writing */}
         <div
-          className="absolute w-[380px] h-[380px] rounded-full pointer-events-none yathra-bg-glow"
+          className="absolute w-[400px] h-[400px] rounded-full pointer-events-none yathra-bg-glow"
           style={{
             background:
-              "radial-gradient(circle, rgba(255, 45, 135, 0.14) 0%, rgba(255, 45, 135, 0) 70%)",
+              "radial-gradient(circle, rgba(255, 45, 135, 0.16) 0%, rgba(255, 45, 135, 0) 70%)",
             filter: "blur(40px)",
           }}
         />
 
-        {/* Central Writing Canvas */}
-        <div className="relative z-10 flex flex-col items-center px-4 max-w-md w-full">
-          <svg
-            viewBox="0 0 460 170"
-            className="w-[300px] sm:w-[410px] overflow-visible"
-            fill="none"
-          >
-            <defs>
-              {/* Soft Luminous Drop Shadow */}
-              <filter id="caveatGlow" x="-20%" y="-20%" width="140%" height="140%">
-                <feGaussianBlur stdDeviation="2" result="blur" />
-                <feMerge>
-                  <feMergeNode in="blur" />
-                  <feMergeNode in="SourceGraphic" />
-                </feMerge>
-              </filter>
-            </defs>
-
-            {/* Rotated handwriting group with natural spontaneous upward tilt */}
-            <g transform="rotate(-7 230 85)">
-              {/* 1. Ghost Under-layer for Instant Legibility */}
+        {/* Central Brand Lockup */}
+        <div className="relative z-10 flex flex-col items-center px-4 max-w-lg w-full">
+          {/* Main Wordmark Row: 'Yathra' on Left + '27 Badge Strictly on the RIGHT */}
+          <div className="relative inline-flex items-start justify-center">
+            {/* SVG Canvas for 'Yathra' with tight width so there is NO blank gap */}
+            <svg
+              viewBox="0 0 250 82"
+              className="w-[230px] sm:w-[250px] h-[72px] sm:h-[82px] overflow-visible"
+              fill="none"
+            >
+              {/* Subtle Ghost Under-layer for Instant Legibility */}
               <text
-                x="210"
-                y="98"
-                textAnchor="middle"
-                className="select-none font-bold"
+                x="0"
+                y="64"
+                className="select-none"
                 style={{
-                  fontFamily: "'Caveat', cursive",
-                  fontSize: "112px",
-                  fontWeight: 700,
-                  fill: "rgba(255, 45, 135, 0.05)",
+                  fontFamily: "'Outfit', sans-serif",
+                  fontSize: "70px",
+                  fontWeight: 900,
+                  letterSpacing: "0.08em",
+                  fill: "rgba(255, 45, 135, 0.06)",
                 }}
               >
                 Yathra
               </text>
 
-              {/* 2. Main Animated Handwriting Stroke */}
+              {/* Main Animated Pink Stroke Writing with Clean Letter Spacing */}
               <text
-                x="210"
-                y="98"
-                textAnchor="middle"
-                className="caveat-draw-text select-none font-bold"
+                x="0"
+                y="64"
+                className="outfit-pink-draw-text select-none"
                 style={{
-                  fontFamily: "'Caveat', cursive",
-                  fontSize: "112px",
-                  fontWeight: 700,
-                  filter: "drop-shadow(0 2px 8px rgba(255, 45, 135, 0.35))",
+                  fontSize: "70px",
+                  fontWeight: 900,
+                  filter: "drop-shadow(0 2px 12px rgba(255, 45, 135, 0.38))",
                 }}
               >
                 Yathra
               </text>
+            </svg>
 
-              {/* 3. Hand-drawn Underline Doodle */}
-              <path
-                d="M 85 118 C 160 134, 255 132, 345 112"
-                className="caveat-underline-doodle"
+            {/* ’27 Badge: Strictly on the RIGHT side, snug against the final letter 'a' */}
+            <div
+              className="yathra-badge-reveal ml-1.5 sm:ml-2 mt-0.5 sm:mt-1 shrink-0"
+              style={{
+                padding: "3px 9px",
+                borderRadius: "9px",
+                backgroundColor: "#ffe4f0",
+                border: "1.5px solid #ffb3d6",
+                boxShadow: "0 2px 8px rgba(255, 45, 135, 0.16)",
+              }}
+            >
+              <span
                 style={{
-                  filter: "drop-shadow(0 1px 4px rgba(255, 45, 135, 0.3))",
+                  fontFamily: "'Outfit', sans-serif",
+                  fontSize: "15px",
+                  fontWeight: 900,
+                  color: PINK,
+                  lineHeight: 1,
+                  display: "block",
                 }}
-              />
-
-              {/* 4. Pop-in Year Tag: ’27 */}
-              <g className="yathra-year-badge" transform="translate(345, 30)">
-                <rect
-                  x="-4"
-                  y="-18"
-                  width="44"
-                  height="28"
-                  rx="8"
-                  fill="#ffe4f0"
-                  stroke="#ffb3d6"
-                  strokeWidth="1"
-                />
-                <text
-                  x="18"
-                  y="2"
-                  textAnchor="middle"
-                  style={{
-                    fontFamily: "'Outfit', sans-serif",
-                    fontSize: "18px",
-                    fontWeight: 900,
-                    fill: PINK,
-                  }}
-                >
-                  ’27
-                </text>
-              </g>
-            </g>
-          </svg>
+              >
+                ’27
+              </span>
+            </div>
+          </div>
 
           {/* Subtitle & Status */}
-          <div className="yathra-subline mt-2 flex flex-col items-center gap-2.5">
+          <div className="yathra-subline mt-4 flex flex-col items-center gap-2.5">
             <div className="flex items-center gap-2 text-zinc-500 font-mono text-[11px] font-bold tracking-[0.22em] uppercase">
               <span className="h-1.5 w-1.5 rounded-full bg-[#ff2d87] animate-pulse" />
               <span>Hult Prize UCEK</span>
